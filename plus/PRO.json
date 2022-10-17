@@ -39,7 +39,8 @@
 			"searchable": 1,
 			"quickSearch": 0,
 			"filterable": 0,
-			"ext": "https://gitcode.net/weixin_58340148/box/-/raw/master/PLUS/Alist.json"
+			"ext": "https://gitcode.net/weixin_58340148/box/-/raw/master/PLUS/Alist.json",
+			"jar":"http://45.125.46.61/box/jar/777.png;md5;7B65FF61E7B6887F975D9D83909361D5"
 		},
 
 
