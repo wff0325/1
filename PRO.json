@@ -37,7 +37,7 @@
             "key" : "drpy_js_360影视",
             "name" : "360影视[DRPY]",
             "type" : 3,
-            "api" : "http://amtv.ga/py/lib/drpy.ym.js",
+            "api" : "https://ghproxy.com/https://raw.githubusercontent.com/ShadowDemon1997/CatVodSpiderJS/main/drpy.js",
             "ext" : "http://amtv.ga/py/js/360影视.js"
         },
     {"key":"csp_Kunyu77","name":"👒七七〔SP〕","type":3,"api":"csp_Kunyu77","searchable":1,"quickSearch":1,"filterable":1,"jar":"https://agit.ai/guot54/ygbh/raw/branch/master/JAR/77.jar;md5;1b0fae7c99b09c6f66d6c39b114580a9"},
@@ -411,7 +411,7 @@
             "key" : "drpy_js_喵了个咪",
             "name" : "🔞喵了个咪[DRPY]",
             "type" : 3,
-            "api" : "http://amtv.ga/py/lib/drpy.ym.js",
+            "api" : "https://ghproxy.com/https://raw.githubusercontent.com/ShadowDemon1997/CatVodSpiderJS/main/drpy.js",
             "ext" : "https://gitcode.net/weixin_58340148/box/-/raw/master/js/%E7%8C%AB%E4%BA%86%E4%B8%AA%E5%92%AA.js"
         },
 {"key":"*色南国资源","name":"*🔞色南国资源","type":1,"api":"https://api.sexnguon.com/api.php/provide/vod/","searchable":0,"quickSearch":0},
