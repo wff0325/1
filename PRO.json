@@ -415,6 +415,13 @@
 			"ext": "http://52bsj.vip:81/api/v3/file/get/58993/Alist.json?sign=u1LstZcmJ3RwCSrwfF1XeIejOUCRQHQSqsNhH-9mUxw%3D%3A0",
 			"jar":"http://45.125.46.61/box/jar/777.png;md5;7B65FF61E7B6887F975D9D83909361D5"
 		},
+		{
+            "key" : "drpy_js_喵了个咪",
+            "name" : "🔞喵了个咪[DRPY]",
+            "type" : 3,
+            "api" : "http://amtv.ga/py/lib/drpy.ym.js",
+            "ext" : "https://gitcode.net/weixin_58340148/box/-/raw/master/js/%E7%8C%AB%E4%BA%86%E4%B8%AA%E5%92%AA.js"
+        },
 {"key":"csp_Xiangjiao","name":"*🔞new香蕉","type":3,"api":"csp_Xiangjiao","searchable":1,"quickSearch":1,"filterable":1,"jar":"https://agit.ai/guot54/ygbh/raw/branch/master/JAR/my_18spider.jar"},
 {"key":"csp_biubiu_香蕉视频","name":"*🔞香蕉视频(XB)","type":3,"api":"csp_XBiubiu","searchable":1,"quickSearch":1,"filterable":1,"ext":"https://agit.ai/guot54/ygbh/raw/branch/master/XB/%e9%a6%99%e8%95%89%e8%a7%86%e9%a2%91.json"},
 {"key":"csp_biubiu_爱看影院","name":"*🔞爱看影院(XB)","type":3,"api":"csp_XBiubiu","searchable":1,"quickSearch":1,"filterable":1,"ext":"https://agit.ai/guot54/ygbh/raw/branch/master/XB/%e7%88%b1%e7%9c%8b%e5%bd%b1%e9%99%a2.json"},
