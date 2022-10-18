@@ -33,13 +33,7 @@
 		"filterable": 1,
 		"ext": "https://gitcode.net/weixin_58340148/box/-/raw/master/PY/py_cctv.py"
 	},
-	 {
-            "key" : "drpy_js_360影视",
-            "name" : "360影视[DRPY]",
-            "type" : 3,
-            "api" : "https://ghproxy.com/https://raw.githubusercontent.com/ShadowDemon1997/CatVodSpiderJS/main/drpy.js",
-            "ext" : "http://amtv.ga/py/js/360影视.js"
-        },
+	 
     {"key":"csp_Kunyu77","name":"👒七七〔SP〕","type":3,"api":"csp_Kunyu77","searchable":1,"quickSearch":1,"filterable":1,"jar":"https://agit.ai/guot54/ygbh/raw/branch/master/JAR/77.jar;md5;1b0fae7c99b09c6f66d6c39b114580a9"},
 	//{"key":"csp_XBPQ厂长","name":"🎈厂长影视〔XBPQ〕","type":3,"api":"csp_xBPQ","searchable":1,"quickSearch":1,"filterable":1,"ext":"https://gitcode.net/weixin_58340148/box/-/raw/master/XBPQ/cz_xBPQ_.json","jar":"https://gitcode.net/weixin_58340148/box/-/raw/master/XBPQ/xBPQ_1017.jar"},
 	{"key":"csp_XBPQ极品影视","name":"🎞️极品影视〔XBPQ〕","type":3,"api":"csp_xBPQ","searchable":1,"quickSearch":1,"filterable":1,"ext":"https://agit.ai/guot54/ygbh/raw/branch/master/XB/%e6%9e%81%e5%93%81%e5%bd%b1%e8%a7%86.json","jar":"https://agit.ai/guot54/ygbh/raw/branch/master/JAR/xBPQ.jar"},
