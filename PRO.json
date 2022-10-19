@@ -161,7 +161,6 @@
 
 {"key":"csp_biubiu_斗鱼","name":"🐬斗鱼TV","type":3,"api":"csp_XBiubiu","searchable":1,"quickSearch":1,"filterable":0,"ext":"https://share.nite07.com/api/v3/file/source/2735/%E6%96%97%E9%B1%BC0713.json?sign=Ihmy6E807CmsjDP6e4m6pOBr8ct5KtTIaOHJPOacBwE%3D%3A0"},
 
-{"key":"csp_XYQBiu_虎牙直播","name":"🎯虎牙直播(YXQ)","type":3,"api":"csp_XYQBiu","searchable":1,"quickSearch":1,"filterable":0,"ext":"https://agit.ai/guot54/ygbh/raw/branch/master/XYQ/%e8%99%8e%e7%89%99.json"},
 {"key":"csp_Yj1211","name": "📽️在线直播","type": 3,"api": "csp_Yj1211","searchable": 1,"quickSearch": 1,"filterable": 1},
 //{"key":"csp_QB_17kan","name":"⚽17看球","type":3,"api":"csp_XYQBiu","searchable":0,"quickSearch":0,"filterable":0,"ext":"https://raw.iqiq.io/liu673cn/box/main/sub/ext/17看球.json"},
       {
@@ -174,9 +173,6 @@
 			"filterable": 1,
 			"ext": "http://45.125.46.61/box/json/%E7%90%83%E8%BF%B72.json"
 		},
-
-{"key": "csp_XYQHiker_特狗影视","name":"🐕特狗影视(XYQ)","type":3,"api":"csp_XYQHiker","searchable":1,"quickSearch":1,"filterable":1,"ext":"https://agit.ai/guot54/ygbh/raw/branch/master/XB/%e7%89%b9%e7%8b%97%e5%bd%b1%e8%a7%86.json","jar":"https://agit.ai/guot54/ygbh/raw/branch/master/JAR/XYQPlugin_0915.jar"},
-
 {"key": "555电影","name": "5️⃣555电影(XB)","type": 3,"api": "csp_XBiubiu","searchable": 1,"quickSearch": 1,"filterable": 0,"ext": "https://share.nite07.com/api/v3/file/source/10444/555.json?sign=8sknI0YOBdUoTnqlLxlY6vSTraw9Ou5A30Rw5Z4rZhk%3D%3A0"},
 {"key":"csp_xpath_789kp","name":"🦋789看片","type":3,"api":"csp_XPathMacFilter","searchable":1,"quickSearch":1,"filterable":1,"ext":"https://agit.ai/guot54/ygbh/raw/branch/master/XB/789kp.json"},
 
