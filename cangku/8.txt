@@ -5,20 +5,11 @@
  
  
    {
-       "url": "http://maoyingshi.cc/tvbox/云星日记/1.m3u8",
-       "name": "〔云星日记〕家庭版线路",
+       "url": "http://52bsj.vip:81/api/v3/file/get/29899/box2.json?sign=3cVyKZQr3lFAwdB3HK-A7h33e0MnmG6lLB9oWlvSNnM%3D%3A0",
+       "name": "月光宝盒家庭版",
        "time": "2022-08-26 02:00:00"
    },
-      { "url": "http://maoyingshi.cc/tvbox/云星日记/bili.json",
-       "name": "〔云星日记〕哔哩套餐线路",
-       "time": "2022-08-26 02:00:00"
-       },
-       {
-           "url": "http://maoyingshi.cc/tvbox/云星日记/ali.m3u8",
-           "name": "〔云星日记〕阿里套餐线路",
-           "time": "2022-08-26 02:00:00"
-       },
-       
+      
        {
            "url": "http://47.242.90.42:8888/down/BJZPa8THuiE9",
            "name": "星辰家庭版线路",
