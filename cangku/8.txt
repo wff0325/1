@@ -29,13 +29,12 @@
  
  
  { "url": "https://raw.fastgit.org/chengxueli818913/maoTV/main/33.txt", "name": "佰欣园主线" }, { "url": "https://ghproxy.com/https://raw.githubusercontent.com/chengxueli818913/maoTV/main/44.txt", "name": "佰欣园副线" }, 
-{ "url": "https://www.fastmock.site/mock/1d52adb084c96725525077ce7380de4c/tv/bd", "name": "BD线路" },
- 
+
  { "url": "https://神器每日推送.tk/pz.json", "name": "神器每日推送线路" }, 
 { "url": "http://52bsj.vip:98/wuai", "name": "🌟吾爱️线路🌟" }, 
  
  { "url": "https://download.kstore.space/download/2863/01.txt", "name": "潇洒日记线路" }, 
-{ "url": "https://wds.ecsxs.com/223843.txt", "name": "223843线路" }, 
+
 { "url": "http://s.nxw.so/vip", "name": "凯速2863" },
  
  { "url": "https://agit.ai/n/b/raw/branch/a/b/c.json", "name": "HDXY线路" },
