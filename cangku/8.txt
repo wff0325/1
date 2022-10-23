@@ -10,11 +10,7 @@
        "time": "2022-08-26 02:00:00"
    },
       
-       {
-           "url": "http://47.242.90.42:8888/down/BJZPa8THuiE9",
-           "name": "星辰家庭版线路",
-           "time": "2022-08-26 02:00:00"
-       },
+      
    
        {
            "url": "http://miaotvs.cn/osc",
@@ -26,19 +22,7 @@
            "name": "猫影视Pro版线路",
            "time": "2022-08-26 02:00:00"
        },
-      
-  
-    
-       {"url": "https://www.fastmock.site/mock/1d52adb084c96725525077ce7380de4c/tv/bd",
-       "name": "未知个人版线路",
-       "time": "2022-09-01 11:25:00"
-       },
-      
- 
-      {
-            "url": "https://www.fastmock.site/mock/1d52adb084c96725525077ce7380de4c/tv/bd",
-            "name": "BD线路"
-        },
+
   
         { "url": "https://ghproxy.com/https://raw.githubusercontent.com/liu673cn/box/main/m.json", "name": "老刘备家庭版副线二" },
  { "url": "http://js.134584.xyz/json/pp87.json", "name": "白嫖影视家庭版线路" },
