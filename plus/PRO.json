@@ -31,18 +31,20 @@
 {"key":"18","name":"🔞分割线—小撸怡情","type":0,"api":""},
 {"key":"12","name":"🔞分割线—大撸伤身","type":0,"api":""},
 {"key":"10","name":"🔞分割线—强撸灰飞烟灭","type":0,"api":""},
-{
-			"key": "csp_Alist",
-			"name": "🗂Alist",
-			"type": 3,
-			"api": "csp_Alist",
-			"searchable": 1,
-			"quickSearch": 0,
-			"filterable": 0,
-			"ext": "http://52bsj.vip:81/api/v3/file/get/58993/Alist.json?sign=u1LstZcmJ3RwCSrwfF1XeIejOUCRQHQSqsNhH-9mUxw%3D%3A0",
-			"jar":"http://45.125.46.61/box/jar/777.png;md5;7B65FF61E7B6887F975D9D83909361D5"
-		},
-
+{"key":"AList",	"name":"🔞AList",	"type":3,"api":"csp_AList",	"searchable":1,"filterable":1,"ext":"🔞9T$https://drive.9t.ee#🔞木偶$https://www.kugutsu.ml",	"jar": "http://52bsj.vip:81/api/v3/file/get/61625/cs.jar?sign=bRzGWw4pD0b6L063rLkEWTQsRD2B6XDQKlHEuAeZm0o%3D%3A0"},
+		
+	{"key":"XYQBiu_测试2",	"name":"🔞zb(QXB)","type":3,"api":"csp_XYQBiu","searchable":1,"quickSearch":1,"filterable":0,"ext":"http://52bsj.vip:81/api/v3/file/get/61636/zb.json?sign=8LTHZaZKDLP4de3-Zz9jo1dH9RhzDHApOBqpLTv7Q3M%3D%3A0",		"jar": "http://52bsj.vip:81/api/v3/file/get/61634/1103.jar?sign=j_ZL6-vGc9fGqhh9ed-mtyRqnQzZG4gslD22H7dCo-g%3D%3A0"},
+	{"key":"XYQBiu_测试3",	"name":"🔞cqzy(QXB)","type":3,"api":"csp_XYQBiu","searchable":1,"quickSearch":1,"filterable":0,"ext":"http://52bsj.vip:81/api/v3/file/get/61637/cqzy.json?sign=Uwl1Z1HzE7-opPlAMgAtMkDhzaKJWeKgnP1KGCF6Kz0%3D%3A0",	"jar": "http://52bsj.vip:81/api/v3/file/get/61634/1103.jar?sign=j_ZL6-vGc9fGqhh9ed-mtyRqnQzZG4gslD22H7dCo-g%3D%3A0"},
+	{"key":"XYQBiu_测试4",	"name":"🔞nsss(QXB)","type":3,"api":"csp_XYQBiu","searchable":1,"quickSearch":1,"filterable":0,"ext":"http://52bsj.vip:81/api/v3/file/get/61638/nsss.json?sign=sQk8Q8_250c9Afr-7DBcv65ih6vo2HRoh1yPnzS4zHI%3D%3A0",	"jar": "http://52bsj.vip:81/api/v3/file/get/61634/1103.jar?sign=j_ZL6-vGc9fGqhh9ed-mtyRqnQzZG4gslD22H7dCo-g%3D%3A0"},
+	{"key":"csp_hsck",		"name":"🔞Hsck","api":"csp_Hsck","type":3,"filterable":1,"quickSearch":1,"searchable":1,"ext":"https://www.javsee.men/","jar": "http://52bsj.vip:81/api/v3/file/get/61635/18.jar?sign=TqxkdwFQQUaAK59b950h1sgG8P6HKPbIGIFgvsBrhtQ%3D%3A0"},	
+    {
+      "key": "18AV",
+      "name": "🔞18AV",
+      "type": 3,
+      "api": "csp_Eighteen",
+      "searchable": 1,
+      "filterable": 1,"jar":"http://52bsj.vip:81/api/v3/file/get/60598/18.jar?sign=_6QlbyRNISsDnMtx6h696RyR_vFHcpwdubYaW_Y0Igs%3D%3A0"
+    },
 
 
 {"key": "csp_xpath_lenxitv","name": "*🔞冷曦影视(XPF)","type": 3,"api": "csp_XPathFilter","searchable": 1,"quickSearch": 1,"filterable": 1,"ext": "https://agit.ai/guot54/ygbh/raw/branch/master/XB/lenxi.json"},   
