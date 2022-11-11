@@ -37,8 +37,8 @@
 
 { "url": "http://s.nxw.so/vip", "name": "凯速2863" },
  
- { "url": "https://agit.ai/n/b/raw/branch/a/b/c.json", "name": "HDXY线路" },
- { "url": "http://miaotvs.cn/osc", "name": "太阳视界家庭版线路" }
+ { "url": "https://agit.ai/n/b/raw/branch/a/b/c.json", "name": "HDXY线路" }
+ 
     ],
     "vip": [
         {
