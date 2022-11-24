@@ -166,8 +166,6 @@ CCTV14,http://60.213.134.68/tlivecloud-ipv6.ysp.cctv.cn/ysp/2000204402.m3u8
 CCTV15,http://60.213.134.68/tlivecloud-ipv6.ysp.cctv.cn/ysp/2000205003.m3u8
 CCTV15,http://39.134.115.163:8080/PLTV/88888910/224/3221225641/index.m3u8
 CCTV15,http://60.213.134.68/tlivecloud-ipv6.ysp.cctv.cn/ysp/2000205002.m3u8
-
-CCTV16,http://liveop.cctv.cn/hls/CCTV16HD/playlist.m3u8
 CCTV16,http://60.213.134.68/tlivecloud-ipv6.ysp.cctv.cn/ysp/2012492303.m3u8
 CCTV16,http://60.213.134.68/tlivecloud-ipv6.ysp.cctv.cn/ysp/2012375003.m3u8
 
@@ -382,7 +380,8 @@ CNC,http://39.135.138.59:18890/PLTV/88888910/224/3221225694/index.m3u8
 
 
 🍺世界杯专线,#genre#
-CCTV-16奥林匹克,http://liveop.cctv.cn/hls/CCTV16HD/playlist.m3u8
+CCTV16,http://60.213.134.68/tlivecloud-ipv6.ysp.cctv.cn/ysp/2012492303.m3u8
+CCTV16,http://60.213.134.68/tlivecloud-ipv6.ysp.cctv.cn/ysp/2012375003.m3u8
 五星体育4k,http://60.213.135.147/keonline.shanghai.liveplay.qq.com/live/program/live/ssty/4000000/mnf.m3u8
 五星体育4k,http://14.205.73.133/keonline.shanghai.liveplay.qq.com/live/program/live/ssty/4000000/mnf.m3u8
 五星体育4k,http://111.29.9.48:6610/000000001000/5000000010000017540/index.m3u8?channel-id=bestzb&Contentid=5000000010000017540&livemode=1&stbId=3
