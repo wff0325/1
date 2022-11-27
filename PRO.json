@@ -33,7 +33,6 @@
 		"filterable": 1,
 		"ext": "https://gitcode.net/weixin_58340148/box/-/raw/master/PY/py_cctv.py"
 	},
-	{"key":"YQK_spider","name":"⚽一起看世界杯","api":"csp_YQKAPP","type":3,"filterable":1,"playerType":2,"quickSearch":1,"searchable":1,"ext":"https://api-tx.shumaxc.xyz","jar":"http://52bsj.vip:81/api/v3/file/get/64524/qj1122.jar?sign=hapAQ7YXfCdIIpK5-rhp7miTPrPV64ZDRV4rojXSNJU%3D%3A0"},
 	
 	{
       "key": "csp_XYQ_lu1",
