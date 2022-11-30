@@ -3700,7 +3700,7 @@ dema,http://ye23.win/iptv/korea2021.php?id=dema
 回复VIP,http://125.40.191.58:9901/tsfile/live/1002_1.m3u8#http://59.49.41.44/live.aishang.ctlcdn.com/00000110240324_1/playlist.m3u8?CONTENTID=00000110240324_1#http://117.148.179.157/PLTV/88888888/224/3221231580/index.m3u8#http://117.148.179.157/PLTV/88888888/224/3221232945/index.m3u8#http://111.20.33.93/PLTV/88888893/224/3221226465/index.m3u8#http://117.148.179.138/PLTV/88888888/224/3221231580/index.m3u8#http://111.20.33.93/TVOD/88888893/224/3221226465/index.m3u8#http://59.49.41.41/live.aishang.ctlcdn.com/00000110240324_1/playlist.m3u8?CONTENTID=00000110240324_1
 
 获取密码,http://125.40.191.58:9901/tsfile/live/1001_1.m3u8#http://111.20.33.93/TVOD/88888893/224/3221226462/index.m3u8#http://117.148.179.157/PLTV/88888888/224/3221232942/index.m3u8#http://111.20.33.93/TVOD/88888893/224/3221226462/index.m3u8#http://gxfrg007.8800.org:8282/tsfile/live/1096_1.m3u8#http://59.49.41.41/live.aishang.ctlcdn.com/00000110240323_1/playlist.m3u8?CONTENTID=00000110240323_1#http://117.148.179.151/PLTV/88888888/224/3221231799/index.m3u8
-💞GAT测试_556,#genre#
+💞GAT测试_55,#genre#
 凤凰中文,http://play-live.ifeng.com/live/06OLEGEGM4G.m3u8 
 凤凰中文,http://playtv-live.ifeng.com/live/06OLEGEGM4G.m3u8 
 凤凰中文,http://playtv-live.ifeng.com/live/06OLEGEGM4G_tv1.m3u8 
@@ -4094,7 +4094,7 @@ k恐怖电影,http://21929815.rossteleccom.net/iptv/KBDMQMYTHBMXED/18055/index.m
 V音乐台,http://21929815.rossteleccom.net/iptv/KBDMQMYTHBMXED/18054/index.m3u8
 STAR电影台1,http://21929815.rossteleccom.net/iptv/KBDMQMYTHBMXED/18036/index.m3u8
 STAR电影台2,http://21929815.rossteleccom.net/iptv/KBDMQMYTHBMXED/18032/index.m3u8
-👠｜VIP直播资源_556,#genre#
+👠｜VIP直播资源_55,#genre#
 mide-821小野六花,https://t4s.cdn2020.com/video/m3u8/2020/09/25/31eaeb70/index.m3u8
 mide-784小野六花,https://t6s.cdn2020.com/video/m3u8/2021/02/05/ddf896d6/index.m3u8
 mide-797小野六花,https://t4s.cdn2020.com/video/m3u8/2020/07/27/89cfae5b/index.m3u8
@@ -4446,7 +4446,7 @@ JK 制服黑丝 00 后学妹 01,https://p.xgkvwoj.cn/watch9/2716a1f455dbf99e4e20
 JK 制服黑丝 00 后学妹 02,https://p.xgkvwoj.cn/watch9/d461be49d91888b1e8e85e2fbf364255/d461be49d91888b1e8e85e2fbf364255.m3u8
 
 
-👠｜VIP直播资源2_556,#genre#
+👠｜VIP直播资源2_55,#genre#
 bf-638藤森里穂,https://t10.cdn2020.com:12335/video/m3u8/2021/08/08/cf654092/index.m3u8
 mkmp-398藤森里穂,https://t10.cdn2020.com:12335/video/m3u8/2021/07/26/48339872/index.m3u8
 atid-447藤森里穂,https://t6s.cdn2020.com/video/m3u8/2021/01/20/3d6b0aaf/index.m3u8
@@ -4503,7 +4503,7 @@ ssni-889葵,https://t5s.cdn2020.com/video/m3u8/2020/10/24/e88b156f/index.m3u8
 atid-443深田,https://t4s.cdn2020.com/video/m3u8/2020/10/12/e25f3223/index.m3u8
 hmn-112北野未奈,https://t16.cdn2020.com:12340/video/m3u8/2022/02/14/4e2edbe2/index.m3u8
 
-👠VIP高清秒播2_556,#genre#
+👠VIP高清秒播2_55,#genre#
 一日女友的漂亮姐姐 上 她是谁,https://ypmnkbb.saejeuj.com/api/app/media/m3u8/zh/70/fm/e0/kc/f7beb303cedd40b2a3f0255889aa6360.m3u8?
 一日女友的漂亮姐姐 中,https://ypmnkbb.saejeuj.com/api/app/media/m3u8/zh/75/da/ic/nq/654561e53a8f44d4b452ee45db1d5aaa.m3u8?
 一日女友的漂亮姐姐 下 ,https://ypmnkbb.saejeuj.com/api/app/media/m3u8/zh/k6/r5/4l/88/60aac9f4edee40078853a86817ead1ff.m3u8?
@@ -4672,7 +4672,7 @@ MD反叛女学生的逆袭-玥可岚,https://t11.cdn2020.com:12336/video/m3u8/20
 切諾基唯一的DatAzz拍手,http://12204.vod.adultiptv.net/ph5a5cb7a12e61e/play.m3u8
 假出租車中出彙編＃1 HD,http://218158.vod.adultiptv.net/ph5a0bfc0cbc2ed/play.m3u8
 
-👠VIP高清秒播3_556,#genre#
+👠VIP高清秒播3_55,#genre#
 鮑魚游戲-孟若羽[960*544][960*544],https://zo392.cdnedge.live/file/avple-images/hls/621731ea336b5d6ff709b379/playlist.m3u8
 肉感精油SPA-酒井愛[1280*720],https://10j99.cdnedge.live/file/avple-images/hls/6219e9c6b9e8e9119a2f1fe8/playlist.m3u8
 反差淫女初登場-楚夢舒[1280*720],https://e2fa6.cdnedge.live/file/avple-images/hls/6219ebe2b9e8e9119a2f1fee/playlist.m3u8
@@ -4722,7 +4722,7 @@ AV女優鄰居[1280*720],https://stream.cdnedge14.live/file/avple-images/hls/60b
 成人 5[1920*1080],http://125.227.210.55:9062/VideoInput/play.ts
 
 
-👠｜VIP高清秒播1_556,#genre#
+👠｜VIP高清秒播1_55,#genre#
 新麻豆傳媒0.1,https://video2.51daao.com/btt1/2021/04/20210421/vTcVOAWe/index.m3u8
 新麻豆傳媒0.2,https://video2.51daao.com/btt1/2021/04/20210421/uerOlDXv/index.m3u8
 新麻豆傳媒0.3,https://video2.51daao.com/btt1/2021/04/20210421/Q6vpCHnh/index.m3u8
@@ -4868,7 +4868,7 @@ Beanpaste,https://fc.imgscloud.com/c/edgnokzuzi/edgnokzuzi.m3u8
 
 
 
-👠｜VIP 直播资源3_556,#genre#
+👠｜VIP 直播资源3_55,#genre#
 午夜1,http://live.redtraffic.xyz:80/interracial.m3u8
 午夜2,http://live.redtraffic.xyz:80/bigtits.m3u8
 午夜3,http://live.redtraffic.xyz:80/threesome.m3u8
@@ -4929,7 +4929,7 @@ Extasy4K,http://213.81.133.133:8080/extasy4k/index.m3u8
 ExstasyHD,http://213.151.233.20:8000/dna-6233-tv-pc.m3u8
 HustlerTV,http://78.83.191.18:8000/play/a078
 
-👠｜VIP 直播资源2_556,#genre#
+👠｜VIP 直播资源2_55,#genre#
 Anal,http://live.redtraffic.xyz/anal.m3u8
 Anal,http://cdn.adultiptv.net/anal.m3u8
 Asian,http://live.redtraffic.xyz/asian.m3u8
@@ -5011,7 +5011,7 @@ Miami TV Latino,https://5ee7c2b857b7f.streamlock.net/latino/latino/playlist.m3u8
 Miami TV México ,https://59ec5453559f0.streamlock.net/mexicotv/smil:miamitvmexicoROKU/playlist.m3u8
 Midnight (1080p),https://allanf181.github.io/adaptive-streams/streams/kr/Midnight.m3u8
 
-👠｜VIP 直播资源3_556,#genre#
+👠｜VIP 直播资源3_55,#genre#
 
 K频道欧美版,http://live.redtraffic.xyz:80/threesome.m3u8
 惊艳台欧美版,http://live.redtraffic.xyz:80/cuckold.m3u8
@@ -5059,7 +5059,7 @@ k频道欧美版,http://live.redtraffic.xyz:80/threesome.m3u8
 
 
 
-👠｜VIP欧美高清_556,#genre#
+👠｜VIP欧美高清_55,#genre#
 AdultIPTV.net Live Cams,http://cdn.adultiptv.net/livecams.m3u8
 AdultIPTV.net MILF,http://cdn.adultiptv.net/milf.m3u8
 AdultIPTV.net Big Dick,http://cdn.adultiptv.net/bigdick.m3u8
@@ -5086,7 +5086,7 @@ AdultIPTV.net Anal,http://cdn.adultiptv.net/anal.m3u8
 AdultIPTV.net Asian,http://cdn.adultiptv.net/asian.m3u8
 AdultIPTV.net Pornstar,http://cdn.adultiptv.net/pornstar.m3u8
 
-👠｜VIP欧美高清1_556,#genre#
+👠｜VIP欧美高清1_55,#genre#
 Brazzers HD,http://21929815.rossteleccom.net/iptv/KBDMQMYTHBMXED/6182/index.m3u8
 Brazzers TV Europe,http://21929815.rossteleccom.net/iptv/KBDMQMYTHBMXED/910/index.m3u8
 Brazzers eXXtra,http://21929815.rossteleccom.net/iptv/KBDMQMYTHBMXED/6181/index.m3u8
