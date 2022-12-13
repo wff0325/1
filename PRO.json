@@ -42,7 +42,7 @@
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 0,
-      "ext": "http://52bsj.vip:81/api/v3/file/get/61542/%E7%94%B5%E8%A7%86%E7%9B%B4%E6%92%AD%E6%BA%90.json?sign=JxgjHlxu8_IP1SK2AbvPOnG3dnOnOtvJE4V3TM0Vp1w%3D%3A0","jar":"http://52bsj.vip:81/api/v3/file/get/61543/%E6%9C%80%E9%AB%981080%E5%93%94%E5%93%A9%E5%BF%B5%E5%BD%B1%E7%A5%9E%E9%A9%ACzb.jar?sign=BTFlwsHLsd9ID93zVjRQSvbbhRn8g4_KtO-cGrGthRI%3D%3A0"
+      "ext": "https://gitlab.com/ygbh1/666/-/raw/main/json/%E7%94%B5%E8%A7%86%E7%9B%B4%E6%92%AD%E6%BA%90.json","jar":"https://gitlab.com/ygbh1/666/-/raw/main/JAR/%E6%9C%80%E9%AB%981080%E5%93%94%E5%93%A9%E5%BF%B5%E5%BD%B1%E7%A5%9E%E9%A9%ACzb.jar"
     },
 	{"key": "追剧喵","name": "🐞追剧喵〔SP〕","type": 3,"api": "csp_ZJMiao","searchable": 1,"quickSearch": 1,"filterable": 1}, 
     {"key":"csp_Kunyu77","name":"👒七七〔SP〕","type":3,"api":"csp_Kunyu77","searchable":1,"quickSearch":1,"filterable":1},
