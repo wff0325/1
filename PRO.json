@@ -14,24 +14,22 @@
 "sites":[
   
  {
-	     "key": "Lezhu_spider",
-	     "name": "🐷乐猪影视",
-	     "api": "csp_Lezhu",
-	     "type": 3,
-	     "filterable": 1,
-	     "quickSearch": 1,
-	     "searchable": 1
-    },
-{
-		"key": "py_cctv",
-		"name": "❤️爱央视（PY)",
-		"type": 3,
-		"api": "py_cctv",
-		"searchable": 0,
-		"quickSearch": 0,
-		"filterable": 1,
-		"ext": "https://gitcode.net/weixin_58340148/box/-/raw/master/PY/py_cctv.py"
-	},
+            "key": "csp_新视觉",
+            "name": "🍁新视觉",
+            "type": 3,
+            "api": "csp_Xinsj",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,"jar":"http://52bsj.vip:81/api/v3/file/get/68477/%E6%96%B0%E8%A7%86%E8%A7%89.jar?sign=5hkB9freXo4-WOfuRa3Kc8_eUA4GPuMxVNgKOVUMnhs%3D%3A0"
+        },   
+	 
+    
+   // {"key":"douban","name":"🎞️豆瓣荐片┃t4首页","type":4,"api":"http://t4.ganggang.live:3812/vod","searchable": 0,"quickSearch": 0,"filterable": 0,"jar":"https://gitlab.com/ygbh1/666/-/raw/main/JAR/panda1123.jar;md5; b1106a30c00023fc614c127cea04a331"},
+
+{"key":"dr_豆瓣","name":"🎞️豆瓣热播┃dr首页","type":4,"api":"http://drpy.ganggang.live:5705/vod?pwd=dzyyds&rule=drpy","searchable":0,"quickSearch":0,"filterable":0,"jar":"https://gitlab.com/ygbh1/666/-/raw/main/JAR/panda1123.jar;md5; b1106a30c00023fc614c127cea04a331"},
+
+ {"key": "csp_lezhu","name": "🐷乐猪影视","type": 3,"api": "csp_XPath","searchable": 1,"quickSearch": 0,"filterable": 1,"ext": "http://52bsj.vip:81/api/v3/file/get/68479/%E4%B9%90%E7%8C%AAXP.json?sign=-mbGfklZSjyMYL-zyJ_0rE2igcXTzyt8TXw0nyk2-7g%3D%3A0"},
+   
 {"key":"YQK_spider","name":"⚽一起看世界杯","api":"csp_YQKAPP","type":3,"filterable":1,"quickSearch":1,"searchable":1,"ext":"https://api-tx.shumaxc.xyz"},	
 	
 	{
