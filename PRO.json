@@ -129,9 +129,9 @@
       ]
     },
 		{"key":"csp_xBPQ_乐猪影视","name":"🐷乐猪影视┃xBPQ","type":3,"api":"csp_xBPQ","searchable":1,"quickSearch":1,"filterable":0,"ext":"http://52bsj.vip:81/api/v3/file/get/68611/%E4%B9%90%E7%8C%AA.json?sign=3LCwJDKuCI_c1-ZE-Y75aw_BpTafG10Zh5mW4gwL7mU%3D%3A0"},
-{"key":"Pang","name":"🐼胖虎","type":"3","api":"csp_Panghu","searchable":"1","quickSearch":"1","filterable":"1","jar":"http://52bsj.vip:81/api/v3/file/get/68860/xo.jar?sign=hHA3T9pSJ3P9JYmV5cam9_CLdLz2xB3WguFbZLMNRdU%3D%3A0"},	
+{"key":"Pang","name":"🐼胖虎","type":"3","api":"csp_Panghu","searchable":"1","quickSearch":"1","filterable":"1","jar":"https://agit.ai/guot54/ygbh/raw/branch/master/JAR/xo.jar"},	
 {"key":"Yanet","name":"🐬鸭奶飞","type":"3","api":"csp_Dora","searchable":"1","quickSearch":"1","filterable":"1","ext":"a369b1f623fe86605f1b029f0cf66349","jar":"http://52bsj.vip:81/api/v3/file/get/61625/cs.jar?sign=bRzGWw4pD0b6L063rLkEWTQsRD2B6XDQKlHEuAeZm0o%3D%3A0"},
-{"key":"Smdyy","name":"🌈神马","type":"3","api":"csp_Smdyy","searchable":"1","quickSearch":"1","filterable":"1","jar":"http://52bsj.vip:81/api/v3/file/get/68860/xo.jar?sign=hHA3T9pSJ3P9JYmV5cam9_CLdLz2xB3WguFbZLMNRdU%3D%3A0"},
+{"key":"Smdyy","name":"🌈神马","type":"3","api":"csp_Smdyy","searchable":"1","quickSearch":"1","filterable":"1","jar":"https://agit.ai/guot54/ygbh/raw/branch/master/JAR/xo.jar"},
 {"key":"Ddys","name":"🎈低端","type":"3","api":"csp_Dora","searchable":"1","quickSearch":"1","filterable":"1","ext":"1cc92323700909e7d46623bc85b958d6","jar":"http://52bsj.vip:81/api/v3/file/get/61625/cs.jar?sign=bRzGWw4pD0b6L063rLkEWTQsRD2B6XDQKlHEuAeZm0o%3D%3A0"},
 {"key": "csp_biubiu_影视工厂","name": "🎑影视工厂","type": 3,"api": "csp_XBiubiu","searchable": 1,	"quickSearch": 1,"filterable": 0,"ext": "http://52bsj.vip:81/api/v3/file/get/61555/%E5%BD%B1%E8%A7%86%E5%B7%A5%E5%8E%82.json?sign=30JHwwq5hE4YG_7diB8H8J4WZOQvmPtx0cliXcYtPAI%3D%3A0"},
 {"key": "Kuaikan","name": "🈷️月光快看(SP)","type": 3,"api": "csp_Kuaikan","searchable": 1,"quickSearch": 1,"filterable": 1},
