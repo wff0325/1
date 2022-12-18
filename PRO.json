@@ -83,6 +83,51 @@
 {"key":"csp_biubiu_瓜皮TV","name":"🎯瓜皮TV","type":3,"api":"csp_XBiubiu","searchable":1,"quickSearch":1,"filterable":0,"ext":"http://52bsj.vip:81/api/v3/file/get/3982/%E7%93%9C%E7%9A%AETV.json?sign=fJ7wD2_TvXE0Mav6YOScPeYUf6sPBCy6BbQ5C2PQ-UA%3D%3A0"},
 {"key":"csp_Bttoo","name":"🐞两个BT","type":3,"api":"csp_Bttoo","searchable":1,"quickSearch":1,"filterable":1,"jar":"http://52bsj.vip:81/api/v3/file/get/29963/box281.jar?sign=xx5cM6sdOlQIx7BcKyXo0nnj-ZrVehFpllWJC4L30xM%3D%3A0"},
 {"key":"csp_SP360","name":" 🌈公众号：月光宝盒BOX","type":3,"api":"csp_SP360","searchable":1,"quickSearch":1,"filterable":1},
+{"key":"Gitcafe","name":"📃小纸条","type":3,"api":"csp_Gitcafe","searchable":1,"quickSearch":1,"filterable":1,"ext":"cfe35d11f40b4872b3f6e35388b16181","jar":"http://52bsj.vip:81/api/v3/file/get/59958/ali.jar?sign=Ju6IMNmWSdej1a3_ptZR-p5yXzlV5A7Bmtku3JDbmI4%3D%3A0"},
+{
+            "key": "Upso",
+            "name": "☁️云搜",
+            "type": "3",
+            "api": "csp_Upso",
+            "searchable": "1",
+            "quickSearch": "1",
+            "filterable": "1",
+            "ext": "https://gitlab.com/ygbh1/666/-/raw/main/token/token.txt",
+			"jar":"https://gitlab.com/ygbh1/666/-/raw/main/JAR/tang.jar"
+        },
+		{
+            "key": "Zhaozy",
+            "name": "🔎资源",
+            "type": "3",
+            "api": "csp_Zhaozy",
+            "searchable": "1",
+            "quickSearch": "1",
+            "filterable": "1",
+            "ext": "https://gitlab.com/ygbh1/666/-/raw/main/token/token.txt",
+			"jar":"https://gitlab.com/ygbh1/666/-/raw/main/JAR/tang.jar"
+        },
+        {
+            "key": "YiSo",
+            "name": "🔍易搜",
+            "type": "3",
+            "api": "csp_YiSo",
+            "searchable": "1",
+            "quickSearch": "1",
+            "filterable": "1",
+            "ext": "https://gitlab.com/ygbh1/666/-/raw/main/token/token.txt",
+			"jar":"https://gitlab.com/ygbh1/666/-/raw/main/JAR/tang.jar"
+        },
+        {
+            "key": "AliPS",
+            "name": "📀盘搜",
+            "type": "3",
+            "api": "csp_AliPS",
+            "searchable": "1",
+            "quickSearch": "1",
+            "filterable": "1",
+            "ext": "https://gitlab.com/ygbh1/666/-/raw/main/token/token.txt",
+			"jar":"https://gitlab.com/ygbh1/666/-/raw/main/JAR/tang.jar"
+        },
 {"key":"csp_Bttwoo","name":"✌2BT(SP)","type":3,"api":"csp_Bttwoo","searchable":1,"quickSearch":1,"filterable":1},
 { "key": "AppTT","name": "🐰图图丨影视","type": 3, "api": "csp_Dora", "jar": "https://gitlab.com/ygbh1/666/-/raw/main/JAR/pandatt.jar;md5; 3D6C99CAE168DA455AA766618BE7B604","ext": "110c922de7d69804467fb83d3bb664b5"},
  {"key":"csp_Auete","name":"🏝Aue(SP)","type":3,"api":"csp_Auete","searchable":1,"quickSearch":1,"filterable":1},         
@@ -155,57 +200,6 @@
 {"key":"csp_xbb_稀饭影视","name":"🍀稀饭影视","type":3,"api":"csp_XBiubiu","searchable":1,"quickSearch":1,"filterable":0,"ext":"http://52bsj.vip:81/api/v3/file/get/61562/%E7%A8%80%E9%A5%AD%E5%BD%B1%E8%A7%86.json?sign=PSG1_JlYIlQZB10fthCyEZTVlPo15A2rsShEsrZ8p08%3D%3A0"},
 {"key": "csp_xpath_音范丝磁力","name": "🐛音范丝磁力〔XP〕","type": 3,"api": "csp_XPath","searchable": 1,"quickSearch": 1,"filterable": 1,"ext": "http://maoyingshi.cc/tvbox/云星日记/sh/MaooXP/音范丝磁力.json","jar":"http://maoyingshi.cc/tvbox/云星日记/jar/ali.jpg;md5;23a7b8ab50ead897fd733e5c52c5f3fd"},
 
-
-
-
-
-
-
-{"key":"Gitcafe","name":"📃小纸条","type":3,"api":"csp_Gitcafe","searchable":1,"quickSearch":1,"filterable":1,"ext":"cfe35d11f40b4872b3f6e35388b16181","jar":"http://52bsj.vip:81/api/v3/file/get/59958/ali.jar?sign=Ju6IMNmWSdej1a3_ptZR-p5yXzlV5A7Bmtku3JDbmI4%3D%3A0"},
-{
-            "key": "Upso",
-            "name": "☁️云搜",
-            "type": "3",
-            "api": "csp_Upso",
-            "searchable": "1",
-            "quickSearch": "1",
-            "filterable": "1",
-            "ext": "https://gitlab.com/ygbh1/666/-/raw/main/token/token.txt",
-			"jar":"https://gitlab.com/ygbh1/666/-/raw/main/JAR/tang.jar"
-        },
-		{
-            "key": "Zhaozy",
-            "name": "🔎资源",
-            "type": "3",
-            "api": "csp_Zhaozy",
-            "searchable": "1",
-            "quickSearch": "1",
-            "filterable": "1",
-            "ext": "https://gitlab.com/ygbh1/666/-/raw/main/token/token.txt",
-			"jar":"https://gitlab.com/ygbh1/666/-/raw/main/JAR/tang.jar"
-        },
-        {
-            "key": "YiSo",
-            "name": "🔍易搜",
-            "type": "3",
-            "api": "csp_YiSo",
-            "searchable": "1",
-            "quickSearch": "1",
-            "filterable": "1",
-            "ext": "https://gitlab.com/ygbh1/666/-/raw/main/token/token.txt",
-			"jar":"https://gitlab.com/ygbh1/666/-/raw/main/JAR/tang.jar"
-        },
-        {
-            "key": "AliPS",
-            "name": "📀盘搜",
-            "type": "3",
-            "api": "csp_AliPS",
-            "searchable": "1",
-            "quickSearch": "1",
-            "filterable": "1",
-            "ext": "https://gitlab.com/ygbh1/666/-/raw/main/token/token.txt",
-			"jar":"https://gitlab.com/ygbh1/666/-/raw/main/JAR/tang.jar"
-        },
 {"key":"push_agent","name":"🍭推送（爱优腾/磁力/阿里）","type":3,"api":"csp_PushAgent","searchable":0,"quickSearch":0,"filterable":0,"ext":"cfe35d11f40b4872b3f6e35388b16181","jar":"http://52bsj.vip:81/api/v3/file/get/40056/%E5%8E%9F%E7%94%BB.jar?sign=Dnj7Fy_zQPEegI4pHmr7QcT8Q6ujk8tiyBjD_kn8TTk%3D%3A0"},
 //{"key": "T4","name": "T4搜索","type": 4,"api": "https://service-59u7dsoa-1308372858.gz.apigw.tencentcs.com/release/vod","searchable": 1,"quickSearch": 1,"filterable": 1,"jar":"https://share.nite07.com/api/v3/file/source/18177/t4.jar?sign=wvzbHCnMNPaxy4weFwgjQal4Fh-i2-Agm2eibngmbNY%3D%3A0"},
 {"key":"csp_biubiu_速搜影视","name":"🥒速搜影视〔XB〕","type":3,"api":"csp_XBiubiu","searchable":1,"quickSearch":1,"filterable":0,"ext":"http://maoyingshi.cc/tvbox/云星日记/sh/MaooXB/速搜影视.json"}, 
