@@ -29,7 +29,7 @@
 
  {"key": "csp_lezhu","name": "🐷乐猪影视","type": 3,"api": "csp_XPath","searchable": 1,"quickSearch": 0,"filterable": 1,"ext": "https://agit.ai/guot54/ygbh/raw/branch/master/XB/%e4%b9%90%e7%8c%aaXP.json"},
    
-{"key":"YQK_spider","name":"⚽一起看世界杯","api":"csp_YQKAPP","type":3,"filterable":1,"quickSearch":1,"searchable":1,"ext":"https://api-tx.shumaxc.xyz"},	
+{"key":"YQK_spider","name":"⚽一起看","api":"csp_YQKAPP","type":3,"filterable":1,"quickSearch":1,"searchable":1,"ext":"https://api-tx.shumaxc.xyz"},	
 	
 	{
       "key": "csp_XYQ_lu1",
