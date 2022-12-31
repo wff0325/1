@@ -128,6 +128,13 @@
             "ext": "https://gitlab.com/ygbh1/666/-/raw/main/token/token.txt",
 			"jar":"https://gitlab.com/ygbh1/666/-/raw/main/JAR/tang.jar"
         },
+        {
+            "key" : "drpy_js_Fun4K",
+            "name" : "Fun4K",
+            "type" : 3,
+            "api" : "https://ghproxy.com/https://raw.githubusercontent.com/ShadowDemon1997/CatVodSpiderJS/main/drpy.js",
+            "ext" : "https://gitcode.net/weixin_58340148/box/-/raw/master/js/Fun4K.js"
+        },
 {"key":"csp_Bttwoo","name":"✌2BT(SP)","type":3,"api":"csp_Bttwoo","searchable":1,"quickSearch":1,"filterable":1},
 { "key": "AppTT","name": "🐰图图丨影视","type": 3, "api": "csp_Dora", "jar": "https://gitlab.com/ygbh1/666/-/raw/main/JAR/pandatt.jar;md5; 3D6C99CAE168DA455AA766618BE7B604","ext": "110c922de7d69804467fb83d3bb664b5"},
  {"key":"csp_Auete","name":"🏝Aue(SP)","type":3,"api":"csp_Auete","searchable":1,"quickSearch":1,"filterable":1},         
