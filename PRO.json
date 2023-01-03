@@ -12,6 +12,16 @@
 "lives":[{"group":"redirect","channels":[{"name":"redirect","urls":["proxy://do=live&type=txt&ext=aHR0cHM6Ly9hZ2l0LmFpL2d1b3Q1NC95Z2JoL3Jhdy9icmFuY2gvbWFzdGVyL3pCL3pCLnR4dA=="]}]}],
 
 "sites":[
+    {
+            "key": "js豆瓣1",
+            "name": "豆瓣热播┃首页（新版)",
+            "type": 3,
+            "api": "https://agit.ai/guot54/ygbh/raw/branch/master/JAR/drpy.min.js",
+            "ext": "https://agit.ai/guot54/ygbh/raw/branch/master/JAR/drpy.js",
+            "searchable": 0,
+            "quickSearch": 0,
+            "filterable": 0
+        },
   
  {
             "key": "csp_新视觉",
