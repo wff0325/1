@@ -60,7 +60,7 @@
       "filterable": 0,
       "ext": "https://gitlab.com/ygbh1/666/-/raw/main/json/%E7%94%B5%E8%A7%86%E7%9B%B4%E6%92%AD%E6%BA%90.json","jar":"https://gitlab.com/ygbh1/666/-/raw/main/JAR/%E6%9C%80%E9%AB%981080%E5%93%94%E5%93%A9%E5%BF%B5%E5%BD%B1%E7%A5%9E%E9%A9%ACzb.jar"
     },
-	{"key": "小苹果","name": "🍎小苹果","type": 3,"api": "csp_LiteApple","searchable": 1,"quickSearch": 1,"filterable": 1,"jar":"https://gitlab.com/ygbh1/666/-/raw/main/JAR/xo.jar"},
+	{"key": "小苹果","name": "🍎小苹果","type": 3,"api": "csp_LiteApple","searchable": 1,"quickSearch": 1,"filterable": 1,"jar":"https://gitlab.com/ygbh1/666/-/raw/main/JAR/ttpg.jar"},
     {"key":"csp_Kunyu77","name":"👒七七〔SP〕","type":3,"api":"csp_Kunyu77","searchable":1,"quickSearch":1,"filterable":1},
 	//{"key":"csp_XBPQ厂长","name":"🎈厂长影视〔XBPQ〕","type":3,"api":"csp_xBPQ","searchable":1,"quickSearch":1,"filterable":1,"ext":"https://gitcode.net/weixin_58340148/box/-/raw/master/XBPQ/cz_xBPQ_.json","jar":"https://gitcode.net/weixin_58340148/box/-/raw/master/XBPQ/xBPQ_1017.jar"},
 	{"key":"csp_XBPQ极品影视","name":"🎞️极品影视〔XBPQ〕","type":3,"api":"csp_xBPQ","searchable":1,"quickSearch":1,"filterable":1,"ext":"https://agit.ai/guot54/ygbh/raw/branch/master/XB/%e6%9e%81%e5%93%81%e5%bd%b1%e8%a7%86.json","jar":"https://agit.ai/guot54/ygbh/raw/branch/master/JAR/xBPQ.jar"},
@@ -102,49 +102,48 @@
 {"key":"csp_Bttoo","name":"🐞两个BT","type":3,"api":"csp_Bttoo","searchable":1,"quickSearch":1,"filterable":1,"jar":"http://52bsj.vip:81/api/v3/file/get/29963/box281.jar?sign=xx5cM6sdOlQIx7BcKyXo0nnj-ZrVehFpllWJC4L30xM%3D%3A0"},
 {"key":"csp_SP360","name":" 🌈公众号：月光宝盒BOX","type":3,"api":"csp_SP360","searchable":1,"quickSearch":1,"filterable":1},
 {"key":"Gitcafe","name":"📃小纸条","type":3,"api":"csp_Gitcafe","searchable":1,"quickSearch":1,"filterable":1,"ext":"ac942348c0a249fba0e63f9206627842","jar":"http://52bsj.vip:81/api/v3/file/get/59958/ali.jar?sign=Ju6IMNmWSdej1a3_ptZR-p5yXzlV5A7Bmtku3JDbmI4%3D%3A0"},
-{
-            "key": "Upso",
-            "name": "☁️云搜",
-            "type": "3",
-            "api": "csp_Upso",
-            "searchable": "1",
-            "quickSearch": "1",
-            "filterable": "1",
-            "ext": "https://gitlab.com/ygbh1/666/-/raw/main/token/token.txt",
-			"jar":"https://gitlab.com/ygbh1/666/-/raw/main/JAR/tang.jar"
-        },
-		{
+ {
             "key": "Zhaozy",
-            "name": "🔎资源",
+            "name": " 🔍阿里资源(搜索)",
             "type": "3",
             "api": "csp_Zhaozy",
             "searchable": "1",
             "quickSearch": "1",
             "filterable": "1",
-            "ext": "https://gitlab.com/ygbh1/666/-/raw/main/token/token.txt",
-			"jar":"https://gitlab.com/ygbh1/666/-/raw/main/JAR/tang.jar"
+            "ext": "http://ali.饭太硬.ml/tok",
+            "jar": "http://52bsj.vip:81/api/v3/file/get/71914/ali3.jar?sign=sP2lTaa6VKjycpE0xeIubEEWlYZpO7Ln3rjPq8a4XKQ%3D%3A0;md5;e3b236416ca6f34b41aeca2c83809837"
         },
         {
             "key": "YiSo",
-            "name": "🔍易搜",
+            "name": " 🔎阿里易搜(搜索)",
             "type": "3",
             "api": "csp_YiSo",
             "searchable": "1",
             "quickSearch": "1",
             "filterable": "1",
-            "ext": "https://gitlab.com/ygbh1/666/-/raw/main/token/token.txt",
-			"jar":"https://gitlab.com/ygbh1/666/-/raw/main/JAR/tang.jar"
+            "ext": "http://ali.饭太硬.ml/tok",
+            "jar": "http://52bsj.vip:81/api/v3/file/get/71914/ali3.jar?sign=sP2lTaa6VKjycpE0xeIubEEWlYZpO7Ln3rjPq8a4XKQ%3D%3A0;md5;e3b236416ca6f34b41aeca2c83809837"
         },
         {
             "key": "AliPS",
-            "name": "📀盘搜",
+            "name": " 📀阿里盘搜(搜索)",
             "type": "3",
-            "api": "csp_AliPS",
+            "api": "csp_PanSou",
             "searchable": "1",
             "quickSearch": "1",
             "filterable": "1",
-            "ext": "https://gitlab.com/ygbh1/666/-/raw/main/token/token.txt",
-			"jar":"https://gitlab.com/ygbh1/666/-/raw/main/JAR/tang.jar"
+            "ext": "http://ali.饭太硬.ml/tok",
+            "jar": "http://52bsj.vip:81/api/v3/file/get/71914/ali3.jar?sign=sP2lTaa6VKjycpE0xeIubEEWlYZpO7Ln3rjPq8a4XKQ%3D%3A0;md5;e3b236416ca6f34b41aeca2c83809837"
+        },
+        {
+            "key": "Upso",
+            "name": " ☁️阿里云搜(搜索)",
+            "type": "3",
+            "api": "csp_Upyunso",
+            "searchable": "1",
+            "quickSearch": "1",
+            "filterable": "1",
+            "ext": "http://ali.饭太硬.ml/tok"
         },
         {
             "key" : "drpy_js_Fun4K",
