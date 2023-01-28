@@ -60,6 +60,15 @@
       "filterable": 0,
       "ext": "https://gitlab.com/ygbh1/666/-/raw/main/json/%E7%94%B5%E8%A7%86%E7%9B%B4%E6%92%AD%E6%BA%90.json","jar":"https://gitlab.com/ygbh1/666/-/raw/main/JAR/%E6%9C%80%E9%AB%981080%E5%93%94%E5%93%A9%E5%BF%B5%E5%BD%B1%E7%A5%9E%E9%A9%ACzb.jar"
     },
+      {
+      "key": "T4直播转点播",
+      "name": "📺︎电视直播2",
+      "type": 4,
+      "api": "http://120.53.102.254/live?url=aHR0cHM6Ly9hZ2l0LmFpL2d1b3Q1NC95Z2JoL3Jhdy9icmFuY2gvbWFzdGVyL3pCL3R2bGl2ZS50eHQ=",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1
+    },
 	{"key": "小苹果","name": "🍎小苹果","type": 3,"api": "csp_LiteApple","searchable": 1,"quickSearch": 1,"filterable": 1,"jar":"https://gitlab.com/ygbh1/666/-/raw/main/JAR/ttpg.jar"},
     {"key":"csp_Kunyu77","name":"👒七七〔SP〕","type":3,"api":"csp_Kunyu77","searchable":1,"quickSearch":1,"filterable":1},
 	//{"key":"csp_XBPQ厂长","name":"🎈厂长影视〔XBPQ〕","type":3,"api":"csp_xBPQ","searchable":1,"quickSearch":1,"filterable":1,"ext":"https://gitcode.net/weixin_58340148/box/-/raw/master/XBPQ/cz_xBPQ_.json","jar":"https://gitcode.net/weixin_58340148/box/-/raw/master/XBPQ/xBPQ_1017.jar"},
