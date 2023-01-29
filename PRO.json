@@ -125,14 +125,7 @@
             "filterable": "1",
             "ext": "http://ali.饭太硬.ml/tok"
         },
-  {
-        "api":"https://www.ddzyz1.com/api.php/provide/vod/",
-        "key":"多多资源",
-        "name":"🍵多多资源(切)",
-        "quickSearch":1,
-        "searchable":1,
-        "type":1
-    },
+
 	 {
             "key": "Dy1010",
             "name": "🎥电影1010",
