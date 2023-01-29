@@ -14,7 +14,7 @@
 "sites":[
    {
             "key": "js豆瓣1",
-            "name": "🌈月光宝盒",
+            "name": "🌈豆瓣首页",
             "type": 3,
             "api": "https://agit.ai/767820774/TVBOXZY/raw/branch/main/JS/lib/drpy.min.js",
             "ext": "http://w.g9.pub:66/2251087869/smallmi/js/drpy.js",
@@ -25,7 +25,7 @@
   
  {
             "key": "csp_新视觉",
-            "name": "🍁祝大家",
+            "name": "🍁新视觉",
             "type": 3,
             "api": "csp_Xinsj",
             "searchable": 1,
@@ -35,7 +35,7 @@
 	 
     
    
-{"key":"dr_豆瓣","name":"🎞️新年快乐","type":3,"api":"http://id.ganggang.live:63/js/drpy2.min.js","ext": "http://id.ganggang.live:63/js/js_drpy.js","searchable":0,"quickSearch":0,"filterable":0},
+{"key":"dr_豆瓣","name":"🎞️豆瓣首页2","type":3,"api":"http://id.ganggang.live:63/js/drpy2.min.js","ext": "http://id.ganggang.live:63/js/js_drpy.js","searchable":0,"quickSearch":0,"filterable":0},
 
  {"key": "csp_lezhu","name": "🐷乐猪影视","type": 3,"api": "csp_XPath","searchable": 1,"quickSearch": 0,"filterable": 1,"ext": "https://agit.ai/guot54/ygbh/raw/branch/master/XB/%e4%b9%90%e7%8c%aaXP.json"},
   {
