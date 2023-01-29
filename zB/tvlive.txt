@@ -388,7 +388,33 @@ KBS2,http://pull-l3-cny.douyincdn.com/third/stream-9accc1d4ae7e4bfa7350249c05a0e
 MBC,http://pull-l3-cny.douyincdn.com/third/stream-4f444d2b71e8fbab0a8802b9fa23ea5b.m3u8
 SBS,http://pull-l3-cny.douyincdn.com/third/stream-d10b659225b3738937372b8835b94f1c.m3u8
 澳亚卫视,https://live.mastvnet.com/lsdream/lY44pmm/2000/live.m3u8
-
+Discovery,http://www.yshmzmc.top/gtjm.php?id=live1002
+自然,http://www.yshmzmc.top/gtjm.php?id=live1003
+动物星球,http://www.yshmzmc.top/gtjm.php?id=live1004
+TLC,http://www.yshmzmc.top/gtjm.php?id=live1005
+BABY TV,http://www.yshmzmc.top/gtjm.php?id=live1007
+东森幼幼,http://www.yshmzmc.top/gtjm.php?id=live1008
+纬来体育,http://www.yshmzmc.top/gtjm.php?id=live1011
+东森新闻,http://www.yshmzmc.top/gtjm.php?id=live1014
+中天新闻,http://www.yshmzmc.top/gtjm.php?id=live1015
+三立都会台,http://www.yshmzmc.top/gtjm.php?id=live1020
+中天娱乐,http://www.yshmzmc.top/gtjm.php?id=live1023
+卫视中文,http://www.yshmzmc.top/gtjm.php?id=live1024
+HBO,http://www.yshmzmc.top/gtjm.php?id=live1029
+卫视电影台,http://www.yshmzmc.top/gtjm.php?id=live1031
+movie gold,http://www.yshmzmc.top/gtjm.php?id=live1032
+star world,http://www.yshmzmc.top/gtjm.php?id=live1040
+八大第一台,http://www.yshmzmc.top/gtjm.php?id=live1043
+CNN,http://www.yshmzmc.top/gtjm.php?id=live1063
+ELEVEN1,http://www.yshmzmc.top/gtjm.php?id=live1069
+ELEVEN2,http://www.yshmzmc.top/gtjm.php?id=live1072
+年代新闻,http://www.yshmzmc.top/gtjm.php?id=live1077
+三立新闻,http://www.yshmzmc.top/gtjm.php?id=live1079
+寰宇新闻,http://www.yshmzmc.top/gtjm.php?id=live1222
+博斯运动1,http://www.yshmzmc.top/gtjm.php?id=live1225
+壹新闻,http://www.yshmzmc.top/gtjm.php?id=live1242
+MOMO综合,http://www.yshmzmc.top/gtjm.php?id=live1248
+年代much,http://www.yshmzmc.top/gtjm.php?id=live2002
 
 重庆有线,#genre#
 SiTV欢笑剧场 4K,http://bytedance.live.cqccn.com/__cl/cg:live/__c/hxjc_4K/__op/default/__f//index.m3u8
