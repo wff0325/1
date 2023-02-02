@@ -46,7 +46,7 @@
 		"searchable": 0,
 		"quickSearch": 0,
 		"filterable": 1,
-		"ext": "https://gitcode.net/weixin_58340148/box/-/raw/master/PY/py_cctv.py"
+		"ext": "https://gitlab.com/ygbh1/666/-/raw/main/py/py_cctv.py"
 	}, 
 {"key":"YQK_spider","name":"⚽一起看","api":"csp_YQKAPP","type":3,"filterable":1,"quickSearch":1,"searchable":1,"ext":"https://api-tx.shumaxc.xyz"},	
 	{"key":"csp_SP360","name":" 🌈公众号：月光宝盒BOX","type":3,"api":"csp_SP360","searchable":1,"quickSearch":1,"filterable":1},
