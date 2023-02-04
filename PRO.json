@@ -434,6 +434,13 @@
       "url": "Web"
     },
  {"name":"解析聚合","type":3,"url":"Demo"},
+ {"name":"NPlayer","type":0,"url":"https://jx.jsonplayer.com/player/?url="},
+  {"name":"lk","type":1,"url":"https://k.json.icu/home/api?type=ys&uid=6399107&key=bdlmrswBDHIKZ01238&url="},
+ { "name": "TVB云播","type": 1,"url": "https://jxm.qwrev534.top/?url="},
+
+ {"name":"777","type": 0,"url":"https://jx.777jiexi.com/player/?url="},
+ {"name": "1","type":0,"url":"https://jxdp.codermart.net/?url="},
+ {"name":"AG","type":0,"url":"https://www.codjx.com/?url="},
  {
       "name": "月",
       "type": 0,
