@@ -372,35 +372,6 @@
       "searchable": 1,
       "filterable": 1,"jar":"https://agit.ai/guot54/ygbh/raw/branch/master/JAR/118.jar"
     },
-		{
-            "key" : "drpy_js_banan",
-            "name" : "🔞banan(DRPY)",
-            "type" : 3,
-            "api" : "https://ghproxy.com/https://raw.githubusercontent.com/ShadowDemon1997/CatVodSpiderJS/main/drpy.js",
-            "ext" : "https://gitcode.net/weixin_58340148/box/-/raw/master/js/banan.js"
-        },
-		{
-            "key" : "drpy_js_养端",
-            "name" : "🔞养端（DRPY）",
-            "type" : 3,
-            "api" : "https://ghproxy.com/https://raw.githubusercontent.com/ShadowDemon1997/CatVodSpiderJS/main/drpy.js",
-            "ext" : "https://gitcode.net/weixin_58340148/box/-/raw/master/js/%E5%85%BB%E7%AB%AF.js"
-        },
-		{
-            "key" : "drpy_js_吸瓜",
-            "name" : "🔞吸瓜[请更换解析]",
-            "type" : 3,
-            "api" : "https://ghproxy.com/https://raw.githubusercontent.com/ShadowDemon1997/CatVodSpiderJS/main/drpy.js",
-            "ext" : "https://gitcode.net/weixin_58340148/box/-/raw/master/js/%E5%90%B8%E7%93%9C.js"
-        },
-		{
-            "key" : "drpy_js_18av",
-            "name" : "🔞18av（DRPY）",
-            "type" : 3,
-            "api" : "https://ghproxy.com/https://raw.githubusercontent.com/ShadowDemon1997/CatVodSpiderJS/main/drpy.js",
-            "ext" : "https://gitcode.net/weixin_58340148/box/-/raw/master/js/18av.js"
-        },
-	
 {"key":"*色南国资源","name":"*🔞色南国资源","type":1,"api":"https://api.sexnguon.com/api.php/provide/vod/","searchable":0,"quickSearch":0},
 {"key":"*狼友资源","name":"*🔞狼友资源","type":1,"api":"https://www.langyouzy.com/api.php/provide/vod/","searchable":0,"quickSearch":0},
 {"key":"*皇冠资源","name":"*🔞皇冠资源","type":1,"api":"https://hghhh.com/api.php/provide/vod/","searchable":0,"quickSearch":0},
