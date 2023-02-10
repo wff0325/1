@@ -105,12 +105,14 @@
   
    {
             "key": "Czsapp",
-            "name": " 🌸厂长资源(SP)",
+            "name": "🐼厂长",
             "type": "3",
-            "api": "csp_Czsapp",
+            "api": "csp_Dora",
             "searchable": "1",
             "quickSearch": "1",
-            "filterable": "1"
+            "filterable": "1",
+            "ext": "8ee655f702d0d21f3643504783babbc3",
+            "jar":"https://gitlab.com/ygbh1/666/-/raw/main/JAR/tt.jar"
         },
         {
             "key": "Nkdy",
