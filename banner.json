@@ -1,0 +1,20 @@
+{
+  "data": [
+    {
+      "name": "更新日志",
+      "pic": "https://agit.ai/guot54/ygbh/raw/branch/master/yg3.jpeg",
+      "url": "https://mp.weixin.qq.com/s?__biz=Mzg3OTgwMzUzNA==&mid=2247485741&idx=1&sn=f2509e45272c9bcdbfb97754433c41ed&chksm=cf7fa4ccf8082dda4559ef1659b278192a7ca504e250b360e2a28d9380e01f1fe843099164ab&token=2098047395&lang=zh_CN#rd",
+      "type": "web",     
+      "desc": "",
+      "show": true
+    },
+    {
+      "name": "财阀家的小儿子",
+      "pic": "https://img2.doubanio.com/view/photo/l/public/p2883220703.webp",
+      "url": "",
+      "type": "search",     
+       "desc": "",
+      "show": ture
+    }
+  ]
+}
