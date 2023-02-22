@@ -375,6 +375,8 @@
     {"key": "csp_XBiu_掏爱撸","name": "🍁掏爱撸(XB)","type": 3,"api": "csp_XBiubiu","searchable": 1,"quickSearch": 1,"filterable": 1,"ext": "https://jihulab.com/ygbh1/box/-/raw/main/H/%E6%8E%8F%E7%88%B1%E6%92%B8.json"},
     {"key": "csp_XBiu_国产屋","name": "🍁国产屋(XB)","type": 3,"api": "csp_XBiubiu","searchable": 1,"quickSearch": 1,"filterable": 1,"ext": "https://jihulab.com/ygbh1/box/-/raw/main/H/%E5%9B%BD%E4%BA%A7%E5%B1%8B.json"},
     {"key": "csp_XBiu_爱看影院","name": "🍁爱看影院(XB)","type": 3,"api": "csp_xBPQ","searchable": 1,"quickSearch": 1,"filterable": 1,"ext": "https://ghproxy.com/https://raw.githubusercontent.com/2hacc/TVBox/main/H/XB/爱看影院.json"},
+    {"key": "csp_XBiu_爱污传媒","name": "🍁爱污传媒(XB)","type": 3,"api": "csp_xBPQ","searchable": 1,"quickSearch": 1,"filterable": 1,"ext": "https://codeberg.org/ygbh8888/xingkongbujian/raw/branch/main/H/%E7%88%B1%E6%B1%A1%E4%BC%A0%E5%AA%92.json"},
+    
     {"key": "csp_XBiu_GAOAA","name": "🍁GAOAA(XB)","type": 3,"api": "csp_XBiubiu","searchable": 1,"quickSearch": 1,"filterable": 0,"ext": "https://ghproxy.com/https://raw.githubusercontent.com/2hacc/TVBox/main/H/XB/GAOAA.json"},
     {"key": "csp_XBiu_黄仓库","name": "🍁黄仓库(XB)","type": 3,"api": "csp_XBiubiu","searchable": 1,"quickSearch": 1,"filterable": 1,"ext": "https://ghproxy.com/https://raw.githubusercontent.com/2hacc/TVBox/main/H/XB/黄仓库.json"},
     {"key": "csp_XBiu_猫咪","name": "🍁猫咪(XB)","type": 3,"api": "csp_XBiubiu","searchable": 1,"quickSearch": 1,"filterable": 1,"ext": "https://jihulab.com/ygbh1/box/-/raw/main/H/%E7%8C%AB%E5%92%AA.json"},
