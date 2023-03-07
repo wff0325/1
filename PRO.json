@@ -176,10 +176,9 @@
             "quickSearch": 1,
             "filterable": 1,
             "changeable": 0,
-            "ext": "61aed15a037546369ccf50a22f4be4cb",
-            "jar": "https://jihulab.com/ygbh1/box/-/raw/main/JAR/230216.jar;md5;5761F54CCFE6157E49F2F980F51D26FD"
-        },
- {
+            "ext": "https://jihulab.com/ygbh1/box/-/raw/main/token/token.txt",
+            "jar": "https://jihulab.com/ygbh1/box/-/raw/main/JAR/%E4%BF%AE%E5%A4%8D%E9%98%BF%E9%87%8C%E5%8E%9F%E7%94%BB%E6%80%A5%E9%80%9F%E5%8A%A0%E8%BD%BD.jar"
+         },{
             "key": "Zhaozy",
             "name": " 🔍阿里资源(搜索)",
             "type": "3",
@@ -187,8 +186,8 @@
             "searchable": "1",
             "quickSearch": "1",
             "filterable": "1",
-            "ext": "61aed15a037546369ccf50a22f4be4cb",
-            "jar": "http://52bsj.vip:81/api/v3/file/get/71914/ali3.jar?sign=sP2lTaa6VKjycpE0xeIubEEWlYZpO7Ln3rjPq8a4XKQ%3D%3A0;md5;e3b236416ca6f34b41aeca2c83809837"
+             "ext": "https://jihulab.com/ygbh1/box/-/raw/main/token/token.txt",
+            "jar": "https://jihulab.com/ygbh1/box/-/raw/main/JAR/%E4%BF%AE%E5%A4%8D%E9%98%BF%E9%87%8C%E5%8E%9F%E7%94%BB%E6%80%A5%E9%80%9F%E5%8A%A0%E8%BD%BD.jar"
         },
         {
             "key": "YiSo",
@@ -198,9 +197,9 @@
             "searchable": "1",
             "quickSearch": "1",
             "filterable": "1",
-            "ext": "61aed15a037546369ccf50a22f4be4cb",
-            "jar": "http://52bsj.vip:81/api/v3/file/get/71914/ali3.jar?sign=sP2lTaa6VKjycpE0xeIubEEWlYZpO7Ln3rjPq8a4XKQ%3D%3A0;md5;e3b236416ca6f34b41aeca2c83809837"
-        },
+             "ext": "https://jihulab.com/ygbh1/box/-/raw/main/token/token.txt",
+            "jar": "https://jihulab.com/ygbh1/box/-/raw/main/JAR/%E4%BF%AE%E5%A4%8D%E9%98%BF%E9%87%8C%E5%8E%9F%E7%94%BB%E6%80%A5%E9%80%9F%E5%8A%A0%E8%BD%BD.jar"
+         },
         {
             "key": "AliPS",
             "name": " 📀阿里盘搜(搜索)",
@@ -209,8 +208,8 @@
             "searchable": "1",
             "quickSearch": "1",
             "filterable": "1",
-            "ext": "61aed15a037546369ccf50a22f4be4cb",
-            "jar": "http://52bsj.vip:81/api/v3/file/get/71914/ali3.jar?sign=sP2lTaa6VKjycpE0xeIubEEWlYZpO7Ln3rjPq8a4XKQ%3D%3A0;md5;e3b236416ca6f34b41aeca2c83809837"
+           "ext": "https://jihulab.com/ygbh1/box/-/raw/main/token/token.txt",
+            "jar": "https://jihulab.com/ygbh1/box/-/raw/main/JAR/%E4%BF%AE%E5%A4%8D%E9%98%BF%E9%87%8C%E5%8E%9F%E7%94%BB%E6%80%A5%E9%80%9F%E5%8A%A0%E8%BD%BD.jar"
         },
         {
             "key": "Upso",
@@ -220,7 +219,8 @@
             "searchable": "1",
             "quickSearch": "1",
             "filterable": "1",
-            "ext": "61aed15a037546369ccf50a22f4be4cb"
+             "ext": "https://jihulab.com/ygbh1/box/-/raw/main/token/token.txt",
+            "jar": "https://jihulab.com/ygbh1/box/-/raw/main/JAR/%E4%BF%AE%E5%A4%8D%E9%98%BF%E9%87%8C%E5%8E%9F%E7%94%BB%E6%80%A5%E9%80%9F%E5%8A%A0%E8%BD%BD.jar"
         },
         
 {"key":"csp_Bttwoo","name":"✌2BT(SP)","type":3,"api":"csp_Bttwoo","searchable":1,"quickSearch":1,"filterable":1,"jar":"http://52bsj.vip:81/api/v3/file/get/59555/dmtv.jar?sign=-MqtqxB94n_EPkw1pV_VwzlIbT3CPYL5fc6Y2VxgLm0%3D%3A0"},
