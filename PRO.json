@@ -15,7 +15,7 @@
 "sites":[
 {
             "key": "js豆瓣1",
-            "name": "🌈豆瓣首页",
+            "name": "🌈免费接口，请勿贩售 公众号：宝盒BOX科技",
             "type": 3,
             "api": "https://agit.ai/767820774/TVBOXZY/raw/branch/main/JS/lib/drpy.min.js",
             "ext": "http://id.ganggang.live:63/js/js_drpy.js",
