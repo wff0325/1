@@ -10,7 +10,7 @@
 
 
 
-"lives":[{"group":"redirect","channels":[{"name":"redirect","urls":["proxy://do=live&type=txt&ext=./zB/zB.txt"]}]}],
+"lives":[{"group":"redirect","channels":[{"name":"redirect","urls":["proxy://do=live&type=txt&ext=https://agit.ai/guot54/ygbh/raw/branch/master/zB/zB.txt"]}]}],
 
 "sites":[
 {
