@@ -10,7 +10,7 @@
 
 
 
-"lives":[{"group":"redirect","channels":[{"name":"redirect","urls":["proxy://do=live&type=txt&ext=./ZB/live.txt"]}]}],
+"lives":[{"group":"redirect","channels":[{"name":"redirect","urls":["proxy://do=live&type=txt&ext=./zB/zB.txt"]}]}],
 
 "sites":[
 {
