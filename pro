@@ -57,7 +57,7 @@
    "name": "🐼电视直播1", 
    "type": 3, 
    "api": "https://agit.ai/guot54/ygbh/raw/branch/master/JS/%e6%94%af%e6%8c%81m3u-%e7%9b%b4%e6%92%ad%e8%bd%ac%e7%82%b9%e6%92%ad.js", 
-   "ext": "https://agit.ai/guot54/ygbh/raw/branch/master/zB/%e7%9b%b4%e6%92%ad.js" 
+   "ext": "https://agit.ai/guot54/ygbh/raw/branch/master/zB/%e7%9b%b4%e6%92%ad2.js" 
   },
 
          {
