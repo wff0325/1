@@ -52,6 +52,13 @@
             "ext": "https://api-tx.shumaxc.xyz",
             "jar": "http://我不是.肥猫.love:63/Jar/qq2.jar;md5;4E872E4AA2D4F8B6F4FFBC11E6B3E1A1"
         },
+{ 
+   "key": "直播转点播", 
+   "name": "🐼电视直播1", 
+   "type": 3, 
+   "api": "https://agit.ai/guot54/ygbh/raw/branch/master/JS/%e6%94%af%e6%8c%81m3u-%e7%9b%b4%e6%92%ad%e8%bd%ac%e7%82%b9%e6%92%ad.js", 
+   "ext": "https://agit.ai/guot54/ygbh/raw/branch/master/zB/%e7%9b%b4%e6%92%ad.js" 
+  },
 
          {
       "key": "T4直播转点播",
@@ -77,7 +84,6 @@
             "ext": "http://52bsj.vip:81/api/v3/file/get/71913/4kvm.json?sign=ARtkUUB2LnGr68XHmFwiWgdybX4Kt3fyCI5VpkdTXw0%3D%3A0"
         },
     {"key":"csp_Kunyu77","name":"👒七七〔SP〕","type":3,"api":"csp_Kunyu77","searchable":1,"quickSearch":1,"filterable":1,"jar":"http://52bsj.vip:81/api/v3/file/get/59542/1007.jar?sign=bkJykVTD6QDtfBpTDWQxnRyan-vn9IcpkUxZDIcnwXU%3D%3A0"},
-{"key":"csp_AppTT","name":"🐰图图影视","type":3,"api": "csp_AppTT","searchable": 1,"quickSearch": 1,"filterable": 1,"ext": "tv$$$dlJYWXFYbkgqbmlsU1JLIyNkMFZ0OE1JdzRJQW1yY3I=$$$Y2hpbkpaUzdiKnpYbzZzWQ==$$$aHR0cDovL2FwaS50dDU4LnR2L2NvbmZpZy9uZXd0di5qc29uP3NzPQ==","m3u8ads": "hd.youyhn.com"},
 {
             "key" : "drpy_js_布雷蓝光",
             "name" : "🎑布雷蓝光",
