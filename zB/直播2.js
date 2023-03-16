@@ -8,5 +8,6 @@
 {"name": "菜妮丝",     "url": "http://xn--ihqu10cn4c.xn--z7x900a.love:63/TV/tvzb.txt"},
 {"name": "乱世",     "url": "http://www.dmtv.ml/mao/live/m3u.txt"},
 {"name": "吾爱",     "url": "http://52bsj.vip:81/api/v3/file/get/763/live.txt?sign=87BTGT1_6AOry7FPwy_uuxFTv2Wcb9aDMj46rDdRTD8%3D%3A0"},
+{"name": "月光宝盒ZLIVE",     "url": "https://gitcode.net/ygbh66/dr_py/-/raw/master/zlive.txt"},
 {"name": "饭太硬",     "url": "http://ftyyy.tk/live.txt"}
 ]
