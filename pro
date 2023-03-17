@@ -341,60 +341,6 @@
 {"key":"drpy_js_朱古力","name":"👠朱古力[DRPY18]","type":3,"api":"https://agit.ai/guot54/TVBOXZY/raw/branch/main/JS/lib/drpy.min.js","searchable":1,"quickSearch":1,"filterable":1,"ext":"https://agit.ai/guot54/TVBOXZY/raw/branch/main/JS/js/%e6%9c%b1%e5%8f%a4%e5%8a%9b.js"},
 
 {"key":"drpy_js_玩偶姐姐","name":"👠玩偶姐姐[DRPY18]","type":3,"api":"https://agit.ai/guot54/TVBOXZY/raw/branch/main/JS/lib/drpy.min.js","searchable":1,"quickSearch":1,"filterable":1,"ext":"https://agit.ai/guot54/TVBOXZY/raw/branch/main/JS/js/%e7%8e%a9%e5%81%b6%e5%a7%90%e5%a7%90.js"},
-
-{"key":"csp_黄仓库","name":"👠黄仓库〔SP〕","api":"csp_Hsck","type":3,"filterable":1,"quickSearch":1,"searchable":1,"ext":"https://www.javsee.men/","jar":"https://agit.ai/guot54/TVBOXZY/raw/branch/main/JAR/18.jar"},
-
-{"key":"csp_Eighteen","name":"👠18AV〔SP〕","type":3,"api":"csp_Eighteen","searchable":1,"quickSearch":1,"filterable":1},
-
-{"key":"csp_XYQHiker_18AV","name":"👠18AV(XYQH)","type":3,"api":"csp_XYQHiker","searchable":1,"quickSearch":1,"filterable":1,"ext":"https://agit.ai/guot54/TVBOXZY/raw/branch/main/XYQH/18AV.json"},
-{"key":"csp_xBPQ-四虎","name":"👠四虎","type":3,"api":"csp_xBPQ","searchable":1,"quickSearch":1,"filterable":0,"ext":"http://ftp6284928.host108.abeiyun.cn/h/xBPQ/四虎.json"},
-{"key":"csp_xBPQ_左临右射","name":"👠左临右射","type":3,"api":"csp_xBPQ","searchable":1,"quickSearch":1,"filterable":1,"ext":"https://agit.ai/guot54/TVBOXZY/raw/branch/main/xBPQ/%e5%b7%a6%e4%b8%b4%e5%8f%b3%e5%b0%84.json","jar":"https://agit.ai/guot54/TVBOXZY/raw/branch/main/JAR/Yoursmile2.jar"},
-
-{"key":"csp_xBPQ_天天直播","name":"👠天天直播","type":3,"api":"csp_xBPQ","searchable":1,"quickSearch":1,"filterable":1,"ext":"https://agit.ai/guot54/TVBOXZY/raw/branch/main/xBPQ/%e5%a4%a9%e5%a4%a9%e7%9b%b4%e6%92%ad.json","jar":"https://agit.ai/guot54/TVBOXZY/raw/branch/main/JAR/Yoursmile2.jar"},
-
-{"key":"csp_xBPQ_聚优中文资源","name":"👠聚优中文资源","type":3,"api":"csp_xBPQ","searchable":1,"quickSearch":1,"filterable":1,"ext":"https://agit.ai/guot54/TVBOXZY/raw/branch/main/xBPQ/%e8%81%9a%e4%bc%98%e4%b8%ad%e6%96%87%e8%b5%84%e6%ba%90.json","jar":"https://agit.ai/guot54/TVBOXZY/raw/branch/main/JAR/Yoursmile2.jar"},
-
-{"key":"csp_xBPQ_聚优超清资源","name":"👠聚优超清资源","type":3,"api":"csp_xBPQ","searchable":1,"quickSearch":1,"filterable":1,"ext":"https://agit.ai/guot54/ygbh/raw/branch/master/XYQ/%e9%a6%99%e8%95%89%e8%b6%85%e6%b8%85.json","jar":"https://agit.ai/guot54/TVBOXZY/raw/branch/main/JAR/Yoursmile2.jar"},
-
-{"key":"csp_xBPQ_聚优国产传媒","name":"👠聚优国产传媒","type":3,"api":"csp_xBPQ","searchable":1,"quickSearch":1,"filterable":1,"ext":"https://agit.ai/guot54/ygbh/raw/branch/master/XYQ/%e9%a6%99%e8%95%89%e5%9b%bd%e4%ba%a7.json","jar":"https://agit.ai/guot54/TVBOXZY/raw/branch/main/JAR/Yoursmile2.jar"},
-
-{"key":"csp_xBPQ_聚优久久热资源","name":"👠聚优久久热资源","type":3,"api":"csp_xBPQ","searchable":1,"quickSearch":1,"filterable":1,"ext":"https://agit.ai/guot54/ygbh/raw/branch/master/XYQ/%e9%a6%99%e8%95%89%e4%b9%85%e4%b9%85%e7%83%ad.json","jar":"https://agit.ai/guot54/TVBOXZY/raw/branch/main/JAR/Yoursmile2.jar"},
-
-{"key":"csp_xBPQ_聚优废柴网资源","name":"👠聚优废柴网资源","type":3,"api":"csp_xBPQ","searchable":1,"quickSearch":1,"filterable":1,"ext":"https://agit.ai/guot54/ygbh/raw/branch/master/XYQ/%e9%a6%99%e8%95%89%e5%ba%9f%e6%9f%b4.json","jar":"https://agit.ai/guot54/TVBOXZY/raw/branch/main/JAR/Yoursmile2.jar"},
-
-{"key":"csp_xBPQ_聚优麻豆女优","name":"👠聚优麻豆女优","type":3,"api":"csp_xBPQ","searchable":1,"quickSearch":1,"filterable":1,"ext":"https://agit.ai/guot54/ygbh/raw/branch/master/XYQ/%e9%a6%99%e8%95%89%e6%90%9c%e7%b4%a2.json","jar":"https://agit.ai/guot54/TVBOXZY/raw/branch/main/JAR/Yoursmile2.jar"},
-
-{"key":"csp_xBPQ_聚优AV解说","name":"👠聚优AV解说","type":3,"api":"csp_xBPQ","searchable":1,"quickSearch":1,"filterable":1,"ext":"https://agit.ai/guot54/ygbh/raw/branch/master/XYQ/%e9%a6%99%e8%95%89%e8%a7%a3%e8%af%b4.json","jar":"https://agit.ai/guot54/TVBOXZY/raw/branch/main/JAR/Yoursmile2.jar"},
-
-{"key":"csp_xBPQ_聚优AV直播","name":"👠聚优AV直播","type":3,"api":"csp_xBPQ","searchable":1,"quickSearch":1,"filterable":1,"ext":"https://agit.ai/guot54/ygbh/raw/branch/master/XYQ/%e9%a6%99%e8%95%89%e7%9b%b4%e6%92%ad.json","jar":"https://agit.ai/guot54/TVBOXZY/raw/branch/main/JAR/Yoursmile2.jar"},
-
-{"key":"csp_xBPQ_聚优直播","name":"👠聚优直播","type":3,"api":"csp_xBPQ","searchable":1,"quickSearch":1,"filterable":1,"ext":"https://agit.ai/guot54/TVBOXZY/raw/branch/main/xBPQ/%e8%81%9a%e4%bc%98%e7%9b%b4%e6%92%ad.json","jar":"https://agit.ai/guot54/TVBOXZY/raw/branch/main/JAR/Yoursmile2.jar"},
-
-{"key":"csp_xBPQ_实时直播","name":"👠实时直播","type":3,"api":"csp_xBPQ","searchable":1,"quickSearch":1,"filterable":1,"ext":"https://agit.ai/guot54/TVBOXZY/raw/branch/main/xBPQ/%e5%ae%9e%e6%97%b6%e7%9b%b4%e6%92%ad.json","jar":"https://agit.ai/guot54/TVBOXZY/raw/branch/main/JAR/Yoursmile2.jar"},
-
-{"key":"csp_xBPQ_黄瓜TV","name":"👠黄瓜TV️","type":3,"api":"csp_xBPQ","searchable":1,"quickSearch":1,"filterable":1,"ext":"https://agit.ai/guot54/TVBOXZY/raw/branch/main/xBPQ/%e9%bb%84%e7%93%9cTV.json","jar":"https://agit.ai/guot54/TVBOXZY/raw/branch/main/JAR/Yoursmile2.jar"},
-{"key":"csp_xBPQ_精东影业1","name":"🏆精东影业1","type":3,"api":"csp_xBPQ","searchable":1,"quickSearch":1,"filterable":0,"ext":"https://agit.ai/guot54/ygbh/raw/branch/master/XYQ/%e7%b2%be%e4%b8%9c%e5%bd%b1%e4%b8%9a1.json","jar":"https://agit.ai/guot54/TVBOXZY/raw/branch/main/JAR/Yoursmile2.jar},
-    {"key":"csp_xBPQ_精东影业2","name":"🏆精东影业2","type":3,"api":"csp_xBPQ","searchable":1,"quickSearch":1,"filterable":0,"ext":"https://agit.ai/guot54/ygbh/raw/branch/master/XYQ/%e7%b2%be%e4%b8%9c%e5%bd%b1%e4%b8%9a2.json","jar":"https://agit.ai/guot54/TVBOXZY/raw/branch/main/JAR/Yoursmile2.jar},
-    {"key":"csp_xBPQ_顶级国产","name":"🏆顶级国产","type":3,"api":"csp_xBPQ","searchable":1,"quickSearch":1,"filterable":0,"ext":"https://agit.ai/guot54/ygbh/raw/branch/master/XYQ/%e9%a1%b6%e7%ba%a7%e5%9b%bd%e4%ba%a7.json","jar":"https://agit.ai/guot54/TVBOXZY/raw/branch/main/JAR/Yoursmile2.jar},
-    {"key":"csp_xBPQ_香蕉","name":"🏆香蕉","type":3,"api":"csp_xBPQ","searchable":1,"quickSearch":1,"filterable":0,"ext":"https://agit.ai/guot54/ygbh/raw/branch/master/XYQ/%e9%a6%99%e8%95%89.json","jar":"https://agit.ai/guot54/TVBOXZY/raw/branch/main/JAR/Yoursmile2.jar},
-{"key":"csp_xBPQ_banan","name":"👠banan","type":3,"api":"csp_xBPQ","searchable":1,"quickSearch":1,"filterable":1,"ext":"https://agit.ai/guot54/ygbh/raw/branch/master/XYQ/banban.json","jar":"https://agit.ai/guot54/TVBOXZY/raw/branch/main/JAR/Yoursmile2.jar"},
-
-{"key":"csp_xBPQ-爱看影院","name":"👠爱看影院️","type":3,"api":"csp_xBPQ","searchable":1,"quickSearch":1,"filterable":1,"ext":"https://agit.ai/guot54/TVBOXZY/raw/branch/main/xBPQ/%e7%88%b1%e7%9c%8b%e5%bd%b1%e9%99%a2.json"},
-
-{"key":"csp_xBPQ_爱污传媒","name":"👠爱污传媒","type":3,"api":"csp_xBPQ","searchable":1,"quickSearch":1,"filterable":1,"ext":"https://agit.ai/guot54/TVBOXZY/raw/branch/main/xBPQ/%e7%88%b1%e6%b1%a1%e4%bc%a0%e5%aa%92.json","jar":"https://agit.ai/guot54/TVBOXZY/raw/branch/main/JAR/Yoursmile2.jar"},
-
-{"key":"csp_xBPQ_麻豆映画","name":"👠麻豆映画","type":3,"api":"csp_xBPQ","searchable":1,"quickSearch":1,"filterable":1,"ext":"https://agit.ai/guot54/TVBOXZY/raw/branch/main/xBPQ/%e9%ba%bb%e8%b1%86%e6%98%a0%e7%94%bb.json","jar":"https://agit.ai/guot54/TVBOXZY/raw/branch/main/JAR/Yoursmile2.jar"},
-
-{"key":"csp_xBPQ_香蕉视频","name":"👠香蕉视频","type":3,"api":"csp_xBPQ","searchable":1,"quickSearch":1,"filterable":1,"ext":"https://agit.ai/guot54/TVBOXZY/raw/branch/main/xBPQ/%e9%a6%99%e8%95%89%e8%a7%86%e9%a2%91.json"},
-
-{"key":"csp_xBPQ_性欲轮回","name":"👠性欲轮回","type":3,"api":"csp_xBPQ","searchable":1,"quickSearch":1,"filterable":1,"ext":"https://agit.ai/guot54/ygbh/raw/branch/master/XYQ/%e6%80%a7%e6%ac%b2%e8%bd%ae%e5%9b%9e.json","jar":"https://agit.ai/guot54/TVBOXZY/raw/branch/main/JAR/Yoursmile2.jar"},
-
-{"key":"csp_xBPQ_性欲轮回[分类]","name":"👠性欲轮回[分类]","type":3,"api":"csp_xBPQ","searchable":1,"quickSearch":1,"filterable":1,"ext":"https://agit.ai/guot54/ygbh/raw/branch/master/XYQ/%e6%80%a7%e6%ac%b2%e8%bd%ae%e5%9b%9e[%e5%88%86%e7%b1%bb].json","jar":"https://agit.ai/guot54/TVBOXZY/raw/branch/main/JAR/Yoursmile2.jar"},
-
-{"key":"csp_xBPQ_右手影院","name":"右手影院","type":3,"api":"csp_xBPQ","searchable":1,"quickSearch":1,"filterable":1,"ext":"https://agit.ai/guot54/TVBOXZY/raw/branch/main/xBPQ/%e5%8f%b3%e6%89%8b%e5%bd%b1%e9%99%a2.json"},
-
-{"key":"csp_xBPQ_色花堂","name":"色花堂","type":3,"api":"csp_xBPQ","searchable":1,"quickSearch":1,"filterable":1,"ext":"https://agit.ai/guot54/TVBOXZY/raw/branch/main/xBPQ/%e8%8a%b1%e7%8c%abTV.json","jar":"https://agit.ai/guot54/TVBOXZY/raw/branch/main/JAR/XBPQ_0111.jar"},
-
 {"key":"csp_xBPQ_GAOAA","name":"👠GAOAA","type":3,"api":"csp_xBPQ","searchable":1,"quickSearch":1,"filterable":1,
 "ext":"https://agit.ai/guot54/TVBOXZY/raw/branch/main/xBPQ/GAOAA.json","jar":"https://agit.ai/guot54/TVBOXZY/raw/branch/main/JAR/XBPQ_0111.jar"},
 
