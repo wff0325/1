@@ -1,5 +1,5 @@
 [
- {"name": "肥羊",     "url": "https://ghproxy.com/https://raw.githubusercontent.com/youshandefeiyang/IPTV/main/main/cqyx.m3u"},
+ {"name": "肥羊",     "url": "https://ghproxy.com/https://raw.githubusercontent.com/youshandefeiyang/IPTV/main/main/cqyx.m3u&&&./pic/1.jpg"},
 {"name": "甜蜜",     "url": "http://zdir.kebedd69.repl.co/public/live.txt"},
 {"name": "巧计",     "url": "https://ghproxy.com/https://raw.githubusercontent.com/dxawi/1/main/tvlive.txt"},
 {"name": "星辰",     "url": "http://tvmvip.com/xclive.txt"},
