@@ -250,6 +250,58 @@ CCTV16,http://39.134.24.162/dbiptv.sn.chinamobile.com/PLTV/88888890/224/32212269
 农林卫视,http://39.134.24.162/dbiptv.sn.chinamobile.com/PLTV/88888890/224/3221226229/index.m3u8
 
 宝盒港澳测试,#genre#
+中視HD,http://www.luweibo.top/hotel/share/tw.php?id=live1048
+華視HD,http://www.luweibo.top/hotel/share/tw.php?id=live1049
+民視HD,http://www.luweibo.top/hotel/share/tw.php?id=live1050
+公視,http://www.luweibo.top/hotel/share/tw.php?id=live1201
+國家地理HD,http://www.luweibo.top/hotel/share/tw.php?id=live1003
+DISCOVERY,http://www.luweibo.top/hotel/share/tw.php?id=live1002
+旅遊生活,http://www.luweibo.top/hotel/share/tw.php?id=live1005
+動物星球,http://www.luweibo.top/hotel/share/tw.php?id=live1004
+亞洲旅遊,http://www.luweibo.top/hotel/share/tw.php?id=live1219
+Baby TV,http://www.luweibo.top/hotel/share/tw.php?id=live1007
+東森幼幼HD,http://www.luweibo.top/hotel/share/tw.php?id=live1008
+龍華卡通台,http://www.luweibo.top/hotel/share/tw.php?id=custom29
+八大綜合HD,http://www.luweibo.top/hotel/share/tw.php?id=live1019
+三立台灣HD,http://www.luweibo.top/hotel/share/tw.php?id=live1021
+三立都會HD,http://www.luweibo.top/hotel/share/tw.php?id=live1020
+衛視中文HD,http://www.luweibo.top/hotel/share/tw.php?id=live1024
+東森綜合HD,http://www.luweibo.top/hotel/share/tw.php?id=live1041
+超視HD,http://www.luweibo.top/hotel/share/tw.php?id=live1180
+中天綜合HD,http://www.luweibo.top/hotel/share/tw.php?id=live1022
+中天娛樂HD,http://www.luweibo.top/hotel/share/tw.php?id=live1023
+MUCH TV,http://www.luweibo.top/hotel/share/tw.php?id=live1189
+八大戲劇HD,http://www.luweibo.top/hotel/share/tw.php?id=live1057
+TVBS歡樂HD,http://www.luweibo.top/hotel/share/tw.php?id=live1018
+緯來戲劇,http://www.luweibo.top/hotel/share/tw.php?id=live1186
+龍華偶像劇,http://www.luweibo.top/hotel/share/tw.php?id=live1235
+緯來日本HD,http://www.luweibo.top/hotel/share/tw.php?id=live1026
+Taiwan Plus,http://www.luweibo.top/hotel/share/tw.php?id=live1238
+年代新聞,http://www.luweibo.top/hotel/share/tw.php?id=live1192
+東森新聞HD,http://www.luweibo.top/hotel/share/tw.php?id=live1014
+中天新聞HD,http://www.luweibo.top/hotel/share/tw.php?id=live1015
+三立新聞HD,http://www.luweibo.top/hotel/share/tw.php?id=live1016
+TVBS新聞HD,http://www.luweibo.top/hotel/share/tw.php?id=live1051
+TVBS HD,http://www.luweibo.top/hotel/share/tw.php?id=live1251
+非凡新聞,http://www.luweibo.top/hotel/share/tw.php?id=live1013
+非凡商業,http://www.luweibo.top/hotel/share/tw.php?id=live1012
+寰宇新聞,http://www.luweibo.top/hotel/share/tw.php?id=live1222
+壹新聞,http://www.luweibo.top/hotel/share/tw.php?id=live1242
+Bloomberg News,http://www.luweibo.top/hotel/share/tw.php?id=live1066
+衛視電影HD,http://www.luweibo.top/hotel/share/tw.php?id=live1031
+好萊塢電影HD,http://www.luweibo.top/hotel/share/tw.php?id=live1025
+緯來電影HD,http://www.luweibo.top/hotel/share/tw.php?id=live1183
+龍華電影台,http://www.luweibo.top/hotel/share/tw.php?id=live1245
+HBO,http://www.luweibo.top/hotel/share/tw.php?id=live1029
+AXN,http://www.luweibo.top/hotel/share/tw.php?id=live1054
+CINEMAX HD,http://www.luweibo.top/hotel/share/tw.php?id=live1030
+STAR MOVIES GOLD,http://www.luweibo.top/hotel/share/tw.php?id=live1032
+Star World,http://www.luweibo.top/hotel/share/tw.php?id=live1040
+博斯運動一,http://www.luweibo.top/hotel/share/tw.php?id=live1225
+momo 綜合台,http://www.luweibo.top/hotel/share/tw.php?id=live1248
+ELEVEN SPORTS 1 HD,http://www.luweibo.top/hotel/share/tw.php?id=live1069
+ELEVEN SPORTS 2 HD,http://www.luweibo.top/hotel/share/tw.php?id=live1072
+海峽衛視HD,http://www.luweibo.top/hotel/share/tw.php?id=live1035
 翡翠台,http://159.75.85.63:8765/telegram@feiyangdigital-feicui.m3u8 
 翡翠台,http://2022.stream-link.org/playlist/tvb_jade
 华丽台,http://2022.stream-link.org/playlist/astro_jade
