@@ -67,78 +67,8 @@ CGTN,http://113.62.253.22/live.aishang.ctlcdn.com/00000110240370_1/playlist.m3u8
 西藏影视文化高清,https://tv.vtibet.cn/live/FYeIdVzzCTBtvchannel2.m3u8
 西藏藏语高清,https://tv.vtibet.cn/live/de3mrRaaCTBtvchannel1.m3u8
 宝盒港澳测试,#genre#
-NOW新闻台,http://154.39.245.180/tbs/jstbs.php?id=17
-香港HOYTV,http://154.39.245.180/tbs/jstbs.php?id=21
-有线新闻台,http://154.39.245.180/tbs/jstbs.php?id=3
-有线财经资讯台,http://154.39.245.180/tbs/jstbs.php?id=4
-有线18台,http://154.39.245.180/tbs/jstbs.php?id=5
-有线体育台,http://154.39.245.180/tbs/jstbs.php?id=6
-有线603,http://154.39.245.180/tbs/jstbs.php?id=8
-无线新闻台,http://154.39.245.180/tbs/jstbs.php?id=10
-无线财经资讯台,http://154.39.245.180/tbs/jstbs.php?id=11
-翡翠台,http://154.39.245.180/tbs/jstbs.php?id=12
-明珠台,http://154.39.245.180/tbs/jstbs.php?id=13
-J2,http://154.39.245.180/tbs/jstbs.php?id=14
-RHK31,http://154.39.245.180/tbs/jstbs.php?id=22
-中天新闻HD,http://154.39.245.180/tbs/jstbs.php?id=24
-东森财经新闻,http://154.39.245.180/tbs/jstbs.php?id=26
-东森新闻,http://154.39.245.180/tbs/jstbs.php?id=25
-RHK32,http://154.39.245.180/tbs/jstbs.php?id=23
-寰宇新闻台,http://154.39.245.180/tbs/jstbs.php?id=28
-台视新闻HD,http://154.39.245.180/tbs/jstbs.php?id=30
-中视新闻HD,http://154.39.245.180/tbs/jstbs.php?id=31
-华视新闻HD,http://154.39.245.180/tbs/jstbs.php?id=32
-三立LIVE,http://154.39.245.180/tbs/jstbs.php?id=34
-民视新闻,http://154.39.245.180/tbs/jstbs.php?id=37
-民视HD,http://154.39.245.180/tbs/jstbs.php?id=41
-台视HD,http://154.39.245.180/tbs/jstbs.php?id=42
-中视HD,http://154.39.245.180/tbs/jstbs.php?id=43
-华视HD,http://154.39.245.180/tbs/jstbs.php?id=44
-TVBS HD,http://154.39.245.180/tbs/jstbs.php?id=46
-TVBS欢乐台HD,http://154.39.245.180/tbs/jstbs.php?id=47
-纬来日本HD,http://154.39.245.180/tbs/jstbs.php?id=55
-纬来育乐HD,http://154.39.245.180/tbs/jstbs.php?id=56
-纬来体育HD,http://154.39.245.180/tbs/jstbs.php?id=54
-ELEVEN1,http://154.39.245.180/tbs/jstbs.php?id=57
-ELEVEN2,http://154.39.245.180/tbs/jstbs.php?id=58
-澳门莲花,http://154.39.245.180/tbs/jstbs.php?id=71
-TVBS,http://154.3.38.29/lanyu/live.php?id=1
-台视新闻,http://154.3.38.29/lanyu/live.php?id=4
-中视新闻,http://154.3.38.29/lanyu/live.php?id=6
-民视新闻,http://154.3.38.29/lanyu/live.php?id=13
-华视新闻,http://154.3.38.29/lanyu/live.php?id=16
-东森新闻,http://154.3.38.29/lanyu/live.php?id=2
-东森财经,http://154.3.38.29/lanyu/live.php?id=7
-中天新闻,http://154.3.38.29/lanyu/live.php?id=3
-中天新闻2,http://154.3.38.29/lanyu/live.php?id=12
-寰宇新闻,http://154.3.38.29/lanyu/live.php?id=5
-三立LIVE,http://154.3.38.29/lanyu/live.php?id=8
-三立iNEWS,http://154.3.38.29/lanyu/live.php?id=9
-三立iNEWS+,http://154.3.38.29/lanyu/live.php?id=10
-镜新闻,http://154.3.38.29/lanyu/live.php?id=11
-CNA News,http://154.3.38.29/lanyu/live.php?id=25
-ANN News,http://154.3.38.29/lanyu/live.php?id=17
-France 24 News,http://154.3.38.29/lanyu/live.php?id=15
-NHK World Japan,http://154.3.38.29/lanyu/live.php?id=26
-NASA Live,http://154.3.38.29/lanyu/live.php?id=24
-東京步行,http://154.3.38.29/lanyu/live.php?id=27
-THE K-POP,http://154.3.38.29/lanyu/live.php?id=29
-K-POP Live,http://154.3.38.29/lanyu/live.php?id=22
-8FM Radio,http://154.3.38.29/lanyu/live.php?id=33
-够炫 Radio,http://154.3.38.29/lanyu/live.php?id=43
-MY好玩 Radio,http://154.3.38.29/lanyu/live.php?id=34
-988 Live Radio,http://154.3.38.29/lanyu/live.php?id=42
-华语经典 Radio,http://154.3.38.29/lanyu/live.php?id=40
-网络流行 Radio,http://154.3.38.29/lanyu/live.php?id=35
-Hit Fm北部 Radio,http://154.3.38.29/lanyu/live.php?id=36
-Hits Radio,http://154.3.38.29/lanyu/live.php?id=37
-Music Radio,http://154.3.38.29/lanyu/live.php?id=38
-Music Live Radio,http://154.3.38.29/lanyu/live.php?id=41
-Lofi Hip Hop Radio,http://154.3.38.29/lanyu/live.php?id=30
-The Good Life Radio,http://154.3.38.29/lanyu/live.php?id=31
 翡翠台,http://2022.stream-link.org/playlist/tvb_jade
 华丽台,http://2022.stream-link.org/playlist/astro_jade
-明珠台,http://159.75.85.63:8765/telegram@feiyangdigital-mingzhu.m3u8
 明珠台,http://107.167.12.58:36733
 八度空间,http://2022.stream-link.org/playlist/8tv
 台视,http://2023.stream-link.org/playlist/ttv
