@@ -1,6 +1,6 @@
 [
  {"name": "月光宝盒",     "url": "https://agit.ai/guot54/ygbh/raw/branch/master/zB/tvlive.txt&&&https://agit.ai/guot54/ygbh/raw/branch/master/yg.jpg"},
- {"name": "肥羊",     "url": "https://ghproxy.com/https://raw.githubusercontent.com/youshandefeiyang/IPTV/main/main/cqyx.m3u&&&https://agit.ai/guot54/ygbh/raw/branch/master/yg.jpg"},
+ {"name": "肥羊",     "url": "https://telegram-feiyangdigital.v1.mk/bestv.m3u&&&https://agit.ai/guot54/ygbh/raw/branch/master/yg.jpg"},
 {"name": "甜蜜",     "url": "http://zdir.kebedd69.repl.co/public/live.txt&&&https://agit.ai/guot54/ygbh/raw/branch/master/yg.jpg"},
 {"name": "巧计",     "url": "https://ghproxy.com/https://raw.githubusercontent.com/dxawi/1/main/tvlive.txt&&&https://agit.ai/guot54/ygbh/raw/branch/master/yg.jpg"},
 {"name": "星辰",     "url": "http://tvmvip.com/xclive.txt&&&https://agit.ai/guot54/ygbh/raw/branch/master/yg.jpg"},
