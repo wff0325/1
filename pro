@@ -34,15 +34,15 @@
         },
 {
             "key": "YQK_spider",
-            "name": "🏃一起看TV",
+            "name": "🎎一起看电视",
             "api": "csp_YQKAPP",
             "type": 3,
             "filterable": 1,
             "playerType": 2,
             "quickSearch": 1,
             "searchable": 1,
-            "ext": "https://api-tx.shumaxc.xyz",
-            "jar": "http://我不是.肥猫.love:63/Jar/qq2.jar;md5;4E872E4AA2D4F8B6F4FFBC11E6B3E1A1"
+            "ext": "https://api-tx.11ty.top",
+            "m3u8ads": "hd.youyhn.com"
         },
 { 
    "key": "直播转点播", 
