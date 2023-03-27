@@ -267,7 +267,7 @@
             "api" : "https://agit.ai/guot54/TVBOXZY/raw/branch/main/JS/lib/drpy.min.js",
             "ext" : "https://jihulab.com/ygbh1/box/-/raw/main/JS/js/DJ%E9%9F%B3%E4%B9%90.js"
         },
-
+{      "key": "csp_Dm84",      "name": "🚌动漫巴士",      "type": 3,      "api": "csp_Dm84",      "searchable": 1,      "quickSearch": 1,      "filterable": 1    },    {      "key": "csp_Ying",      "name": "💮樱花动漫",      "type": 3,      "api": "csp_Ying",      "searchable": 1,      "quickSearch": 1,      "filterable": 1    },    {      "key": "csp_Ysj",      "name": "🎀异界动漫",      "type": 3,      "api": "csp_Ysj",      "searchable": 1,      "quickSearch": 1,      "filterable": 1    },    {      "key": "csp_Anime1",      "name": "🐾日本动漫",      "type": 3,      "api": "csp_Anime1",      "searchable": 1,      "quickSearch": 1,      "filterable": 1    },  
     {"key":"22","name":"接口仅供测试，请勿贩售","type":0,"api":""},
     {"key":"18","name":"请勿相信视频中的任何广告","type":0,"api":""},
 
