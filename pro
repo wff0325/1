@@ -167,24 +167,6 @@
         "其他片"
       ]
     },
-	
-	{"key":"csp_xBPQ_乐猪影视","name":"🐷乐猪影视┃xBPQ","type":3,"api":"csp_xBPQ","searchable":1,"quickSearch":1,"filterable":0,"ext":"http://52bsj.vip:81/api/v3/file/get/68611/%E4%B9%90%E7%8C%AA.json?sign=3LCwJDKuCI_c1-ZE-Y75aw_BpTafG10Zh5mW4gwL7mU%3D%3A0"},
-{
-            "key" : "drpy_js_鸭乃飞",
-            "name" : "❤️鸭奶飞",
-            "type" : 3,
-            "api" : "https://agit.ai/guot54/TVBOXZY/raw/branch/main/JS/lib/drpy.min.js",
-            "ext" : "https://gitlab.com/ygbh1/666/-/raw/main/json/%E9%B8%AD%E5%A5%88%E9%A3%9E.js"
-        },
-{"key":"Smdyy","name":"🌈神马","type":"3","api":"csp_Smdyy","searchable":"1","quickSearch":"1","filterable":"1","jar":"http://52bsj.vip:81/api/v3/file/get/68860/xo.jar?sign=hHA3T9pSJ3P9JYmV5cam9_CLdLz2xB3WguFbZLMNRdU%3D%3A0"},
-{
-            "key" : "drpy_js_哔哩兔",
-            "name" : "🎈哔哩兔",
-            "type" : 3,
-            "api" : "https://agit.ai/guot54/TVBOXZY/raw/branch/main/JS/lib/drpy.min.js",
-            "ext" : "https://gitlab.com/ygbh1/666/-/raw/main/json/%E5%93%94%E5%93%A9%E5%85%94.js"
-        },
-{"key": "csp_biubiu_影视工厂","name": "🎑影视工厂","type": 3,"api": "csp_XBiubiu","searchable": 1,	"quickSearch": 1,"filterable": 0,"ext": "http://52bsj.vip:81/api/v3/file/get/61555/%E5%BD%B1%E8%A7%86%E5%B7%A5%E5%8E%82.json?sign=30JHwwq5hE4YG_7diB8H8J4WZOQvmPtx0cliXcYtPAI%3D%3A0"},
 {"key": "Kuaikan","name": "🈷️快看(SP)","type": 3,"api": "csp_Kuaikan","searchable": 1,"quickSearch": 1,"filterable": 1},
 {"key":"csp_Smdyy","name":"🦄电影院","api":"csp_Smdyy","type":3,"filterable":1,"quickSearch":1,"searchable":1,"ext":""},
 {"key":"csp_XBPQ石榴影视","name":"🎞️石榴电影〔XBPQ〕","type":3,"api":"csp_xBPQ","searchable":1,"quickSearch":1,"filterable":1,"ext":"http://52bsj.vip:81/api/v3/file/get/63302/%E7%9F%B3%E6%A6%B4%E7%94%B5%E5%BD%B1%28xBPQ%29.json?sign=F59beX97EKduK2kehSA7Eb9Gbv78Fh2q8j_jcZJATr0%3D%3A0","jar":"http://52bsj.vip:81/api/v3/file/get/61833/xBPQ_1106.jar?sign=OVzxP6WlxeCthygathb2n4nXosg5HkE6NM9vkf3IFVk%3D%3A0"},
