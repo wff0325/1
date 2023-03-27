@@ -6,7 +6,7 @@
       "url": "https://mp.weixin.qq.com/s?__biz=MzkzMDQ0Mjg2MA==&mid=2247483870&idx=1&sn=ae912e9e1056d9e86734d26388ac4c02&chksm=c27b7addf50cf3cbe94b29a7e9db42dcb877355f8896a016ad25ead7afcba601c8c84483f83d&token=1338176442&lang=zh_CN#rd",
       "type": "web",     
       "desc": "",
-      "show": true
+      "show": false
     },
     {
       "name": "听说你喜欢我",
@@ -30,7 +30,7 @@
       "url": "",
       "type": "search",     
        "desc": "",
-      "show": true
+      "show": false
     }
   ]
 }
