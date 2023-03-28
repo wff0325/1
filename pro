@@ -11,8 +11,8 @@
             "key": "js豆瓣1",
             "name": "🌈免费接口，请勿贩售 公众号：宝盒BOX科技",
             "type": 3,
-            "api": "https://agit.ai/767820774/TVBOXZY/raw/branch/main/JS/lib/drpy.min.js",
-            "ext": "http://id.ganggang.live:63/js/js_drpy.js",
+            "api": "https://gitcode.net/qq_32394351/dr_py/-/raw/master/libs/drpy2.min.js",
+            "ext": "https://agit.ai/guot54/ygbh/raw/branch/master/JS/drpy.js",
             "searchable": 0,
             "quickSearch": 0,
             "filterable": 0
@@ -20,7 +20,7 @@
 	 {"key": "csp_lezhu","name": "🐷乐猪影视","type": 3,"api": "csp_XPath","searchable": 1,"quickSearch": 0,"filterable": 1,"ext": "http://52bsj.vip:81/api/v3/file/get/68479/%E4%B9%90%E7%8C%AAXP.json?sign=-mbGfklZSjyMYL-zyJ_0rE2igcXTzyt8TXw0nyk2-7g%3D%3A0"},
    
 
-{"key":"dr_豆瓣","name":"🎞豆瓣首页","type":3,"api":"http://id.ganggang.live:63/js/drpy2.min.js","ext": "http://id.ganggang.live:63/js/js_drpy.js","searchable":0,"quickSearch":0,"filterable":0},
+{"key":"dr_豆瓣","name":"🎞豆瓣首页","type":3,"api":"https://gitcode.net/qq_32394351/dr_py/-/raw/master/libs/drpy2.min.js","ext": "http://v.tvfan.top:88/tvbox/js/drpy.js","searchable":0,"quickSearch":0,"filterable":0},
 {"key":"Xinsj","name":"🌟新视觉","type":"3","api":"csp_Xinsj","searchable":"1","quickSearch":"1","filterable":"1","ext":"https://www.6080dy2.com"},
 {"key":"csp_panghu","name":"🐯胖虎影视","type":3,"api":"csp_Panghu","m3u8ads":"hd.youyhn.com","searchable":1,"quickSearch":1,"filterable":1},
 {
