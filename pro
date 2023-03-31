@@ -21,7 +21,7 @@
    
 
 {"key":"dr_豆瓣","name":"🎞豆瓣首页","type":3,"api":"https://gitcode.net/qq_32394351/dr_py/-/raw/master/libs/drpy2.min.js","ext": "http://v.tvfan.top:88/tvbox/js/drpy.js","searchable":0,"quickSearch":0,"filterable":0},
-{"key":"Xinsj","name":"🌟新视觉","type":"3","api":"csp_Xinsj","searchable":"1","quickSearch":"1","filterable":"1","ext":"https://www.6080dy2.com"},
+{      "key": "csp_Xinsj",      "name": "🎗️新视觉",      "type": 3,      "api": "csp_Xinsj",      "m3u8ads": "hd.youyhn.com",      "searchable": 1,      "quickSearch": 1,      "filterable": 1,      "ext": "https://www.6080dy3.com"    },
 {"key":"csp_panghu","name":"🐯胖虎影视","type":3,"api":"csp_Panghu","m3u8ads":"hd.youyhn.com","searchable":1,"quickSearch":1,"filterable":1},
 {
             "key": "YQK_spider",
