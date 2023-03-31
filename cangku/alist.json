@@ -2,12 +2,15 @@
   "drives": [
     {
       "name": "小雅",
-      "server": "http://alist.xiaoya.pro/测试（不限速）/"
+      "server": "http://alist.xiaoya.pro/"
     },
-
+{
+      "name": "月光宝盒",
+      "server": "https://5244-12e9d4c74eb1416780f843b0db0ff4ca.onpatr.cloud/"
+    },
     {
       "name": "动漫盘",
-      "server": "http://pan.smjc.cc/自用Open/动画片/"
+      "server": "http://pan.smjc.cc"
     },
     {
       "name": "触光",
