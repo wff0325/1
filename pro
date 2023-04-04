@@ -11,8 +11,8 @@
             "key": "js豆瓣1",
             "name": "🌈免费接口，请勿贩售 公众号：宝盒汇",
             "type": 3,
-            "api": "https://gitcode.net/qq_32394351/dr_py/-/raw/master/libs/drpy2.min.js",
-            "ext": "https://agit.ai/guot54/ygbh/raw/branch/master/JS/drpy.js",
+            "api": "http://alist.xn--z7x900a.love:63/drpy2.min.js",
+            "ext": "http://alist.xn--z7x900a.love:63/豆瓣.js",
             "searchable": 0,
             "quickSearch": 0,
             "filterable": 0
