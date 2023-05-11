@@ -19,8 +19,6 @@
         },
 	 {"key": "csp_lezhu","name": "🐷乐猪影视","type": 3,"api": "csp_XPath","searchable": 1,"quickSearch": 0,"filterable": 1,"ext": "http://52bsj.vip:81/api/v3/file/get/68479/%E4%B9%90%E7%8C%AAXP.json?sign=-mbGfklZSjyMYL-zyJ_0rE2igcXTzyt8TXw0nyk2-7g%3D%3A0"},
    
-
-{"key":"dr_豆瓣","name":"🎞豆瓣首页","type":3,"api":"https://gitcode.net/qq_32394351/dr_py/-/raw/master/libs/drpy2.min.js","ext": "http://v.tvfan.top:88/tvbox/js/drpy.js","searchable":0,"quickSearch":0,"filterable":0},
   {      "key": "csp_Xinsj",      "name": "🎗️新视觉",      "type": 3,      "api": "csp_Xinsj",      "m3u8ads": "hd.youyhn.com",      "searchable": 1,      "quickSearch": 1,      "filterable": 1,      "ext": "https://www.6080dy3.com"    }, 
 {"key":"csp_panghu","name":"🐯胖虎影视","type":3,"api":"csp_Panghu","m3u8ads":"hd.youyhn.com","searchable":1,"quickSearch":1,"filterable":1},
 {"key":"csp_YQKAPP","name":"👩‍👦一起看电视","type":3,"api":"csp_YQKAPP","playerType":2,"searchable":1,"quickSearch":1,"filterable":1,"ext":"https://api-aws.11ty.top"},
