@@ -1,4 +1,4 @@
-{"Home": [{"key":"网页","title":"宝盒汇","pic":"https://agit.ai/guot54/ygbh/raw/branch/master/%e8%b0%83%e8%af%95%e5%8a%a9%e6%89%8b/18.jpeg"}],"zhuyejiekou": [{"name":"","url":""}],
+{"Home": [{"key":"网页","title":"宝盒汇","pic":"https://agit.ai/guot54/ygbh/raw/branch/master/%e8%b0%83%e8%af%95%e5%8a%a9%e6%89%8b/18.jpeg"},{"key":"直播","title":"直播","pic":"https://agit.ai/hellocupe/test/raw/branch/master/7.png"}],"zhuyejiekou": [{"name":"","url":""}],
 "caijizhan": [{"name":"","url":""}],"zhujiexi":[{"name":"","url":""}],"beiyongjiexi": [{"name":"","url":""}],"dianshizhibo": "",
 "guolvdizhi": "player.css#url=#51.la#poster#api.php#file=#cnzz.com#baidu.com#.gif",
 
