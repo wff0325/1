@@ -33,14 +33,14 @@
     	{"key":"csp_SP360","name":" 🌈360","type":3,"api":"csp_SP360","searchable":1,"quickSearch":1,"filterable":1,"jar":"http://52bsj.vip:81/api/v3/file/get/5660/360.jar?sign=UvvtkxrYYz1CQrSzwD98cpU4wQwTatQcDYOTRQ8x3wU%3D%3A0"},	
 {
             "key": "csp_AppTT",
-            "name": "🐰图图影视",
+            "name": "🐰┃图图┃影视",
             "type": 3,
             "api": "csp_AppTT",
             "searchable": 1,
             "quickSearch": 1,
             "filterable": 1,
             "ext": "SldYWXFabkhXTWlsTlpMdFNSSyN0ek1JdzlJQVJSY00=$$$Q01pbkowUzdvNnNZWk1WVw==$$$aHR0cDovL2FwaS50dDU4LnR2L2NvbmZpZy9uZXd0di5qc29uP3NzPQ==",
-            "jar": "http://52bsj.vip:81/api/v3/file/get/144578/tt515.jar?sign=rCypM1As6ARB7d4YF3egW6NdetN6wvCgn-jLpRO9hBI%3D%3A0;md5;36C5A2F03CA68213DADBF4502A2F4174"
+            "jar": "http://我不是.肥猫.love:63/Jar/panda230423.jar;md5;36C5A2F03CA68213DADBF4502A2F4174"
         },
     {"key":"csp_Kunyu77","name":"👒七七〔SP〕","type":3,"api":"csp_Kunyu77","searchable":1,"quickSearch":1,"filterable":1,"jar":"http://52bsj.vip:81/api/v3/file/get/59542/1007.jar?sign=bkJykVTD6QDtfBpTDWQxnRyan-vn9IcpkUxZDIcnwXU%3D%3A0"},
 {"key":"csp_BuLei","name":"🎯布雷蓝光","type":3,"api":"csp_BuLei","searchable":1,"quickSearch":1,"filterable":1,"ext":"http://v.ilime.cc$$$auto$$$sdlw1111$$$qqaa1122"},
