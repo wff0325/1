@@ -1,9 +1,9 @@
 {
 
-//所有资源均收集于互联网
 
 
-"spider":"https://agit.ai/guot54/ygbh/raw/branch/master/JAR/0519.jar;md5;E8FE5D2C9D119879E383A85DF8FFD027",
+
+"spider":"https://agit.ai/guot54/ygbh/raw/branch/master/JAR/527.jar;md5;F89C43655A15D4964C38573649A56702",
 
 "lives":[
 
@@ -11,7 +11,7 @@
     
 {
       "name": "live",
-      "url": "https://uujs.ml/f/Ymps7/pro.txt",
+      "url": "http://52bsj.vip:81/api/v3/file/get/79119/ZB.txt?sign=iChDXDC7WJRTp7yWAyVdbY3si5sJ5eFwEgaR35YQGSo%3D%3A0",
       "type": 0,
       "epg": "http://epg.51zmt.top:8000/api/diyp/?ch={name}&date={date}",
       "logo": "https://epg.112114.xyz/logo/{name}.png",
@@ -20,7 +20,7 @@
     {"group":"redirect",
     "channels":[{
     "name":"redirect",
-    "urls":["proxy://do=live&type=txt&ext=aHR0cHM6Ly91dWpzLm1sL2YvWW1wczcvcHJvLnR4dA=="]}]
+    "urls":["proxy://do=live&type=txt&ext=aHR0cDovLzUyYnNqLnZpcDo4MS9hcGkvdjMvZmlsZS9nZXQvNzkxMTkvWkIudHh0P3NpZ249aUNoRFhEQzdXSlJUcDd5V0F5VmRiWTNzaTVzSjVlRndFZ2FSMzVZUUdTbyUzRCUzQTA="]}]
     }],
 "sites":[
 {
@@ -37,16 +37,25 @@
    
 
 {
-      "key": "csp_酷酷",
-      "name": "🏵酷影视",
-      "type": 3,
-      "api": "csp_AppYsV2",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 1,
-      "ext": "http://kuyun.realku.cn/api.php/app/"
-    },
-  {      "key": "csp_Xinsj",      "name": "🎗️新视觉",      "type": 3,      "api": "csp_Xinsj",      "m3u8ads": "hd.youyhn.com",      "searchable": 1,      "quickSearch": 1,      "filterable": 1,      "ext": "https://www.6080dy3.com"    }, 
+            "key": "csp_appys_酷影",
+            "name": "🥠️酷影视",
+            "type": 3,
+            "api": "csp_AppYsV2",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "ext": "http://ys.realdou.cn/api.php/app/"
+        },
+  {
+            "key": "Xinsj",
+            "name": "🎗新视觉",
+            "type": "3",
+            "api": "csp_Xinsj",
+            "searchable": "1",
+            "quickSearch": "1",
+            "filterable": "1",
+            "ext": "https://www.6080yy2.com"
+        }, 
 {"key":"csp_panghu","name":"🐯胖虎影视","type":3,"api":"csp_Panghu","m3u8ads":"hd.youyhn.com","searchable":1,"quickSearch":1,"filterable":1},
 {"key":"csp_YQKAPP","name":"👩‍👦一起看电视","type":3,"api":"csp_YQKAPP","playerType":2,"searchable":1,"quickSearch":1,"filterable":1,"ext":"https://api-aws.11ty.top"},
 { 
@@ -56,7 +65,16 @@
    "api": "https://agit.ai/guot54/ygbh/raw/branch/master/JS/%e7%9b%b4%e6%92%ad%e8%bd%ac%e5%88%86%e7%ba%bf%e7%82%b9%e6%92%ad2.js", 
    "ext": "https://agit.ai/guot54/ygbh/raw/branch/master/zB/%e7%9b%b4%e6%92%ad.js" 
   },
-    {"key": "小苹果","name": "🍎小苹果","type": 3,"api": "csp_LiteApple","searchable": 1,"quickSearch": 1,"filterable": 1},
+    {
+            "key": "csp_apple",
+            "name": "🍎小苹果",
+            "type": 3,
+            "api": "csp_LiteApple",
+            "playerType": 1,
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1
+        },
     	{"key":"csp_SP360","name":" 🌈360","type":3,"api":"csp_SP360","searchable":1,"quickSearch":1,"filterable":1,"jar":"http://52bsj.vip:81/api/v3/file/get/5660/360.jar?sign=UvvtkxrYYz1CQrSzwD98cpU4wQwTatQcDYOTRQ8x3wU%3D%3A0"},	
 {
             "key": "csp_AppTT",
@@ -80,6 +98,16 @@
       "searchable": 1,
       "ext": "https://yayayaaapp.ynf.icu/api.php/app/"
     },
+    {
+            "key": "红红",
+            "name": "🌈红红影视",
+            "type": 3,
+            "api": "csp_AppYsV2",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "ext": "http://bbq.1006.tk/icciu_api.php/v1.vod"
+        },
 {
             "key": "csp_BuLei",
             "name": "🍩布雷蓝光",
@@ -175,7 +203,16 @@
         },	
 {"key": "Kuaikan","name": "👁️快看","type": 3,"api": "csp_Kuaikan","searchable": 1,"quickSearch": 1,"filterable": 1},	 
 {"key":"mtv_pc_焦炭影视","name":"🔥焦炭影视","type":3,"api":"csp_Cokemv","searchable":1,"quickSearch":1,"filterable":1}, 
-{"key":"csp_fantuan","name":"🍙饭团影视","type":3,"api":"csp_Fantuan","m3u8ads":"hd.youyhn.com","searchable":1,"quickSearch":1,"filterable":1,"ext":"https://www.fantuanhd.com"},
+ {
+            "key": "csp_fantuan",
+            "name": "🍙饭团影视",
+            "type": 3,
+            "api": "csp_Fantuan",
+            "searchable": 1,
+            "quickSearch": 1,
+            "filterable": 1,
+            "ext": "https://www.fantuanhd.com"
+        },
 {"key":"csp_Bttoo","name":"🐞两个BT","type":3,"api":"csp_Bttoo","searchable":1,"quickSearch":1,"filterable":1},
 {"key":"七夜","name":"😾七夜4K","type":3,"api":"csp_Dovx","searchable":1,"filterable":0,"changeable":0,"ext": "./token.txt"},
 {"key":"csp_WoGG","name":"👽玩偶哥哥┃4K","type":3,"api":"csp_WoGG","searchable":1,"quickSearch":1,"filterable":1,"ext": "./token.txt"},
