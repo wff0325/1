@@ -11,7 +11,7 @@
     
 {
       "name": "live",
-      "url": "http://52bsj.vip:81/api/v3/file/get/79119/ZB.txt?sign=iChDXDC7WJRTp7yWAyVdbY3si5sJ5eFwEgaR35YQGSo%3D%3A0",
+      "url": "https://uujs.ml/f/Ymps7/pro.txt",
       "type": 0,
       "epg": "http://epg.51zmt.top:8000/api/diyp/?ch={name}&date={date}",
       "logo": "https://epg.112114.xyz/logo/{name}.png",
@@ -20,7 +20,7 @@
     {"group":"redirect",
     "channels":[{
     "name":"redirect",
-    "urls":["proxy://do=live&type=txt&ext=aHR0cDovLzUyYnNqLnZpcDo4MS9hcGkvdjMvZmlsZS9nZXQvNzkxMTkvWkIudHh0P3NpZ249aUNoRFhEQzdXSlJUcDd5V0F5VmRiWTNzaTVzSjVlRndFZ2FSMzVZUUdTbyUzRCUzQTA="]}]
+    "urls":["proxy://do=live&type=txt&ext=aHR0cHM6Ly91dWpzLm1sL2YvWW1wczcvcHJvLnR4dA=="]}]
     }],
 "sites":[
 {
