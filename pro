@@ -35,7 +35,6 @@
         },
 	 {"key": "csp_lezhu","name": "🐷乐猪影视","type": 3,"api": "csp_XPath","searchable": 1,"quickSearch": 0,"filterable": 1,"ext": "http://52bsj.vip:81/api/v3/file/get/68479/%E4%B9%90%E7%8C%AAXP.json?sign=-mbGfklZSjyMYL-zyJ_0rE2igcXTzyt8TXw0nyk2-7g%3D%3A0"},
    
-
 {
             "key": "csp_appys_酷影",
             "name": "🥠️酷影视",
@@ -44,7 +43,7 @@
             "searchable": 1,
             "quickSearch": 1,
             "filterable": 1,
-            "ext": "http://ys.realdou.cn/api.php/app/"
+            "ext": "http://ys.realdou.cn:8652/api.php/app/"
         },
   {
             "key": "Xinsj",
@@ -76,17 +75,7 @@
             "filterable": 1
         },
     	{"key":"csp_SP360","name":" 🌈360","type":3,"api":"csp_SP360","searchable":1,"quickSearch":1,"filterable":1,"jar":"http://52bsj.vip:81/api/v3/file/get/5660/360.jar?sign=UvvtkxrYYz1CQrSzwD98cpU4wQwTatQcDYOTRQ8x3wU%3D%3A0"},	
-{
-            "key": "csp_AppTT",
-            "name": "🐰图图影视",
-            "type": 3,
-            "api": "csp_AppTT",
-            "searchable": 1,
-            "quickSearch": 1,
-            "filterable": 1,
-            "ext": "SldYWXFabkhXTWlsTlpMdFNSSyN0ek1JdzlJQVJSY00=$$$Q01pbkowUzdvNnNZWk1WVw==$$$aHR0cDovL2FwaS50dDU4LnR2L2NvbmZpZy9uZXd0di5qc29uP3NzPQ==",
-            "jar": "http://我不是.肥猫.love:63/Jar/panda230423.jar;md5;36C5A2F03CA68213DADBF4502A2F4174"
-        },
+{"key":"csp_AppTT","name":"🐰图图影视","type":3,"api": "csp_AppTT","searchable": 1,"quickSearch": 1,"filterable": 1,"ext": "SldZWXFaWkhXTU1sTlpadFNSSyN0elRJdzlMQVJSQ00=$$$Q1ppbkoxUzdvNnNZbU1WVw==$$$aHR0cDovL2FwaS50dDU4LnR2L2NvbmZpZy9uZXd0di5qc29uP3NzPQ=="},
     {"key":"csp_Kunyu77","name":"👒七七〔SP〕","type":3,"api":"csp_Kunyu77","searchable":1,"quickSearch":1,"filterable":1,"jar":"http://52bsj.vip:81/api/v3/file/get/59542/1007.jar?sign=bkJykVTD6QDtfBpTDWQxnRyan-vn9IcpkUxZDIcnwXU%3D%3A0"},
      {
       "key": "csp_黄黄",
@@ -129,6 +118,10 @@
             "api" : "https://agit.ai/guot54/TVBOXZY/raw/branch/main/JS/lib/drpy.min.js",
             "ext" : "https://jihulab.com/ygbh1/box/-/raw/main/JS/js/%E5%AD%90%E5%AD%90%E5%BD%B1%E8%A7%86.js"
         },
+        {"key":"多米蓝光","name":"🌽️多米影视","type":3,"api":"csp_AppYsV2","searchable":1,"quickSearch":1,"filterable":1,"ext":"http://v.dmdh.top/api.php/app/"},
+
+{"key":爱迪V2,"name":"💡️爱迪影视","type":3,"api":"csp_AppYsV2","ext":"https://aidiapp.xyz/xgapp.php/v2/"}, 
+
         {
             "key" : "drpy_js_创艺",
             "name" : "🎞️创艺影视",
@@ -293,7 +286,6 @@
 {"key": "少儿","name": "🅱️教育","type": 3,"api": "csp_Bili","searchable": 0,"quickSearch": 0,"filterable": 0,"ext": "http://52bsj.vip:81/api/v3/file/get/33113/%E5%B0%91%E5%84%BF%E6%95%99%E8%82%B2.json?sign=M9Yy0JDj_uwsAsiHY0YChEk27S55kj30rdi_3zU7Nb4%3D%3A0","jar":"http://52bsj.vip:81/api/v3/file/get/64478/%E5%A4%96%E9%93%BEcookie%E8%83%BD%E7%BF%BB%E9%A1%B5.jar?sign=SLg7is9_oL_nL8yI8QRIwO11Vpav7P5eYY25FoNSYIs%3D%3A0"},
 {"key": "CCTV","name": "CCTV","type": 3,"api": "csp_Bili","searchable": 0,"quickSearch": 0,"filterable": 0,"ext": "http://52bsj.vip:81/api/v3/file/get/104886/cctv.json?sign=EHC5fvr6tlsLuThY5HAghaF8T-9xQZ2aj7QFrkQw0VE%3D%3A0","jar":"http://52bsj.vip:81/api/v3/file/get/64478/%E5%A4%96%E9%93%BEcookie%E8%83%BD%E7%BF%BB%E9%A1%B5.jar?sign=SLg7is9_oL_nL8yI8QRIwO11Vpav7P5eYY25FoNSYIs%3D%3A0"},
 {"key": "csp_xpath_A33","name": "🎸MTV","type": 3,"api": "csp_XPath","searchable": 1,"quickSearch": 0,"filterable": 1,"ext": "http://52bsj.vip:81/api/v3/file/get/31693/mtv.json?sign=zzAxHDF7eAXNvp55rUpNfuLy31ZfUJyLTpWxwE_plBc%3D%3A0"},
-{"key":"天堂资源","name":"📌天堂资源(官)","type":1,"api":"http://vipmv.cc/api.php/provide/vod/","searchable":1,"quickSearch":1},
 {"key":"push_agent","name":"🍭推送（爱优腾/磁力/阿里）","type":3,"api":"csp_PushAgent","searchable":0,"quickSearch":0,"filterable":0,"ext":"cfe35d11f40b4872b3f6e35388b16181","jar":"http://52bsj.vip:81/api/v3/file/get/40056/%E5%8E%9F%E7%94%BB.jar?sign=Dnj7Fy_zQPEegI4pHmr7QcT8Q6ujk8tiyBjD_kn8TTk%3D%3A0"},
 
 {
@@ -389,7 +381,8 @@
         },
 {      "key": "csp_Dm84",      "name": "🚌动漫巴士",      "type": 3,      "api": "csp_Dm84",      "searchable": 1,      "quickSearch": 1,      "filterable": 1    },    {      "key": "csp_Ying",      "name": "💮樱花动漫",      "type": 3,      "api": "csp_Ying",      "searchable": 1,      "quickSearch": 1,      "filterable": 1    },    {      "key": "csp_Ysj",      "name": "🎀异界动漫",      "type": 3,      "api": "csp_Ysj",      "searchable": 1,      "quickSearch": 1,      "filterable": 1    },    {      "key": "csp_Anime1",      "name": "🐾日本动漫",      "type": 3,      "api": "csp_Anime1",      "searchable": 1,      "quickSearch": 1,      "filterable": 1    }, 
     {"key":"22","name":"接口仅供测试，请勿贩售","type":0,"api":""},
-    {"key":"18","name":"请勿相信视频中的任何广告","type":0,"api":""},
+    {"key":"18","name":"请勿相信视频中的任何广告","type":0,"api":""}
+,
 
 {"key":"1","name":"🔞🈲未成年人禁止访问，请止步！！","type":0,"api":""},
 {"key":"18","name":"🔞🈲分割线——————","type":0,"api":""},
