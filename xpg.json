@@ -5,11 +5,11 @@
             "name": "🍎主力源",
             "type": 3,
             "api": "csp_LiteApple",
+              "playerType": 1,
             "searchable": 1,
             "quickSearch": 1,
-            "filterable": 1,
-            "jar": "https://agit.ai/guot54/ygbh/raw/branch/master/JAR/527.jar;md5;F89C43655A15D4964C38573649A56702"
-        },
+            "filterable": 1
+            },
         {
             "key": "t4佬",
             "name": "🍀┃豆瓣精选",
@@ -1371,7 +1371,7 @@
             "quickSearch": 0
         }
     ],
-    "spider": "http://m35.grelighting.cn/html/ccc.jar;md5;C37C34107A528D50706B26E6BC37253F",
+    "spider": "https://agit.ai/guot54/ygbh/raw/branch/master/JAR/527.jar;md5;F89C43655A15D4964C38573649A56702",
     "wallpaper": "http://www.kf666888.cn/api/tvbox/img",
     "lives": [   
 {
