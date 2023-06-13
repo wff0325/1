@@ -523,23 +523,7 @@
                 
             ]
         },
-        {
-            "key": "三级专场",
-            "name": "👠三级采集",
-            "type": 1,
-            "api": "https://api.ykapi.net/api.php/provide/vod/",
-            "playUrl": "",
-            "searchable": 1,
-            "quickSearch": 1,
-            "filterable": 1,
-            "categories": [
-                "韩国伦理",
-                "香港伦理",
-                "台湾伦理",
-                "日本写真"
-                
-            ]
-        },
+       {"key": "天美AV","name": "👠天美AV","type": 1,"api": "https://tmav.art/api.php/provide/vod/", "searchable": 1,"quickSearch": 1, "filterable": 0 },
       
     {
             "key": "裤兜",
