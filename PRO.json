@@ -15,7 +15,7 @@
 "sites":[
 {
             "key": "js豆瓣1",
-            "name": "此版本停止更新，新版请于公众号【宝盒box科技】获取",
+            "name": "此版本停止更新，新版请于公众号【宝盒没宝】获取",
             "type": 3,
             "api": "https://agit.ai/767820774/TVBOXZY/raw/branch/main/JS/lib/drpy.min.js",
             "ext": "http://id.ganggang.live:63/js/js_drpy.js",
