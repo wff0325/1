@@ -22,7 +22,7 @@ var rule = {
 	filterable:1,
 	headers:{'User-Agent':'Dart/2.14 (dart:io)'},
 	timeout:5000,
-	class_name:'新电影4K&新剧4K&好莱坞精选4K&电影&连续剧&动漫&综艺', // 分类筛选 /api.php/app/nav
+	class_name:'新电影4K&新剧4K&好莱坞精选4K&港台经典4K&邵氏老电影4K&明星专辑4K&六公主4K&豆瓣TOP250电影4K&电影&连续剧&动漫&综艺&MV&体育赛事', // 分类筛选 /api.php/app/nav
 	class_url:'20&21&47&1&2&4&3',
 	play_parse:true,
 	lazy:'js:if(/m3u8|mp4|mkv/.test(input)){input={jx:0,url:input.replace(/+/g, "%20"),parse:0,header:JSON.stringify({"user-agent":"Lavf/58.12.100"})}}else{let purl=request("http://bingfa.behds.cn/indexappzhuanyong.php?url="+input);input={jx:0,url:JSON.parse(purl).url,parse:0}}',
