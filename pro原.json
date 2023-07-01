@@ -35,7 +35,7 @@
         },
 	 {"key": "csp_lezhu","name": "🐷乐猪影视","type": 3,"api": "csp_XPath","searchable": 1,"quickSearch": 0,"filterable": 1,"ext": "http://52bsj.vip:81/api/v3/file/get/68479/%E4%B9%90%E7%8C%AAXP.json?sign=-mbGfklZSjyMYL-zyJ_0rE2igcXTzyt8TXw0nyk2-7g%3D%3A0"},
    
-{"key": "csp_appys_影探","name": "🏵影探4K","type": 3,"api": "csp_AppYsV2","searchable": 1,"quickSearch": 1,"filterable": 1,"ext": "http://big.lfytyl.com/api.php/app/"},
+{"key": "csp_appys_影探","name": "🏵影探4K","type": 3,"api": "csp_AppYsV2","searchable": 1,"quickSearch": 1,"filterable": 1,"ext": "http://big.lfytyl.com/api.php/app/","jar": "https://agit.ai/guot54/ygbh/raw/branch/master/JAR/yt.jar"},
 {
             "key": "dr_ymzx",
             "name": "🌙宝盒飞云4K",
