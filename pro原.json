@@ -75,7 +75,7 @@
         "播放数组": "ax-grid ax-split-2 ax-space-md&&</ul>",
         "线路数组": "ax-btn*ax-padding ax-xl\">&&/a>[不包含:介绍]",
         "分类url": "http://www.guangbomi.com/tv/{cateId}/{catePg}.html[http://www.guangbomi.com/tv/{cateId}/index.html"
-      },"jar": "https://agit.ai/guot54/ygbh/raw/branch/master/JAR/%e5%b0%8f%e6%9a%b4%e8%84%be%e6%b0%947.jar;md5;6ad6ecbdd8d8dd440f9824c9b6628cad"
+      },"jar": "https://agit.ai/guot54/ygbh/raw/branch/master/JAR/%e5%b0%8f%e6%9a%b4%e8%84%be%e6%b0%947.jar"
     },
 { 
    "key": "直播转点播", 
