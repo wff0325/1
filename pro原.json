@@ -11,7 +11,7 @@
     
 {
       "name": "live",
-      "url": "https://uujs.ml/f/Ymps7/pro.txt",
+      "url": "https://agit.ai/guot54/ygbh/raw/branch/master/zB/pro.txt",
       "type": 0,
       "epg": "http://epg.51zmt.top:8000/api/diyp/?ch={name}&date={date}",
       "logo": "https://epg.112114.xyz/logo/{name}.png",
@@ -20,7 +20,7 @@
     {"group":"redirect",
     "channels":[{
     "name":"redirect",
-    "urls":["proxy://do=live&type=txt&ext=aHR0cHM6Ly91dWpzLm1sL2YvWW1wczcvcHJvLnR4dA=="]}]
+    "urls":["proxy://do=live&type=txt&ext=aHR0cHM6Ly9hZ2l0LmFpL2d1b3Q1NC95Z2JoL3Jhdy9icmFuY2gvbWFzdGVyL3pCL3Byby50eHQ="]}]
     }],
 "sites":[
 {
