@@ -1,6 +1,7 @@
 
 🌙月光宝盒,#genre#
-金马影院,http://hpull.kktv8.com/livekktv/128600025/playlist.m3u8
+经典功夫台,https://cn-sdqd-cu-01-18.bilivideo.com/live-bvc/701749/live_179302204_68184269/index.m3u8
+怀旧影视,https://cn-sccd-cm-03-08.bilivideo.com/live-bvc/612742/live_1742432946_84975647/index.m3u8
 澳门莲花,http://107.151.203.111:2209/135/hk.php?id=amlh
 澳亚卫视,https://live.mastvnet.com/lsdream/lY44pmm/2000/live.m3u8
 三立台湾台,https://sanlihalive1-a.akamaihd.net/5ffd3a166f7241d9b489b7d7241db96f/ap-northeast-1/4338955585001/profile_0/chunklist.m3u8?hdnea=st=1664678506~exp=9007200919419497~acl=/5ffd3a166f7241d9b489b7d7241db96f/*/profile_0/chunklist.m3u8*~hmac=cfd432e7da8eece68fe4a4da3a3bc08ab1bbc50b147a84c95ae3d4a569e932b1
