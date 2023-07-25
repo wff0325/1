@@ -43,17 +43,26 @@
             "quickSearch": 1,
             "filterable": 1
         },
-          {
+           {
       "key": "荐片",
-      "name": "荐片┃磁力",
+      "name": "🧲荐片磁力",
       "type": 3,
       "playerType": "1",
       "api": "http://alist.xn--z7x900a.love:63/drpy2.min.js",
       "ext": "http://smallmi.xiaohewanwan.love:63/jp.js"
     },
+     {"key": "csp_XBPQ_6V",
+  "name": "🌙宝盒4K磁力",
+  "type": 3,
+  "api": "csp_XBPQ",
+  "searchable": 1,
+  "quickSearch": 1,
+  "filterable": 1,
+  "ext":"https://agit.ai/guot54/ygbh/raw/branch/master/XB/6V%e7%a3%81.json"}, 
+ 
 
 	 {"key": "csp_lezhu","name": "🐷乐猪影视","type": 3,"api": "csp_XPath","searchable": 1,"quickSearch": 0,"filterable": 1,"ext": "http://52bsj.vip:81/api/v3/file/get/68479/%E4%B9%90%E7%8C%AAXP.json?sign=-mbGfklZSjyMYL-zyJ_0rE2igcXTzyt8TXw0nyk2-7g%3D%3A0"},   
-    {
+      {
       "key": "探探",
       "name": "🏵影探4K",
       "type": 3,
@@ -63,6 +72,34 @@
       "quickSearch": 1,
       "changeable": 0,
       "jar": "https://agit.ai/guot54/ygbh/raw/branch/master/JAR/fan724.jar"
+    },
+{
+      "key": "cjzy_快看",
+      "name": "👁️‍🗨️快看",
+      "type": 1,
+      "api": "https://kuaikan-api.com/api.php/provide/vod/from/kuaikan/",
+      "playUrl": "",
+      "changeable": 1,
+      "playerType": 2,
+      "categories": [
+        "国产剧",
+        "港台剧",
+        "国产动漫",
+        "日韩剧",
+        "欧美剧",
+        "海外剧",
+        "动作片",
+        "爱情片",
+        "剧情片",
+        "科幻片",
+        "奇幻片",
+        "战争片",
+        "犯罪片",
+        "恐怖片",
+        "悬疑片",
+        "惊悚片",
+        "冒险片"
+      ]
     },{"key": "draikan","name":"🤖爱看4k","type":3,"api": "https://agit.ai/guot54/ygbh/raw/branch/master/JS/lf_ikanbot3_min.js",
             "searchable": 1,
             "quickSearch": 1,
@@ -328,8 +365,7 @@
             "searchable": "1",
             "quickSearch": "1",
             "filterable": "1"
-        },	
-{"key": "Kuaikan","name": "👁️快看","type": 3,"api": "csp_Kuaikan","searchable": 1,"quickSearch": 1,"filterable": 1},	 
+        },		 
 {"key":"mtv_pc_焦炭影视","name":"🔥焦炭影视","type":3,"api":"csp_Cokemv","searchable":1,"quickSearch":1,"filterable":1}, 
 {"key":"csp_Bttoo","name":"🐞两个BT","type":3,"api":"csp_Bttoo","searchable":1,"quickSearch":1,"filterable":1},
 {
