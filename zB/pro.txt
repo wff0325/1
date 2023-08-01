@@ -4,123 +4,6 @@
 澳亚卫视,https://live.mastvnet.com/lsdream/lY44pmm/2000/live.m3u8
 三立台湾台,https://sanlihalive1-a.akamaihd.net/5ffd3a166f7241d9b489b7d7241db96f/ap-northeast-1/4338955585001/profile_0/chunklist.m3u8?hdnea=st=1664678506~exp=9007200919419497~acl=/5ffd3a166f7241d9b489b7d7241db96f/*/profile_0/chunklist.m3u8*~hmac=cfd432e7da8eece68fe4a4da3a3bc08ab1bbc50b147a84c95ae3d4a569e932b1
 三立都会台,https://sanlihalive1-a.akamaihd.net/4c3bb0ccad574d0e9b507c2dcd2dfabc/ap-northeast-1/4338955585001/profile_0/chunklist.m3u8?hdnea=st=1664678487~exp=9007200919419478~acl=/4c3bb0ccad574d0e9b507c2dcd2dfabc/*/profile_0/chunklist.m3u8*~hmac=1a3986bd8fb660eacbcc9954c67fb674fa810779ddc2fab5fa77188868ca3686
-
-
-中天新闻,http://66.181.39.224/ml.php?id=ctinews
-纬来日本,http://66.181.39.224/ml.php?id=videolandjapan
-纬来电影,http://66.181.39.224/ml.php?id=videolandmovie
-東森戏剧,http://66.181.39.224/ml.php?id=ettvdrama
-东森洋片,http://66.181.39.224/ml.php?id=ettvwestern
-爱尔达体育3台,http://66.181.39.224/ml.php?id=eltasport3_twn
-CN卡通频道,http://66.181.39.224/ml.php?id=momo1_twn
-国家地理,http://66.181.39.224/ml.php?id=natgeohd_twn
-纬来体育,http://66.181.39.224/ml.php?id=videolandsport
-东森超视,http://66.181.39.224/ml.php?id=ettvsuper
-无线新闻台,http://66.181.39.224/ml.php?id=inews_twn
-好莱坞电影,http://66.181.39.224/ml.php?id=hollywoodmovies_twn
-娱乐新闻台,http://66.181.39.224/ml.php?id=tvbxinhe_twn
-华纳电影台,http://66.181.39.224/ml.php?id=WarnerTV
-爱奇艺,http://66.181.39.224/ml.php?id=Qiyi_mega
-无线财经台,http://66.181.39.224/ml.php?id=tvbcaijing_twn
-卫视洋片台,http://66.181.39.224/ml.php?id=starmovies_raj
-大湾区卫视,http://66.181.39.224/ml.php?id=guangdongweishi_twn
-astro欢喜台,http://66.181.39.224/ml.php?id=Huahee
-astro小太阳,http://66.181.39.224/ml.php?id=Xiaotaiyang
-博斯运动 1,http://66.181.39.224/ml.php?id=bosisport1_twn
-Baby 卡通台,http://66.181.39.224/ml.php?id=babytv_twn
-DiscoveryTurbo,http://66.181.39.224/ml.php?id=discoveryturbo_twn
-TVBS新闻台,http://66.181.39.224/ml.php?id=tvbs_n
-TVBS欢乐台,http://66.181.39.224/ml.php?id=tvbshuanle_twn
-TLC 旅游台,http://66.181.39.224/ml.php?id=tlc_twn
-博斯运动2,http://66.181.39.224/ml.php?id=bosisport2_twn
-博斯高球1,http://66.181.39.224/ml.php?id=bosigolf1_twn
-博斯高球2,http://66.181.39.224/ml.php?id=bosigolf2_twn
-台视新闻,http://66.181.39.224/ml.php?id=ttvnews_twn
-中视经典,http://66.181.39.224/ml.php?id=zhongshi_twn
-中视新闻,http://66.181.39.224/ml.php?id=ca73a13c37
-中视新闻,http://66.181.39.224/ml.php?id=zhongshinews_twn
-非凡新闻,http://66.181.39.224/ml.php?id=feifannews_twn
-三立台湾,http://66.181.39.224/ml.php?id=sanlitaiwan
-中天综合,http://66.181.39.224/ml.php?id=ctizhonghe
-中天娱乐,http://66.181.39.224/ml.php?id=ctient
-爱尔达体育1台,http://66.181.39.224/ml.php?id=eltasport1_twn
-爱尔达体育2台,http://66.181.39.224/ml.php?id=eltasport2_twn
-TLC旅游生活频道,http://66.181.39.224/ml.php?id=Tlc
-东森财经新闻,http://66.181.39.224/ml.php?id=ettvcaijing_twn
-爱尔达影剧台,http://66.181.39.224/ml.php?id=eltadrama_twn
-爱尔达影剧台,http://66.181.39.224/ml.php?id=eltayingju_twn
-TVB 星河台,http://66.181.39.224/ml.php?id=Xinhe_mega
-国家地理野生,http://66.181.39.224/ml.php?id=natgeowild_twn
-民视台湾台,http://66.181.39.224/ml.php?id=ftvtaiwan_twn
-民视新闻台,http://66.181.39.224/ml.php?id=ftvnew_taiwan
-民视第一台,http://66.181.39.224/ml.php?id=lunghuajingdian_twn
-寰宇新闻台,http://66.181.39.224/ml.php?id=huanyuxinwen_twn
-年代新闻台,http://66.181.39.224/ml.php?id=niandainews_twn
-三立都会台,http://66.181.39.224/ml.php?id=sanlidouhui_twn
-三立综合台,http://66.181.39.224/ml.php?id=sanlizhonghe
-三立戏剧台,http://66.181.39.224/ml.php?id=sanlixiju_twn
-靖天国际台,http://66.181.39.224/ml.php?id=jingtianintl_twn
-八大第一台,http://66.181.39.224/ml.php?id=badafirst
-八大综合台,http://66.181.39.224/ml.php?id=badazhonghe
-八大戏剧台,http://66.181.39.224/ml.php?id=badadrama
-東森电影台,http://66.181.39.224/ml.php?id=ettvmovie
-东森综合台,http://66.181.39.224/ml.php?id=ettvzhonghe
-亚洲旅游台,http://66.181.39.224/ml.php?id=asiatravel_twn
-卫视中文台,http://66.181.39.224/ml.php?id=weishichinese_twn
-美亚电影台,http://66.181.39.224/ml.php?id=meiyamovie_twn
-凤凰中文,http://66.181.39.224/ml.php?id=phoenixtv_hd
-凤凰资讯,http://66.181.39.224/ml.php?id=phoenixinfo_hd
-星衛電影,http://66.181.39.224/ml.php?id=xingwei_movie
-动物星球,http://66.181.39.224/ml.php?id=animalplanet_twn
-探索频道,http://66.181.39.224/ml.php?id=ba86fcd935
-探索频道,http://66.181.39.224/ml.php?id=discoveryhd_twn
-探索亚洲,http://66.181.39.224/ml.php?id=discoverytwn_twn
-博斯网球,http://66.181.39.224/ml.php?id=bositennis_twn
-亚洲美食,http://66.181.39.224/ml.php?id=afc_twn
-美食星球,http://66.181.39.224/ml.php?id=foodplanet_twn
-astro双星,http://66.181.39.224/ml.php?id=Shuangxing
-astro全挂,http://66.181.39.224/ml.php?id=Quanjia
-東森LIVE,http://66.181.39.224/ml.php?id=ettvnews
-ELTA综合,http://66.181.39.224/ml.php?id=eltazonghe
-HBO-原创,http://66.181.39.224/ml.php?id=hbosignature_twn
-中视 HD,http://66.181.39.224/ml.php?id=zhongshihd_twn
-民视 HD,http://66.181.39.224/ml.php?id=ftvhd_taiwan
-翡翠台,http://66.181.39.224/ml.php?id=jade_twn
-华丽台,http://66.181.39.224/ml.php?id=Wlt
-TVB星河,http://66.181.39.224/ml.php?id=Xinhe
-香港台,http://66.181.39.224/ml.php?id=hkphoenix_twn
-爱奇艺,http://66.181.39.224/ml.php?id=Qiyi
-小太阳,http://66.181.39.224/ml.php?id=Xiaotaiyang_mega
-Channel 5,http://66.181.39.224/ml.php?id=Channel5HD
-Channel 8,http://66.181.39.224/ml.php?id=Channel8HD
-Channel 8,http://66.181.39.224/ml.php?id=Ch8114
-HBO家庭,http://66.181.39.224/ml.php?id=fyi_twn
-EYE戏剧,http://66.181.39.224/ml.php?id=eyetvxiju_twn
-EYE旅游,http://66.181.39.224/ml.php?id=eyetvtravel_twn
-明珠台,http://66.181.39.224/ml.php?id=pearl_twn
-BBC Earth,http://66.181.39.224/ml.php?id=bbcearth_twn
-ChannelU,http://66.181.39.224/ml.php?id=ChannelU
-HBO HITS,http://66.181.39.224/ml.php?id=hbohead_twn
-ELEVEN 1,http://66.181.39.224/ml.php?id=golfchannel_twn
-CINEMAX,http://66.181.39.224/ml.php?id=cinemax_twn
-台视,http://66.181.39.224/ml.php?id=ttv_taiwan
-华视,http://66.181.39.224/ml.php?id=ctshd_twn
-公视,http://66.181.39.224/ml.php?id=ctv_taiwan
-信吉,http://66.181.39.224/ml.php?id=huanyutaiwan_twn
-VIUTV6,http://66.181.39.224/ml.php?id=viusix_twn
-RTHK31,http://66.181.39.224/ml.php?id=rhk31_twn
-RTHK32,http://66.181.39.224/ml.php?id=rhk32_twn
-HBO_HD,http://66.181.39.224/ml.php?id=hbohd_twn
-探索,http://66.181.39.224/ml.php?id=discoverych_twn
-VIUTV1,http://66.181.39.224/ml.php?id=viu1_twn
-AXNTW,http://66.181.39.224/ml.php?id=axn_twn
-TVBS,http://66.181.39.224/ml.php?id=tvbs
-HGTV,http://66.181.39.224/ml.php?id=HGTV
-AXN,http://66.181.39.224/ml.php?id=Axn
-AEC,http://66.181.39.224/ml.php?id=AEC
-TV8,http://66.181.39.224/ml.php?id=TV8
-One,http://66.181.39.224/ml.php?id=One
-WWE,http://66.181.39.224/ml.php?id=wwe_twn
 无线新闻台,http://line.premiumpowers.net/play/live.php?mac=00:1A:79:BF:D2:44&extension=ts&stream=153399
 明珠台,http://nas.jdshipin.com:8801/gudoumz.php
 明珠台,http://r.jdshipin.com/ZQ4kN
@@ -8194,7 +8077,7 @@ dema,http://ye23.win/iptv/korea2021.php?id=dema
 阿里郎WORLD,http://ye23.win/iptv/korea2021.php?id=arirang_1
 阿里郎WORLD,http://ye23.win/iptv/korea2021.php?id=arirang_2
 
-🌈彩虹頻道_555,#genre#
+🌈彩虹頻道_688,#genre#
 HAPPY,mitv://generationnexxxt.com:19806/3d1df484dbe649a3b509dbe60dca4bfa
 K,mitv://generationnexxxt.com:19806/5e51b7ff2fa34cb6a667e3d3c217da88
 Japan HDV,http://87c576b1.cbilant.com/iptv/XP2DFA2ML2YEFG/6225/index.m3u8
@@ -8305,7 +8188,7 @@ mkmp-011桜井友田彩也香,https://t10.cdn2020.com:12335/video/m3u8/2021/08/2
 mkmp-433乱不,https://t16.cdn2020.com:12340/video/m3u8/2022/02/18/3ff1dede/index.m3u8
 mkon-014渚,https://t13.cdn2020.com:12338/video/m3u8/2021/12/08/5d2c3c38/index.m3u8
 
-👠｜VIP麻豆资源_555,#genre#
+👠｜VIP麻豆资源_688,#genre#
 MLT-002/连续被上的OL,https://ypmnkbb.saejeuj.com/api/app/media/m3u8/av/da/bj/1c/et/399a1a6f21a74a6b9a391b1903ce2f3c.m3u8?
 MSD-001/乱伦迷情药,https://ypmnkbb.saejeuj.com/api/app/media/m3u8/av/qi/oi/gz/ux/dbf57474fbed49c9aa3fb97bcd75b891.m3u8?
 MSD-002/维修工的心跳艳遇(上),https://ypmnkbb.saejeuj.com/api/app/media/m3u8/av/gz/dp/pq/y9/acd55327c8504396a9ec4bf6050bd13a.m3u8?
@@ -8393,7 +8276,7 @@ MSD-112/惹火上门按摩,https://ypmnkbb.saejeuj.com/api/app/media/m3u8/av/9m/
 MSD-113/爽操少妇喷白浆,https://ypmnkbb.saejeuj.com/api/app/media/m3u8/av/9o/w7/qp/4a/4ec0964678e645ce89eef69903c719e1.m3u8?
 MSD-114/口爆童颜巨乳嫩妹,https://ypmnkbb.saejeuj.com/api/app/media/m3u8/av/yb/9e/kr/j1/28c0d9c657a74a5c8be6a799eac8b201.m3u8?
 
-👠｜VIP直播资源_555,#genre#
+👠｜VIP直播资源_688,#genre#
 mide-821小野六花,https://t4s.cdn2020.com/video/m3u8/2020/09/25/31eaeb70/index.m3u8
 mide-784小野六花,https://t6s.cdn2020.com/video/m3u8/2021/02/05/ddf896d6/index.m3u8
 mide-797小野六花,https://t4s.cdn2020.com/video/m3u8/2020/07/27/89cfae5b/index.m3u8
@@ -8551,7 +8434,7 @@ abw-178結城,https://t15.cdn2020.com:12339/video/m3u8/2021/12/25/ae7feac3/index
 ipx-527岬,https://t4s.cdn2020.com/video/m3u8/2020/08/17/e1844eba/index.m3u8
 ipx-711岬,https://t10.cdn2020.com:12335/video/m3u8/2021/08/15/30400709/index.m3u8
 ipx-539岬,https://t4s.cdn2020.com/video/m3u8/2020/09/19/772e1a46/index.m3u8
-👠玩偶姐姐_555,#genre#
+👠玩偶姐姐_688,#genre#
 一日女友的漂亮姐姐 上 她是谁,https://ypmnkbb.saejeuj.com/api/app/media/m3u8/zh/70/fm/e0/kc/f7beb303cedd40b2a3f0255889aa6360.m3u8?
 一日女友的漂亮姐姐 中,https://ypmnkbb.saejeuj.com/api/app/media/m3u8/zh/75/da/ic/nq/654561e53a8f44d4b452ee45db1d5aaa.m3u8?
 一日女友的漂亮姐姐 下 ,https://ypmnkbb.saejeuj.com/api/app/media/m3u8/zh/k6/r5/4l/88/60aac9f4edee40078853a86817ead1ff.m3u8?
@@ -8709,7 +8592,7 @@ MD反叛女学生的逆袭-玥可岚,https://t11.cdn2020.com:12336/video/m3u8/20
 凱爾西·夢露（KelsiMonroe）獲得了本月的屁股！（ap12080）,http://218158.vod.redtraffic.xyz/ph5914a82e707aa/play.m3u8
 切諾基唯一的DatAzz拍手,http://12204.vod.adultiptv.net/ph5a5cb7a12e61e/play.m3u8
 假出租車中出彙編＃1 HD,http://218158.vod.adultiptv.net/ph5a0bfc0cbc2ed/play.m3u8
-👠｜VIP欧美1_555,#genre#
+👠｜VIP欧美1_688,#genre#
 Playboy,http://87c576b1.cbilant.com/iptv/XP2DFA2ML2YEFG/527/index.m3u8
 Bazzers TV Europe,http://87c576b1.cbilant.com/iptv/XP2DFA2ML2YEFG/910/index.m3u8
 Blue Hustler,http://87c576b1.cbilant.com/iptv/XP2DFA2ML2YEFG/1064/index.m3u8
@@ -8792,7 +8675,7 @@ Blowjob Red TV,http://vl05t7es.rostelekom.xyz/iptv/QAX2K7HNCDZF2N/6180/index.m3u
 Brazzers eXXtra,http://vl05t7es.rostelekom.xyz/iptv/QAX2K7HNCDZF2N/6181/index.m3u8
 Brazzers HD,http://vl05t7es.rostelekom.xyz/iptv/QAX2K7HNCDZF2N/6182/index.m3u8
 
-👠｜VIP欧美2_555,#genre#
+👠｜VIP欧美2_688,#genre#
 Brunette Adult TV,http://87c576b1.cbilant.com/iptv/XP2DFA2ML2YEFG/6183/index.m3u8
 cento x cento,http://87c576b1.cbilant.com/iptv/XP2DFA2ML2YEFG/6184/index.m3u8
 Cherry Pimps,http://87c576b1.cbilant.com/iptv/XP2DFA2ML2YEFG/6185/index.m3u8
