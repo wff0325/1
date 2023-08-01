@@ -32,7 +32,16 @@
             "searchable": 0,
             "quickSearch": 0,
             "filterable": 0
-        },
+        },{
+      "key": "csp_Nmys",
+      "name": "✈️速度流畅",
+      "type": 3,
+      "api": "csp_Nmys",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": "https://agit.ai/guot54/ygbh/raw/branch/master/XB/nmys.json"
+    },
          {
             "key": "dr_77",
             "name": "🛩️酷云77",
@@ -78,17 +87,16 @@
         {"key":"csp_MeijuTT","name":"🧲美剧天堂","type":3,"api":"csp_MeijuTT","playerType":1,"searchable":1,"quickSearch":1,"filterable":1,"jar": "https://agit.ai/guot54/ygbh/raw/branch/master/JAR/cili.jar"},
         {"key":"csp_MeijuMi","name":"🧲美剧迷","type":3,"api":"csp_MeijuMi","playerType":1,"searchable":1,"quickSearch":1,"filterable":1,"jar": "https://agit.ai/guot54/ygbh/raw/branch/master/JAR/cili.jar"},
 	 {"key": "csp_lezhu","name": "🐷乐猪影视","type": 3,"api": "csp_XPath","searchable": 1,"quickSearch": 0,"filterable": 1,"ext": "http://52bsj.vip:81/api/v3/file/get/68479/%E4%B9%90%E7%8C%AAXP.json?sign=-mbGfklZSjyMYL-zyJ_0rE2igcXTzyt8TXw0nyk2-7g%3D%3A0"},   
-      {
-      "key": "探探",
-      "name": "🏵影探4K",
+        {
+      "key": "小艺",
+      "name": "🥩小艺影视",
       "type": 3,
-      "playerType": "1",
-      "api": "csp_YT",
+      "api": "csp_AppYsV2",
       "searchable": 1,
       "quickSearch": 1,
-      "changeable": 0,
-      "jar": "https://agit.ai/guot54/ygbh/raw/branch/master/JAR/fan724.jar"
-    },
+      "filterable": 1,
+      "ext": "https://lg.tvcms.top/api.php/app/"
+    },   
 {
       "key": "cjzy_快看",
       "name": "👁️‍🗨️快看",
@@ -170,16 +178,6 @@
             "filterable": 1,
             "ext": "http://124.222.175.111:89/api.php/app/"
         },
-        {
-      "key": "csp_Nmys",
-      "name": "🌾农民影视",
-      "type": 3,
-      "api": "csp_Nmys",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 1,
-      "ext": "http://饭太硬.top/x/json/nmys.json"
-    },
     	{
             "key" : "drpy_js_007",
             "name" : "🎫007电影",
