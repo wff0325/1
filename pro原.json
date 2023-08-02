@@ -708,10 +708,10 @@
 {"key": "csp_jiujiuzhobo","name":"🔞久久直播","type": 3, "api": "csp_xBPQ","searchable": 0,"quickSearch": 0, "filterable": 0, "ext":"https://agit.ai/guot54/ygbh/raw/branch/master/h/99zb.json","jar":"https://agit.ai/guot54/ygbh/raw/branch/master/JAR/xb.jar"}, 
 {"key":"csp_jy","name":"🔞聚优直播","type":3,"api":"csp_xBPQ","searchable":1,"quickSearch":1,"filterable":0,"ext":"https://agit.ai/guot54/ygbh/raw/branch/master/h/jy.json","jar":"https://agit.ai/guot54/ygbh/raw/branch/master/JAR/xb.jar"},
  {"key": "直转点", "name": "🔞㊙️点播","type": 3,"api":"http://lgz.hk3.20212021.ml.cdn.cloudflare.net/直转点.js","ext":"http://lgz.hk3.20212021.ml.cdn.cloudflare.net/直转点.txt"}, 
- {"key":"csp_Alist1_lhg","name":"🔞罗汉果","type":3,"api":"csp_AList","searchable":1,"quickSearch":1,"filterable":0,"changeable":1,"ext":"https://dpaste.com/7CML6KWYG.txt","jar":"https://agit.ai/guot54/ygbh/raw/branch/master/JAR/lh.jar"}, 
- {"key":"csp_md","name":"🔞女优大合集","type":3,"api":"csp_xBPQ","searchable":1,"quickSearch":1,"filterable":0,"ext":"https://download.kstore.space/download/3313/mao/madou.json","jar":"https://agit.ai/guot54/ygbh/raw/branch/master/JAR/xb.jar"}, 
- {"key":"ALis","name":"🔞阿里盘片","type":3,"api":"csp_AList","searchable":1,"changeable":0,"ext":{"drives":[{"name":"SOD+","server":"https://a.sodaz.xyz"}]},"jar":"https://jihulab.com/ymz1231/jar/-/raw/main/fm.jar;md5;12256c49c78305f2bedfd09b5d786620"}, 
- {"key":"csp_xBPQ_91色","name":"🔞91色","type":3,"api":"csp_xBPQ","searchable":1,"quickSearch":1,"filterable":0, "ext":"https://agit.ai/guot54/ygbh/raw/branch/master/h/91s.json","jar":"https://agit.ai/guot54/ygbh/raw/branch/master/JAR/xb.jar"},
+ {"key":"csp_Alist1_lhg","name":"🔞罗汉果","type":3,"api":"csp_AList","searchable":0,"quickSearch":0,"filterable":0,"changeable":1,"ext":"https://dpaste.com/7CML6KWYG.txt","jar":"https://agit.ai/guot54/ygbh/raw/branch/master/JAR/lh.jar"}, 
+ {"key":"csp_md","name":"🔞女优大合集","type":3,"api":"csp_xBPQ","searchable":0,"quickSearch":0,"filterable":0,"ext":"https://download.kstore.space/download/3313/mao/madou.json","jar":"https://agit.ai/guot54/ygbh/raw/branch/master/JAR/xb.jar"}, 
+ {"key":"ALis","name":"🔞阿里盘片","type":3,"api":"csp_AList","searchable":0,"changeable":0,"ext":{"drives":[{"name":"SOD+","server":"https://a.sodaz.xyz"}]},"jar":"https://jihulab.com/ymz1231/jar/-/raw/main/fm.jar;md5;12256c49c78305f2bedfd09b5d786620"}, 
+ {"key":"csp_xBPQ_91色","name":"🔞91色","type":3,"api":"csp_xBPQ","searchable":0,"quickSearch":0,"filterable":0, "ext":"https://agit.ai/guot54/ygbh/raw/branch/master/h/91s.json","jar":"https://agit.ai/guot54/ygbh/raw/branch/master/JAR/xb.jar"},
 	{
             "key": "老鸭",
             "name": "👠老鸭采集",
@@ -719,7 +719,7 @@
             "api": "https://api.apilyzy.com/api.php/provide/vod/",
             "playUrl": "",
             "searchable": 0,
-            "quickSearch": 1,
+            "quickSearch": 0,
             "filterable": 1,
             "categories": [
             "日本有码",
@@ -735,20 +735,20 @@
                 
             ]
         },
-       {"key": "天美AV","name": "👠天美AV","type": 1,"api": "https://tmav.art/api.php/provide/vod/", "searchable": 0,"quickSearch": 1, "filterable": 0 },
-       {"key": "KOK资源","name": "👠KOK资源","type": 1,"api": "https://api.vodkok2.com/api.php/provide/vod/", "searchable": 0,"quickSearch": 1, "filterable": 0 },
+       {"key": "天美AV","name": "👠天美AV","type": 1,"api": "https://tmav.art/api.php/provide/vod/", "searchable": 0,"quickSearch": 0, "filterable": 0 },
+       {"key": "KOK资源","name": "👠KOK资源","type": 1,"api": "https://api.vodkok2.com/api.php/provide/vod/", "searchable": 0,"quickSearch": 0, "filterable": 0 },
        {"key":"QQ传媒","name":"👠QQ传媒","type":1,"api":"https://qqcm.sbs/api.php/provide/vod/","searchable":0,"quickSearch":0},
-{ "key": "鸡坤资源", "name": "👠鸡坤资源", "type": 1, "api": "https://jkunzyapi.com/api.php/provide/vod/", "searchable": 0, "quickSearch": 1, "filterable": 0 },
+{ "key": "鸡坤资源", "name": "👠鸡坤资源", "type": 1, "api": "https://jkunzyapi.com/api.php/provide/vod/", "searchable": 0, "quickSearch": 0, "filterable": 0 },
 {"key": "zp116","name": "👠泡芙资源","type": 0,"api": "http://zmcj88.com/api?ac=list","searchable": 1,"quickSearch": 0, "filterable": 0},
-{"key":"9号资源","name":"👠9号资源","type":0,"api":"http://fhapi9.com/api.php/provide/vod/at/xml/","searchable":0,"quickSearch":1},
-{"key": "宝塔资源","name": "👠宝塔资源","type": 1,"api": "https://baotazy.com/api.php/provide/vod/", "searchable": 0,"quickSearch": 1, "filterable": 0 },
-{"key": "滴滴资源","name": "👠滴滴资源","type": 0,"api": "https://api.ddapi.cc/api.php/provide/vod/at/xml", "searchable": 0,"quickSearch": 1, "filterable": 0 },
-{"key": "蛋蛋视频","name": "👠蛋蛋视频","type": 1,"api": "https://156.249.29.8/inc/apijson_vod.php", "searchable": 0,"quickSearch": 1, "filterable": 0 },
-{"key": "草榴资源","name": "👠草榴资源","type": 1,"api": "https://www.caoliuzy.com/api.php/provide/vod/", "searchable": 0,"quickSearch": 1, "filterable": 0 },
-{"key": "玉兔资源","name": "👠玉兔资源","type": 1,"api": "https://yutuzy3.com/api.php/provide/vod/?ac=list", "searchable": 0,"quickSearch": 1, "filterable": 0 }, 
+{"key":"9号资源","name":"👠9号资源","type":0,"api":"http://fhapi9.com/api.php/provide/vod/at/xml/","searchable":0,"quickSearch":0},
+{"key": "宝塔资源","name": "👠宝塔资源","type": 1,"api": "https://baotazy.com/api.php/provide/vod/", "searchable": 0,"quickSearch": 0, "filterable": 0 },
+{"key": "滴滴资源","name": "👠滴滴资源","type": 0,"api": "https://api.ddapi.cc/api.php/provide/vod/at/xml", "searchable": 0,"quickSearch": 0, "filterable": 0 },
+{"key": "蛋蛋视频","name": "👠蛋蛋视频","type": 1,"api": "https://156.249.29.8/inc/apijson_vod.php", "searchable": 0,"quickSearch": 0, "filterable": 0 },
+{"key": "草榴资源","name": "👠草榴资源","type": 1,"api": "https://www.caoliuzy.com/api.php/provide/vod/", "searchable": 0,"quickSearch": 0, "filterable": 0 },
+{"key": "玉兔资源","name": "👠玉兔资源","type": 1,"api": "https://yutuzy3.com/api.php/provide/vod/?ac=list", "searchable": 0,"quickSearch": 0, "filterable": 0 }, 
 
 
-{"key":"爱爱影视","name":"👠爱爱影视","type":1,"api":"http://22.shaozeyk.top/api.php/provide/vod/","searchable":1,"quickSearch":1,"filterable":1},
+{"key":"爱爱影视","name":"👠爱爱影视","type":1,"api":"http://22.shaozeyk.top/api.php/provide/vod/","searchable":0,"quickSearch":0,"filterable":1},
       
     
         {
