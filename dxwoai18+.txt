@@ -3,10 +3,18 @@
 
 {"key":"*91麻豆","name":"*91麻豆","type":1,"api":"https://9191md.me/api.php/provide/vod/","searchable":0,"quickSearch":0},
 {"key":"*色猫资源","name":"*色猫资源","type":1,"api":"https://caiji.semaozy.net/inc/apijson_vod.php","searchable":0,"quickSearch":0},
+{"key":"csp_Alist1_lhg","name":"🔞罗汉果","type":3,"api":"csp_AList","searchable":0,"quickSearch":0,"filterable":0,"changeable":1,"ext":"https://dpaste.com/7CML6KWYG.txt","jar":"https://jihulab.com/wpp1/WPP/-/raw/master/JAR/lh.jar"}, 
 
-
-
-
+ {
+        "key":"🔞宝盒专享",
+        "name":"🔞宝盒专享",
+        "type":3,
+        "api":"https://jihulab.com/wpp1/WPP/-/raw/master/h/zC.js",
+        "searchable":2,
+        "quickSearch":0,
+        "filterable":0,
+        "ext":"https://jihulab.com/wpp1/WPP/-/raw/master/h/18cr.json"
+        },
 
 {"key":"*美少女资源","name":"*美少女资源","type":0,"api":"https://www.msnii.com/api/xml.php","searchable":0,"quickSearch":0},
 {"key":"*淫水机资源","name":"*淫水机资源","type":0,"api":"https://www.xrbsp.com/api/xml.php","searchable":0,"quickSearch":0},
