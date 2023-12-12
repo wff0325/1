@@ -11,7 +11,7 @@
     
 {
       "name": "live",
-      "url": "https://raw.githubusercontent.com/wff0325/1/master/zB/pro.txt",
+      "url": "https://raw.githubusercontent.com/wff0325/1/master/zB/WC.txt",
       "type": 0,
       "epg": "http://epg.51zmt.top:8000/api/diyp/?ch={name}&date={date}",
       "logo": "https://epg.112114.xyz/logo/{name}.png",
