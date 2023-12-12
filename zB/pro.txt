@@ -19,11 +19,12 @@ CCTV12,http://[2409:8087:2001:20:2800:0:df6e:eb22]:80/wh7f454c46tw98162637_21107
 CCTV13,http://[2409:8087:2001:20:2800:0:df6e:eb24]:80/wh7f454c46tw2444616252_100116641/ott.mobaibox.com/PLTV/3/224/3221228324/index.m3u8?icpid=3&RTS=1674369675&from=40&popid=40&hms_devid=2292&prioritypopid=40&vqe=3
 CCTV14,http://[2409:8087:2001:20:2800:0:df6e:eb23]:80/wh7f454c46tw1184949553_1248271610/ott.mobaibox.com/PLTV/3/224/3221228292/index.m3u8?icpid=3&RTS=1674381300&from=40&popid=40&hms_devid=2291&prioritypopid=40&vqe=3
 CCTV15,http://[2409:8087:2001:20:2800:0:df6e:eb23]:80/wh7f454c46tw1248547286_2118050836/ott.mobaibox.com/PLTV/3/224/3221228404/index.m3u8?icpid=3&RTS=1674381363&from=40&popid=40&hms_devid=2291&prioritypopid=40&vqe=3
+CCTV16,http://[2409:8087:2001:20:2800:0:df6e:eb18]/ott.mobaibox.com/PLTV/3/224/3221228127/index.m3u8
 CCTV16,http://[2409:8087:2001:20:2800:0:df6e:eb19]:80/wh7f454c46tw1269761993_1267691970/ott.mobaibox.com/PLTV/3/224/3221228320/index.m3u8?icpid=3&RTS=1674381385&from=40&popid=40&hms_devid=2113&prioritypopid=40&vqe=3
 CCTV17,http://[2409:8087:2001:20:2800:0:df6e:eb22]:80/wh7f454c46tw1418270804_-738667041/ott.mobaibox.com/PLTV/3/224/3221228407/index.m3u8?icpid=3&RTS=1674381533&from=40&popid=40&hms_devid=2291&prioritypopid=40&vqe=3
 
-CCTV4K,https://live.goodiptv.club/api/cqyx.php?id=CCTV4K
-CCTV16 4K,https://live.goodiptv.club/api/cqyx.php?id=CCTV16_4K
+CCTV4K,http://[2409:8087:2001:20:2800:0:df6e:eb13]/ott.mobaibox.com/PLTV/3/224/3221228228/index.m3u8
+CCTV8K,http://[2409:8087:2001:20:2800:0:df6e:eb02]/ott.mobaibox.com/PLTV/3/224/3221228165/index.m3u8
 
 
 
@@ -82,23 +83,18 @@ CETV1,http://[2409:8087:1e03:21::34]:6610/cms001/ch00000090990000001020/index.m3
 CETV4,http://[2409:8087:1e03:21::2]:6060/cms001/ch00000090990000001348/index.m3u8?
 CETV4,http://[2409:8087:1e03:21::34]:6610/cms001/ch00000090990000001348/index.m3u8?IASHttpSessionId=RR8275420230310002030000839
 CCTV电视指南,http://[2409:8087:7000:20:1000::22]:6060/yinhe/2/ch00000090990000002545/index.m3u8?virtualDomain=yinhe.live_hls.zte.com
-CCTV央视文化精品,http://[2409:8087:7000:20:1000::22]:6060/yinhe/2/ch00000090990000002535/index.m3u8?virtualDomain=yinhe.live_hls.zte.com
-CCTV世界地理,http://[2409:8087:7001:20:2::3]:80/dbiptv.sn.chinamobile.com/PLTV/88888893/224/3221226947/index.m3u8
-CCTV世界地理,http://[2409:8087:7000:20:1000::22]:6060/yinhe/2/ch00000090990000002485/index.m3u8?virtualDomain=yinhe.live_hls.zte.com
-CCTV风云剧场,http://[2409:8087:7001:20:2::3]:80/dbiptv.sn.chinamobile.com/PLTV/88888893/224/3221226950/index.m3u8
-CCTV风云剧场,http://[2409:8087:7000:20:1000::22]:6060/yinhe/2/ch00000090990000002505/index.m3u8?virtualDomain=yinhe.live_hls.zte.com
-CCTV风云音乐,http://[2409:8087:7001:20:2::3]:80/dbiptv.sn.chinamobile.com/PLTV/88888893/224/3221226953/index.m3u8
-CCTV风云音乐,http://[2409:8087:7000:20:1000::22]:6060/yinhe/2/ch00000090990000002525/index.m3u8?virtualDomain=yinhe.live_hls.zte.com
-CCTV第一剧场,http://[2409:8087:7001:20:2::3]:80/dbiptv.sn.chinamobile.com/PLTV/88888893/224/3221226959/index.m3u8
-CCTV第一剧场,http://[2409:8087:7000:20:1000::22]:6060/yinhe/2/ch00000090990000002498/index.m3u8?virtualDomain=yinhe.live_hls.zte.com
-CCTV女性时尚,http://[2409:8087:7001:20:2::3]:80/dbiptv.sn.chinamobile.com/PLTV/88888893/224/3221226969/index.m3u8
-CCTV女性时尚,http://[2409:8087:7000:20:1000::22]:6060/yinhe/2/ch00000090990000002475/index.m3u8?virtualDomain=yinhe.live_hls.zte.com
-CCTV怀旧剧场,http://[2409:8087:7001:20:2::3]:80/dbiptv.sn.chinamobile.com/PLTV/88888893/224/3221226972/index.m3u8
-CCTV怀旧剧场,http://[2409:8087:7000:20:1000::22]:6060/yinhe/2/ch00000090990000002495/index.m3u8?virtualDomain=yinhe.live_hls.zte.com
+CCTV电视指南,http://[2409:8087:7001:20:2::3]:80/dbiptv.sn.chinamobile.com/PLTV/88888893/224/3221226987/index.m3u8
 CCTV兵器科技,http://[2409:8087:7001:20:2::3]:80/dbiptv.sn.chinamobile.com/PLTV/88888893/224/3221226975/index.m3u8
-CCTV风云足球,http://[2409:8087:7001:20:2::3]:80/dbiptv.sn.chinamobile.com/PLTV/88888893/224/3221226984/index.m3u8
-CCTV风云足球,http://[2409:8087:7000:20:1000::22]:6060/yinhe/2/ch00000090990000002499/index.m3u8?virtualDomain=yinhe.live_hls.zte.com
+CCTV怀旧剧场,http://[2409:8087:7001:20:2::3]:80/dbiptv.sn.chinamobile.com/PLTV/88888893/224/3221226972/index.m3u8
+CCTV世界地理,http://[2409:8087:7001:20:2::3]:80/dbiptv.sn.chinamobile.com/PLTV/88888893/224/3221226947/index.m3u8
 CCTV文化精品,http://[2409:8087:7001:20:2::3]:80/dbiptv.sn.chinamobile.com/PLTV/88888893/224/3221226981/index.m3u8
+CCTV央视台球,http://[2409:8087:7001:20:2::3]:80/dbiptv.sn.chinamobile.com/PLTV/88888893/224/3221226956/index.m3u8
+CCTV央视高网,http://[2409:8087:7001:20:2::3]:80/dbiptv.sn.chinamobile.com/PLTV/88888893/224/3221226978/index.m3u8
+CCTV风云剧场,http://[2409:8087:7001:20:2::3]:80/dbiptv.sn.chinamobile.com/PLTV/88888893/224/3221226950/index.m3u8
+CCTV风云音乐,http://[2409:8087:7001:20:2::3]:80/dbiptv.sn.chinamobile.com/PLTV/88888893/224/3221226953/index.m3u8
+CCTV第一剧场,http://[2409:8087:7001:20:2::3]:80/dbiptv.sn.chinamobile.com/PLTV/88888893/224/3221226959/index.m3u8
+CCTV女性时尚,http://[2409:8087:7001:20:2::3]:80/dbiptv.sn.chinamobile.com/PLTV/88888893/224/3221226969/index.m3u8
+CCTV风云足球,http://[2409:8087:7001:20:2::3]:80/dbiptv.sn.chinamobile.com/PLTV/88888893/224/3221226984/index.m3u8
 
 CCTV1,http://hms304nc1972679586.live.aikan.miguvideo.com/wh7f454c46tw3831204341_1349411946/wd_r2/cctv/cctv1hd/2500/01.m3u8?msisdn=19115966146&Channel_ID=0119_04102000-99000_400300000040002&client_ip=182.149.232.3&timestamp=20230115080246&ContentId=265183188&timezone=UTC&mtv_session=01b97ad3f1d61532d8f0d40578ee3f47&HlsSubType=1&HlsProfileId=1&nphaid=0&encrypt=ac6f75650a73ab06efc36233598f26b8
 CCTV2,http://hms104nc1972679566.live.aikan.miguvideo.com/wh7f454c46tw3468827325_440542616/wd_r2/cctv/cctv2hd/3000/01.m3u8?msisdn=guest&Channel_ID=0119_04102000-99000_400300000040002&client_ip=112.45.97.120&timestamp=20230208125733&ContentId=265667329&timezone=UTC&mtv_session=f739dcaed0e05c0e9e14fa47d0810c20&HlsSubType=1&HlsProfileId=1&nphaid=0&encrypt=c4d54a337744e33e655349fe312a5eed
@@ -427,64 +423,7 @@ CHC动作电影,http://dbiptv.sn.chinamobile.com/PLTV/88888890/224/3221226465/in
 
 
 4k,#genre#
-CCTV4K,http://49.235.110.121:9090/daili/gudo.php?id=cctv4k
-CCTV4K,http://49.235.110.121:9090/daili/bestv.php?id=cctv4k
-CCTV16_4K,http://49.235.110.121:9090/daili/gudo.php?id=cctv164k
-CCTV16_4K,http://49.235.110.121:9090/daili/bestv.php?id=cctv164k
-CCTV4K,http://liveop.cctv.cn/hls/4KHD/playlist.m3u8
-欢笑剧场4K,http://49.235.110.121:9090/daili/bestv.php?id=hxjc4k
-超高清电影4K,http://49.235.110.121:9090/daili/小果.php?id=emdy4k_8000&Cf.m3u8
-广东综艺4K,http://49.235.110.121:9090/daili/gudo.php?id=gdzy4k
-广东4K超高清,http://8.217.90.28:9999/触电.php?id=gdzy
-CCTV8K频道,http://49.235.110.121:9090/daili/8k.php
-北京纪实科教8K,http://111.31.106.140/downflv.brtvcloud.com/8klive/8kliveok.m3u8
-北京4K超清,http://webmail.axxe.top:4022/rtp/239.3.1.249:8001
-4K修复,rtmp://liveshowbak2.kan0512.com/norecord/csztv4k_4k
-4K剧场,http://bp-caster.bestv.com.cn/513/1/video.m3u8
-苏州4K,http://liveshowbak2.kan0512.com/ksz-norecord/csztv4k_4k.m3u8
-苏州4K,http://1972762443.cloudvdn.com/a.m3u8?domain=liveshowbak2.kan0512.com&player=TsoAAKTAB9juCfgW&secondToken=secondToken
-4k记录欧洲,https://d18dyiwu97wm6q.cloudfront.net/playlist2160p.m3u8
-静态4K测试,https://d2dw21aq0j0l5c.cloudfront.net/playlist_3840x2160.m3u8
-欢笑剧场4K,http://wd.shadowzen.xyz/tvphp/cqyx2.php?id=hxjc_4K
-欢笑剧场4K,http://xiaozeng.hk3.345888.xyz.cdn.cloudflare.net/ww/bestv.php?id=hxjc4k/15000000
-欢笑剧场4K,http://xiaozeng.hk3.345888.xyz.cdn.cloudflare.net/ww/cqyx.php?id=hxjc_4K
-南国都市4K,https://justsometime.gztv.com/sec/shenghuos.m3u8
-Loupe 4K,https://d2dw21aq0j0l5c.cloudfront.net/playlist_3840x2160.m3u8
-Clarity 4K,https://d6s2o8so4wk28.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-2vzmnn0zl3exh-prod/amgclarity4k/playlist.m3u8
-Love Nature 4K,https://d18dyiwu97wm6q.cloudfront.net/playlist2160p.m3u8
-Love Nature 4K,https://d18dyiwu97wm6q.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/LoveNature4K2-prod/playlist.m3u8
-4kurd hd,https://epg.pw/stream/0e6ac497dc894c3d3a4c17beaa797e4e21540e7ea91b7bec9546cc1479b814ed.m3u8
-LOUPE 4K,http://d2dw21aq0j0l5c.cloudfront.net/playlist_3840x2160.m3u8
-Now Sports 4K,http://4ksuper.live/play/live.php?mac=00:1A:79:50:63:9E&stream=1032489&extension=ts
-ELEVEN SPORTS 4K,http://4ksuper.live/play/live.php?mac=00:1A:79:50:63:9E&stream=905665&extension=ts
-咪咕4K_30M,http://120.196.232.50:8088/rrs03.hw.gmcc.net/PLTV/651/224/3221226938/1.m3u8
-咪咕4K_30M,http://120.196.232.41:8088/rrs03.hw.gmcc.net/PLTV/651/224/3221226989/1.m3u8
-咪咕体育4K,http://r.jdshipin.com/ln4xk
-咪咕4K(2),http://api.52tb.xyz/info?id=165&token=20230126icqgot
-Кино UHD 4K_4,http://89.248.160.57/iptv/W9DG7KKUWQ3T2H/5004/index.m3u8
-爱自然Love Nature 4K_1,http://89.248.160.57/iptv/RFPEEUQNURN7MN/5001/index.m3u8
-BOX RELAX 4K_3,http://89.248.160.57/iptv/UPKY3Y8BF6KNX8/19283/index.m3u8
-NASA TV 4K_4,http://89.248.160.57/iptv/W9DG7KKUWQ3T2H/15239/index.m3u8
-TRT 4K_4,http://89.248.160.57/iptv/W9DG7KKUWQ3T2H/4001/index.m3u8
-MyZen TV 4K_3,http://89.248.160.57/iptv/UPKY3Y8BF6KNX8/5002/index.m3u8
-BOX RELAX 4K_4,http://89.248.160.57/iptv/W9DG7KKUWQ3T2H/19283/index.m3u8
-TRT 4K_2,http://89.248.160.57/iptv/Q5MK5AD8A8ZBUA/4001/index.m3u8
-时装Fashion TV 4K,http://89.248.160.57/iptv/RFPEEUQNURN7MN/4005/index.m3u8
-时装Fashion TV 4K,http://89.248.160.57/iptv/UPKY3Y8BF6KNX8/4005/index.m3u8
-nsight 4K_4,http://89.248.160.57/iptv/W9DG7KKUWQ3T2H/5000/index.m3u8
-Russian Extreme 4K_4,http://89.248.160.57/iptv/W9DG7KKUWQ3T2H/5003/index.m3u8
-Сериал UHD 4K_4,http://89.248.160.57/iptv/W9DG7KKUWQ3T2H/5005/index.m3u8
-体育SKY SPORT 4K_4,http://89.248.160.57/iptv/W9DG7KKUWQ3T2H/6820/index.m3u8
-BCU Ultra 4K_4,http://89.248.160.57/iptv/W9DG7KKUWQ3T2H/11045/index.m3u8
-KNHO 4K_3,http://89.248.160.57/iptv/UPKY3Y8BF6KNX8/11114/index.m3u8
-CEPNAA 4K_4,http://89.248.160.57/iptv/W9DG7KKUWQ3T2H/11115/index.m3u8
-MM Flip UHD 4K_4,http://89.248.160.57/iptv/W9DG7KKUWQ3T2H/13057/index.m3u8
-SKY HIGH NATURE 4K_3,http://89.248.160.57/iptv/UPKY3Y8BF6KNX8/14247/index.m3u8
-BCU Premiere Ultra 4K_5,http://89.248.160.57/iptv/ADYDWLKVER8U7V/15023/index.m3u8
-KNHO 4K_4,http://89.248.160.57/iptv/W9DG7KKUWQ3T2H/11114/index.m3u8
-ULTRA REX 4K_5,http://89.248.160.57/iptv/ADYDWLKVER8U7V/14029/index.m3u8
-SKY HIGH DANCE UHD 4K_4,http://89.248.160.57/iptv/W9DG7KKUWQ3T2H/14250/index.m3u8
-MUSEUMTV 4K_4,http://89.248.160.57/iptv/W9DG7KKUWQ3T2H/14016/index.m3u8
+
 
 
 NewTV,#genre#
