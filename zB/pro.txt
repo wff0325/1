@@ -267,6 +267,7 @@ CCTV17,http://hms224nc1972679578.live.aikan.miguvideo.com/wh7f454c46tw1594433061
 
 香港,#genre#
 TVB翡翠,http://www.namewee.xyz/gudou.php?id=364&id=1350_4500
+TVB翡翠,http://27.36.62.162:9090/live/1350_4500.m3u8?t=w14L5ppGYYzipwiIRQpgdA==&u=17199741419&p=8&pid=&cid=&d=865372026096088&sid=koTphyj/kaa0LadsOgFrsA==&r=20231227195321&e=20231228195326&nc=g1Llartx6h2N&a=7&v=2&isSuma=1&hlsSessionID=2793077895961538391&srchost=172.16.149.181:8060&gid=uuf1QYNww3uFBtA4yewQxQ%3D%3D
 TVB翡翠,http://r.jdshipin.com/qClQf
 TVB翡翠,https://epg.pw/stream/fe02817d95c6d58f41e1ea8208b5a8c9462bf525b153819b0c3918406127925a.m3u8
 TVB翡翠,https://edge6a.v2h-cdn.com/jade/jade.stream/chunklist.m3u8
