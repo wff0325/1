@@ -6,8 +6,11 @@
 # Core Functionality By:
 #   - https://github.com/eooce (老王)
 # Version: 2.4.8.sh (macOS - sed delimiter, panel URL opening with https default) - Modified by User Request
-# Modification: Output Clash API URL directly instead of fetching content.
-apt install jq -y
+# Modification: 
+#   - Output Clash API URL directly instead of fetching content.
+#   - Added a "Custom Install" option to allow setting a fixed Cloudflare Tunnel (Argo) and other parameters.
+
+apt install jq -y > /dev/null 2>&1
 # --- Color Definitions ---
 COLOR_RED='\033[0;31m'
 COLOR_GREEN='\033[0;32m'
@@ -71,18 +74,19 @@ read_input() {
 }
 
 # --- 初始化变量 ---
-CUSTOM_UUID="7db7bdc4-e191-4155-bf29-ad479e7a4401"
-NEZHA_SERVER="nz1.opb.dpdns.org:80" # Not used in recommended mode
-NEZHA_PORT="28916"   # Not used in recommended mode
-NEZHA_KEY="sS6IUMMHEIg8Fts01i9ha4aIUJOXHeEE"    # Not used in recommended mode
-ARGO_DOMAIN="phala.opb.dpdns.org"  # Not used in recommended mode
-ARGO_AUTH="eyJhIjoiZjYyNThmYzBjNDRmMmQ3MWNjNjQ0ZGQyZTQ0OGQ1YWYiLCJ0IjoiY2VkZGY5M2QtNjQ5MC00OGZkLTllMmUtMTg3ODFjNzg3YzM0IiwicyI6IlpHWmpPV0V6WWpjdE56QmxaaTAwTkROa0xXRmxOVGN0TmpBNE1qUTVPRE5pWkROaCJ9"    # Not used in recommended mode
+CUSTOM_UUID=""
+# 保留了默认值，方便用户在自定义模式下直接回车使用
+NEZHA_SERVER="nz1.opb.dpdns.org:80"
+NEZHA_PORT="28916"
+NEZHA_KEY="sS6IUMMHEIg8Fts01i9ha4aIUJOXHeEE"
+ARGO_DOMAIN="phala.opb.dpdns.org"
+ARGO_AUTH="eyJhIjoiZjYyNThmYzBjNDRmMmQ3MWNjNjQ0ZGQyZTQ0OGQ1YWYiLCJ0IjoiY2VkZGY5M2QtNjQ5MC00OGZkLTllMmUtMTg3ODFjNzg3YzM0IiwicyI6IlpHWmpPV0V6WWpjdE56QmxaaTAwTkROa0xXRmxOVGN0TmpBNE1qUTVPRE5pWkROaCJ9"
 NAME="ibm"
 CFIP="cloudflare.182682.xyz"
 CFPORT="443"
-CHAT_ID=""      # Not used in recommended mode
-BOT_TOKEN=""    # Not used in recommended mode
-UPLOAD_URL=""   # Not used in recommended mode
+CHAT_ID=""
+BOT_TOKEN=""
+UPLOAD_URL=""
 declare -a PREFERRED_ADD_LIST=()
 
 # --- UUID 处理函数 ---
@@ -113,6 +117,11 @@ run_deployment() {
   echo -e "${COLOR_CYAN}  当前配置预览:${COLOR_RESET}"
   echo -e "    ${COLOR_WHITE_BOLD}UUID:${COLOR_RESET} $CUSTOM_UUID"
   echo -e "    ${COLOR_WHITE_BOLD}节点名称 (NAME):${COLOR_RESET} $NAME"
+  [ -n "$ARGO_DOMAIN" ] && echo -e "    ${COLOR_WHITE_BOLD}固定隧道域名 (ARGO_DOMAIN):${COLOR_RESET} $ARGO_DOMAIN"
+  [ -n "$ARGO_AUTH" ] && echo -e "    ${COLOR_WHITE_BOLD}固定隧道Token (ARGO_AUTH):${COLOR_RESET} ${ARGO_AUTH:0:10}..." # 只显示部分以保护隐私
+  [ -n "$NEZHA_SERVER" ] && echo -e "    ${COLOR_WHITE_BOLD}哪吒服务器 (NEZHA_SERVER):${COLOR_RESET} $NEZHA_SERVER"
+  [ -n "$NEZHA_PORT" ] && echo -e "    ${COLOR_WHITE_BOLD}哪吒端口 (NEZHA_PORT):${COLOR_RESET} $NEZHA_PORT"
+  [ -n "$NEZHA_KEY" ] && echo -e "    ${COLOR_WHITE_BOLD}哪吒密钥 (NEZHA_KEY):${COLOR_RESET} ${NEZHA_KEY:0:10}..."
   echo -e "    ${COLOR_WHITE_BOLD}主优选IP (CFIP):${COLOR_RESET} $CFIP (端口: $CFPORT)"
   echo -e "    ${COLOR_WHITE_BOLD}优选IP列表:${COLOR_RESET} ${PREFERRED_ADD_LIST[*]}"
   print_separator
@@ -219,6 +228,11 @@ run_deployment() {
           echo -e "${COLOR_RED}    ✗ VMess 链接解码失败。${COLOR_RESET}"
         else
           ORIGINAL_PS=$(echo "$JSON_CONFIG" | jq -r .ps 2>/dev/null); if [[ -z "$ORIGINAL_PS" || "$ORIGINAL_PS" == "null" ]]; then ORIGINAL_PS="节点"; fi
+          # 如果使用了Argo隧道，则将隧道域名也加入到节点列表中
+          if [ -n "$ARGO_ACTUAL_DOMAIN" ]; then
+              PREFERRED_ADD_LIST+=("$ARGO_ACTUAL_DOMAIN")
+          fi
+          
           if [ ${#PREFERRED_ADD_LIST[@]} -eq 0 ]; then
               echo -e "${COLOR_YELLOW}    警告: 优选IP列表为空，使用默认。${COLOR_RESET}"
               PREFERRED_ADD_LIST=("cloudflare.182682.xyz" "joeyblog.net")
@@ -257,7 +271,6 @@ run_deployment() {
         
         echo -e "${COLOR_GREEN}  ✓ Clash 订阅 URL:${COLOR_RESET}"
         echo -e "    ${COLOR_WHITE_BOLD}${FINAL_CLASH_API_URL}${COLOR_RESET}"
-        # Removed curl call to fetch content, now just displaying the URL
       fi
     else
       echo -e "${COLOR_YELLOW}  没有可用的 VMess 链接来生成 Clash 订阅。${COLOR_RESET}"
@@ -290,8 +303,9 @@ run_deployment() {
 
 
 # --- 主菜单 ---
-print_header "IBM-sb-ws 部署模式选择" "${COLOR_CYAN}" # Changed header to Cyan
-echo -e "${COLOR_WHITE_BOLD}  1) 推荐安装${COLOR_RESET} (仅需确认UUID，可自定义优选IP列表)"
+print_header "IBM-sb-ws 部署模式选择" "${COLOR_CYAN}"
+echo -e "${COLOR_WHITE_BOLD}  1) 推荐安装${COLOR_RESET} (简易模式, 无固定隧道)"
+echo -e "${COLOR_WHITE_BOLD}  2) 自定义安装${COLOR_RESET} (可配置固定隧道/哪吒等高级参数)"
 echo -e "${COLOR_WHITE_BOLD}  Q) 退出脚本${COLOR_RESET}"
 print_separator
 read -p "$(echo -e ${COLOR_YELLOW}"请输入选项 [1]: "${COLOR_RESET})" main_choice
@@ -300,7 +314,7 @@ main_choice=${main_choice:-1}
 case "$main_choice" in
   1) 
     echo
-    print_header "推荐安装模式" "${COLOR_MAGENTA}" # Changed header to Magenta
+    print_header "推荐安装模式" "${COLOR_MAGENTA}"
     echo -e "${COLOR_CYAN}此模式将使用最简配置。节点名称默认为 'ibm'。${COLOR_RESET}"
     echo
     handle_uuid_generation 
@@ -317,6 +331,7 @@ case "$main_choice" in
       fi
     done
 
+    # 在推荐模式下，清空高级参数
     NEZHA_SERVER=""; NEZHA_PORT=""; NEZHA_KEY=""
     ARGO_DOMAIN=""; ARGO_AUTH=""
     NAME="ibm" 
@@ -329,41 +344,62 @@ case "$main_choice" in
     CHAT_ID=""; BOT_TOKEN=""; UPLOAD_URL=""
     run_deployment
     ;;
+  
+  2)
+    echo
+    print_header "自定义安装模式" "${COLOR_MAGENTA}"
+    echo -e "${COLOR_CYAN}在此模式下，您可以配置所有高级参数。对于不想自定义的参数，直接按回车即可。${COLOR_RESET}"
+    echo
+    
+    handle_uuid_generation
+
+    echo -e "${COLOR_MAGENTA}--- 节点与隧道配置 ---${COLOR_RESET}"
+    read_input "请输入节点名称 (NAME):" NAME "$NAME" "这是在客户端中显示的节点备注名。"
+    read_input "请输入您的固定隧道域名 (ARGO_DOMAIN):" ARGO_DOMAIN "$ARGO_DOMAIN" "如果您有自己的 Cloudflare Tunnel，请在此输入域名。留空则不使用。"
+    read_input "请输入您的固定隧道Token (ARGO_AUTH):" ARGO_AUTH "$ARGO_AUTH" "格式通常为 'ey...' 开头的一长串字符。如果上面域名留空，此项也应留空。"
+    
+    echo -e "${COLOR_MAGENTA}--- 哪吒监控配置 (可选) ---${COLOR_RESET}"
+    read_input "请输入哪吒探针服务器地址 (NEZHA_SERVER):" NEZHA_SERVER "$NEZHA_SERVER" "格式：your.domain.com:port 或 ip:port。留空则不安装。"
+    read_input "请输入哪吒探针端口 (NEZHA_PORT):" NEZHA_PORT "$NEZHA_PORT" "如果服务器地址中已包含端口，此项可忽略。"
+    read_input "请输入哪吒探针密钥 (NEZHA_KEY):" NEZHA_KEY "$NEZHA_KEY" "您的哪吒面板中的密钥。留空则不安装。"
+
+    echo -e "${COLOR_MAGENTA}--- 优选 IP/域名 配置 ---${COLOR_RESET}"
+    DEFAULT_PREFERRED_IPS_CUS="cloudflare.182682.xyz,joeyblog.net"
+    read_input "请输入优选IP或域名列表 (逗号隔开):" USER_PREFERRED_IPS_INPUT_CUS "${DEFAULT_PREFERRED_IPS_CUS}"
+    
+    PREFERRED_ADD_LIST=() 
+    IFS=',' read -r -a temp_array_cus <<< "$USER_PREFERRED_IPS_INPUT_CUS"
+    for item in "${temp_array_cus[@]}"; do
+      trimmed_item=$(echo "$item" | xargs)
+      if [ -n "$trimmed_item" ]; then
+          PREFERRED_ADD_LIST+=("$trimmed_item")
+      fi
+    done
+
+    # 如果没有设置隧道，则从优选IP中选择第一个作为CFIP
+    if [ -z "$ARGO_DOMAIN" ]; then
+      if [ ${#PREFERRED_ADD_LIST[@]} -gt 0 ]; then
+          CFIP="${PREFERRED_ADD_LIST[0]}"
+      else
+          CFIP="cloudflare.182682.xyz"
+      fi
+    else
+    # 如果设置了隧道，则CFIP可以留空或设为隧道域名
+      CFIP="$ARGO_DOMAIN"
+    fi
+    
+    CFPORT="443"
+    CHAT_ID=""; BOT_TOKEN=""; UPLOAD_URL="" # 这些仍然是未使用的参数
+    run_deployment
+    ;;
+
   [Qq]*) 
     echo -e "${COLOR_GREEN}已退出向导。感谢使用!${COLOR_RESET}"
     exit 0
     ;;
   *) 
-    echo -e "${COLOR_RED}无效选项，默认执行推荐安装。${COLOR_RESET}"
-    echo
-    print_header "推荐安装模式 (默认执行)" "${COLOR_MAGENTA}" # Changed header to Magenta
-    echo -e "${COLOR_CYAN}此模式将使用最简配置。节点名称默认为 'ibm'。${COLOR_RESET}"
-    echo
-    handle_uuid_generation 
-    
-    DEFAULT_PREFERRED_IPS_REC="cloudflare.182682.xyz,joeyblog.net"
-    read_input "请输入优选IP或域名列表 (逗号隔开, 留空则使用默认: ${DEFAULT_PREFERRED_IPS_REC}):" USER_PREFERRED_IPS_INPUT_REC "${DEFAULT_PREFERRED_IPS_REC}"
-    
-    PREFERRED_ADD_LIST=() 
-    IFS=',' read -r -a temp_array_rec <<< "$USER_PREFERRED_IPS_INPUT_REC"
-    for item in "${temp_array_rec[@]}"; do
-      trimmed_item=$(echo "$item" | xargs) 
-      if [ -n "$trimmed_item" ]; then 
-          PREFERRED_ADD_LIST+=("$trimmed_item")
-      fi
-    done
-
-    NEZHA_SERVER=""; NEZHA_PORT=""; NEZHA_KEY=""
-    ARGO_DOMAIN=""; ARGO_AUTH=""
-    NAME="ibm" 
-    if [ ${#PREFERRED_ADD_LIST[@]} -gt 0 ]; then
-        CFIP="${PREFERRED_ADD_LIST[0]}" 
-    else
-        CFIP="cloudflare.182682.xyz" 
-    fi
-    CFPORT="443" 
-    CHAT_ID=""; BOT_TOKEN=""; UPLOAD_URL=""
-    run_deployment
+    echo -e "${COLOR_RED}无效选项，脚本已退出。${COLOR_RESET}"
+    exit 1
     ;;
 esac
 exit 0
