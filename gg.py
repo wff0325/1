@@ -26,19 +26,30 @@ if 'processes' not in st.session_state:
     st.session_state.processes = {}
 
 # ======== 辅助函数 ========
-def download_with_progress(url, target_path, status_placeholder):
-    try:
-        status_placeholder.update(label=f"正在下载 {Path(url).name}...")
-        ctx = ssl._create_unverified_context()
-        headers = {'User-Agent': 'Mozilla/5.0'}
-        req = urllib.request.Request(url, headers=headers)
-        with urllib.request.urlopen(req, context=ctx) as response, open(target_path, 'wb') as out_file:
-            shutil.copyfileobj(response, out_file)
-        status_placeholder.update(label=f"下载成功: {target_path.name}")
-        return True
-    except Exception as e:
-        st.error(f"下载文件失败: {url}, 错误: {e}")
-        return False
+def download_with_progress(urls, target_path, status_placeholder):
+    """尝试从URL列表中下载，直到成功为止。"""
+    for i, url in enumerate(urls):
+        try:
+            status_placeholder.update(label=f"尝试下载 {Path(url).name} (来源 {i+1})...")
+            ctx = ssl._create_unverified_context()
+            headers = {'User-Agent': 'Mozilla/5.0'}
+            req = urllib.request.Request(url, headers=headers)
+            with urllib.request.urlopen(req, context=ctx) as response, open(target_path, 'wb') as out_file:
+                shutil.copyfileobj(response, out_file)
+            
+            # 验证文件是否有效 (对ZIP文件特别重要)
+            if target_path.suffix == '.zip':
+                with zipfile.ZipFile(target_path, 'r') as zf_test:
+                    if zf_test.testzip() is not None:
+                        raise ValueError("下载的ZIP文件已损坏")
+            
+            status_placeholder.update(label=f"下载成功: {target_path.name}")
+            return True
+        except Exception as e:
+            st.warning(f"从 {url} 下载失败: {e}. 尝试下一个来源...")
+    
+    st.error(f"所有下载来源均失败: {Path(target_path).name}")
+    return False
 
 def stop_process(name):
     """停止并移除一个已记录的进程。"""
@@ -62,9 +73,7 @@ def kill_all_processes():
                 if any(keyword in cmd_line for keyword in keywords):
                     proc.kill()
                     killed_procs.append(cmd_line)
-        except (psutil.NoSuchProcess, psutil.AccessDenied):
-            pass
-    # 清空 session state 中的记录
+        except (psutil.NoSuchProcess, psutil.AccessDenied): pass
     st.session_state.processes = {}
     return killed_procs
 
@@ -101,84 +110,69 @@ with col2:
 if st.button("下载/更新所有必需文件"):
     with st.status("正在下载...", expanded=True) as status:
         arch = "amd64"
-        download_with_progress(f"https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-{arch}", INSTALL_DIR / "cloudflared", status)
-        os.chmod(INSTALL_DIR / "cloudflared", 0o755)
         
-        sb_version="1.9.0-beta.11"; sb_name=f"sing-box-{sb_version}-linux-{arch}"; sb_url=f"https://github.com/SagerNet/sing-box/releases/download/v{sb_version}/{sb_name}.tar.gz"; tar_path=INSTALL_DIR/"sing-box.tar.gz"
-        if download_with_progress(sb_url, tar_path, status):
+        cf_urls = [f"https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-{arch}"]
+        if download_with_progress(cf_urls, INSTALL_DIR / "cloudflared", status):
+            os.chmod(INSTALL_DIR / "cloudflared", 0o755)
+        
+        sb_version="1.9.0-beta.11"; sb_name=f"sing-box-{sb_version}-linux-{arch}"; tar_path=INSTALL_DIR/"sing-box.tar.gz"
+        sb_urls = [f"https://github.com/SagerNet/sing-box/releases/download/v{sb_version}/{sb_name}.tar.gz"]
+        if download_with_progress(sb_urls, tar_path, status):
             import tarfile;
             with tarfile.open(tar_path, "r:gz") as tar: tar.extractall(path=INSTALL_DIR, filter='data')
             shutil.move(INSTALL_DIR/sb_name/"sing-box", INSTALL_DIR/"sing-box"); shutil.rmtree(INSTALL_DIR/sb_name); tar_path.unlink(); os.chmod(INSTALL_DIR/"sing-box", 0o755)
 
         if "NEZHA_SERVER" in st.secrets:
-            nezha_url = "https://github.91chi.fun/https://github.com/naiba/nezha/releases/latest/download/nezha-agent_linux_amd64.zip"; zip_path = INSTALL_DIR/"nezha-agent.zip"
-            if download_with_progress(nezha_url, zip_path, status):
+            zip_path = INSTALL_DIR/"nezha-agent.zip"
+            nezha_urls = [
+                "https://github.com/naiba/nezha/releases/latest/download/nezha-agent_linux_amd64.zip", # 官方地址
+                "https://github.91chi.fun/https://github.com/naiba/nezha/releases/latest/download/nezha-agent_linux_amd64.zip" # 镜像地址
+            ]
+            if download_with_progress(nezha_urls, zip_path, status):
                 with zipfile.ZipFile(zip_path, 'r') as zf: zf.extractall(INSTALL_DIR);
                 zip_path.unlink()
-        status.update(label="所有文件就位！", state="complete")
+        
+        status.update(label="操作完成！", state="complete")
     st.rerun()
 
 st.header("2. 服务独立控制与日志")
 
-# --- Cloudflared 控制 ---
-st.subheader("Cloudflared Tunnel")
-cf_col1, cf_col2 = st.columns(2)
-with cf_col1:
-    if st.button("启动 Cloudflared"):
-        stop_process('cloudflared') # 先停止旧的
-        token = st.secrets["CF_TOKEN"]
-        command = [str(INSTALL_DIR / "cloudflared"), 'tunnel', '--no-autoupdate', 'run', '--token', token]
-        proc = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-        st.session_state.processes['cloudflared'] = proc
-        st.rerun()
-with cf_col2:
-    if st.button("停止 Cloudflared"):
-        stop_process('cloudflared')
-        st.rerun()
-if 'cloudflared' in st.session_state.processes:
-    with st.expander("显示 Cloudflared 日志", expanded=True):
-        st.code(st.session_state.processes['cloudflared'].stdout.read(), language="log")
-
-# --- Sing-box 控制 ---
-st.subheader("Sing-box (Vmess 服务)")
-sb_col1, sb_col2 = st.columns(2)
-with sb_col1:
-    if st.button("启动 Sing-box"):
-        stop_process('sing-box')
-        port = int(st.secrets.get("PORT", random.randint(10000, 20000)))
-        uuid = st.secrets.get("UUID", str(uuid.uuid4()))
-        ws_path = "/"
-        sb_config = {"log": {"level": "info"}, "inbounds": [{"type": "vmess", "listen": "127.0.0.1", "listen_port": port, "users": [{"uuid": uuid}], "transport": {"type": "ws", "path": ws_path}}], "outbounds": [{"type": "direct"}]}
+# --- 控制按钮 ---
+service_cols = st.columns(3)
+with service_cols[0]:
+    if st.button("启动所有服务"):
+        kill_all_processes() # 启动前先清理
+        # 启动 Cloudflared
+        token = st.secrets["CF_TOKEN"]; command = [str(INSTALL_DIR / "cloudflared"), 'tunnel', '--no-autoupdate', 'run', '--token', token]
+        st.session_state.processes['cloudflared'] = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        # 启动 Sing-box
+        port = int(st.secrets.get("PORT", random.randint(10000, 20000))); uuid_str = st.secrets.get("UUID", str(uuid.uuid4())); ws_path = "/"
+        sb_config = {"log": {"level": "info"}, "inbounds": [{"type": "vmess", "listen": "127.0.0.1", "listen_port": port, "users": [{"uuid": uuid_str}], "transport": {"type": "ws", "path": ws_path}}], "outbounds": [{"type": "direct"}]}
         (INSTALL_DIR / "sb.json").write_text(json.dumps(sb_config))
         command = [str(INSTALL_DIR / "sing-box"), 'run', '-c', str(INSTALL_DIR / "sb.json")]
-        proc = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-        st.session_state.processes['sing-box'] = proc
-        st.rerun()
-with sb_col2:
-    if st.button("停止 Sing-box"):
-        stop_process('sing-box')
-        st.rerun()
-if 'sing-box' in st.session_state.processes:
-    with st.expander("显示 Sing-box 日志", expanded=True):
-        st.code(st.session_state.processes['sing-box'].stdout.read(), language="log")
-
-# --- Nezha Agent 控制 ---
-if "NEZHA_SERVER" in st.secrets:
-    st.subheader("Nezha Agent")
-    ne_col1, ne_col2 = st.columns(2)
-    with ne_col1:
-        if st.button("启动 Nezha Agent"):
-            stop_process('nezha-agent')
+        st.session_state.processes['sing-box'] = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        # 启动 Nezha Agent
+        if "NEZHA_SERVER" in st.secrets:
             nezha_config = {"SERVER": st.secrets["NEZHA_SERVER"], "PORT": st.secrets["NEZHA_PORT"], "KEY": st.secrets["NEZHA_KEY"], "TLS": st.secrets.get("NEZHA_TLS", False)}
             command = [str(INSTALL_DIR / "nezha-agent"), '-s', f"{nezha_config['SERVER']}:{nezha_config['PORT']}", '-p', nezha_config['KEY']]
             if nezha_config['TLS']: command.append('--tls')
-            proc = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-            st.session_state.processes['nezha-agent'] = proc
-            st.rerun()
-    with ne_col2:
-        if st.button("停止 Nezha Agent"):
-            stop_process('nezha-agent')
-            st.rerun()
+            st.session_state.processes['nezha-agent'] = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        st.rerun()
+
+# --- 日志显示 ---
+log_tabs = st.tabs(["Cloudflared", "Sing-box", "Nezha Agent"])
+
+with log_tabs[0]:
+    st.subheader("Cloudflared Tunnel 日志")
+    if 'cloudflared' in st.session_state.processes:
+        st.code(st.session_state.processes['cloudflared'].stdout.read(), language="log")
+
+with log_tabs[1]:
+    st.subheader("Sing-box (Vmess 服务) 日志")
+    if 'sing-box' in st.session_state.processes:
+        st.code(st.session_state.processes['sing-box'].stdout.read(), language="log")
+
+with log_tabs[2]:
+    st.subheader("Nezha Agent 日志")
     if 'nezha-agent' in st.session_state.processes:
-        with st.expander("显示 Nezha Agent 日志", expanded=True):
-            st.code(st.session_state.processes['nezha-agent'].stdout.read(), language="log")
+        st.code(st.session_state.processes['nezha-agent'].stdout.read(), language="log")
