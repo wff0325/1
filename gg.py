@@ -21,13 +21,12 @@ CF_LOG_FILE = INSTALL_DIR / "cloudflared.log"
 NEZHA_LOG_FILE = INSTALL_DIR / "nezha.log"
 FLASK_LOG_FILE = INSTALL_DIR / "flask.log"
 FLASK_APP_FILE = APP_ROOT / "web_app.py"
-INTERNAL_PORT = "52068" 
 
 # 创建安装目录
 INSTALL_DIR.mkdir(parents=True, exist_ok=True)
 
-# ======== Flask App 代码 (无需改动) ========
-FLASK_APP_CODE = f"""
+# ======== Flask App 代码 ========
+FLASK_APP_CODE = """
 import os
 import sys
 import socket
@@ -37,7 +36,8 @@ from flask import Flask
 from flask_sock import Sock
 from waitress import serve
 
-PORT = int(os.environ.get('PORT', '{INTERNAL_PORT}'))
+# --- 从环境变量读取我们自定义的端口号 ---
+PORT = int(os.environ.get('BACKEND_PORT', 3000))
 UUID = os.environ.get('UUID', 'ffffffff-ffff-ffff-ffff-ffffffffffff').replace('-', '')
 
 app = Flask(__name__)
@@ -132,7 +132,9 @@ def install_and_run():
         # --- 1. 加载配置 ---
         status.update(label="正在加载配置...")
         try:
+            # --- 关键修正：读取我们自定义的 BACKEND_PORT ---
             config = {
+                "BACKEND_PORT": st.secrets.get("BACKEND_PORT", "52068"),
                 "UUID": st.secrets["UUID"],
                 "DOMAIN": st.secrets["DOMAIN"], 
                 "CF_TOKEN": st.secrets["CF_TOKEN"],
@@ -164,8 +166,9 @@ def install_and_run():
         # --- 4. 启动所有后台服务 ---
         status.update(label="正在启动后台服务...")
         
+        # --- 关键修正：将 BACKEND_PORT 传递给 Flask 进程 ---
         flask_env = os.environ.copy()
-        flask_env.update({"PORT": INTERNAL_PORT, "UUID": config["UUID"]})
+        flask_env.update({"BACKEND_PORT": config["BACKEND_PORT"], "UUID": config["UUID"]})
 
         if "flask_process" not in st.session_state or st.session_state.flask_process.poll() is not None:
             py_executable = sys.executable
@@ -188,12 +191,9 @@ def install_and_run():
                 st.error("Cloudflared 启动失败! 请检查 Token。")
                 st.code(CF_LOG_FILE.read_text(), language="log"); st.stop()
         
-        # --- 这是最终的关键修正：在 YAML 文件中加入 UUID ---
         if config["NEZHA_SERVER"] and ("nezha_process" not in st.session_state or st.session_state.nezha_process.poll() is not None):
             os.chmod(nezha_agent_path, 0o755)
             use_tls_str = 'true' if config["NEZHA_TLS"] else 'false'
-            
-            # 使用三重引号创建格式完美的 YAML 字符串，并补上 UUID
             config_yaml_content = f"""server: {config['NEZHA_SERVER']}
 client_secret: {config['NEZHA_KEY']}
 tls: {use_tls_str}
@@ -201,7 +201,6 @@ uuid: {config['UUID']}
 """
             config_yaml_path = INSTALL_DIR / "config.yaml"
             config_yaml_path.write_text(config_yaml_content)
-
             command_list = [str(nezha_agent_path), '-c', str(config_yaml_path)]
             with open(NEZHA_LOG_FILE, 'w') as log_f:
                 st.session_state.nezha_process = subprocess.Popen(command_list, cwd=INSTALL_DIR, stdout=log_f, stderr=log_f)
@@ -223,7 +222,7 @@ uuid: {config['UUID']}
 
 # ======== Streamlit UI 界面 ========
 st.title("Py-Vless 控制面板")
-st.caption("最终版")
+st.caption("最终修正版")
 
 if "installed" not in st.session_state:
     install_and_run()
