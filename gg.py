@@ -41,7 +41,7 @@ st.set_page_config(page_title="ArgoSB 控制面板", layout="centered")
 # ======== 核心变量和路径 ========
 APP_ROOT = Path.cwd() 
 INSTALL_DIR = APP_ROOT / ".agsb"
-LOG_FILE = INSTALL_DIR / "argo.log"
+LOG_FILE = INSTALL_DIR / "argo.log" # 仍然定义，但诊断时不用
 
 # 创建安装目录
 INSTALL_DIR.mkdir(parents=True, exist_ok=True)
@@ -102,15 +102,18 @@ def start_services(config):
         (INSTALL_DIR / "sb.json").write_text(json.dumps(sb_config))
         singbox_path = INSTALL_DIR / "sing-box"
         os.chmod(singbox_path, 0o755)
-        st.session_state.sb_process = subprocess.Popen([str(singbox_path), 'run', '-c', str(INSTALL_DIR / "sb.json")])
+        # 将 sing-box 的日志也打印出来，以防万一
+        st.session_state.sb_process = subprocess.Popen([str(singbox_path), 'run', '-c', str(INSTALL_DIR / "sb.json")], stdout=sys.stdout, stderr=sys.stderr)
 
     # 启动 cloudflared
     if "cf_process" not in st.session_state or st.session_state.cf_process.poll() is not None:
         cloudflared_path = INSTALL_DIR / "cloudflared"
         os.chmod(cloudflared_path, 0o755)
         command = [str(cloudflared_path), 'tunnel', '--no-autoupdate', 'run', '--token', config['CF_TOKEN']]
-        with open(LOG_FILE, 'w') as log_f:
-            st.session_state.cf_process = subprocess.Popen(command, stdout=log_f, stderr=log_f)
+        
+        # --- 诊断修改 ---
+        # 不再写入 argo.log，而是直接打印到 Streamlit 的标准输出和错误流
+        st.session_state.cf_process = subprocess.Popen(command, stdout=sys.stdout, stderr=sys.stderr)
 
     # 启动哪吒探针 (如果已配置)
     if config.get("NEZHA"):
@@ -167,6 +170,9 @@ def install_and_run(config):
         
         status.update(label="正在启动后台服务...")
         start_services(config)
+
+        # 增加一点等待时间，让 cloudflared 有机会打印出错误信息
+        time.sleep(5)
         
         status.update(label="正在生成节点链接...")
         generate_links_and_save(config)
@@ -188,14 +194,14 @@ if "installed" in st.session_state and st.session_state.installed:
     st.code(st.session_state.links, language="text")
 else:
     install_and_run(app_config)
-    st.rerun()
+    # 不再自动rerun，让日志有机会显示出来
+    # st.rerun()
 
-with st.expander("查看当前配置和Argo日志"):
+with st.expander("查看当前配置"):
     display_config = {k: v for k, v in app_config.items() if k not in ["CF_TOKEN", "NEZHA"]}
     if app_config.get("NEZHA"):
         display_config["NEZHA"] = {k: v for k, v in app_config["NEZHA"].items() if k != "KEY"}
     st.json(display_config)
-    if LOG_FILE.exists(): st.code(LOG_FILE.read_text(), language='log')
 
 st.markdown("---")
-st.markdown("原作者: wff | 改编: AI for Streamlit")
+st.markdown("原作者: wff| 改编: AI for Streamlit")
