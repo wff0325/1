@@ -21,7 +21,6 @@ CF_LOG_FILE = INSTALL_DIR / "cloudflared.log"
 NEZHA_LOG_FILE = INSTALL_DIR / "nezha.log"
 FLASK_LOG_FILE = INSTALL_DIR / "flask.log"
 FLASK_APP_FILE = APP_ROOT / "web_app.py"
-# --- 使用您指定的端口作为后台服务的监听端口 ---
 BACKEND_PORT_STR = "52068" 
 
 # 创建安装目录
@@ -38,7 +37,6 @@ from flask import Flask
 from flask_sock import Sock
 from waitress import serve
 
-# --- 从环境变量读取我们自定义的端口号 ---
 PORT = int(os.environ.get('BACKEND_PORT', '{BACKEND_PORT_STR}'))
 UUID = os.environ.get('UUID', 'ffffffff-ffff-ffff-ffff-ffffffffffff').replace('-', '')
 
@@ -102,6 +100,31 @@ def vless_proxy(ws, subpath):
 if __name__ == "__main__":
     serve(app, host='0.0.0.0', port=PORT)
 """
+
+# ======== 辅助函数 (被误删的部分已恢复) ========
+def download_file(url, target_path, status_ui):
+    try:
+        status_ui.update(label=f'正在下载 {Path(url).name}...')
+        with requests.get(url, stream=True, timeout=30) as r:
+            r.raise_for_status()
+            with open(target_path, 'wb') as f:
+                for chunk in r.iter_content(chunk_size=8192): f.write(chunk)
+        return True
+    except Exception as e:
+        status_ui.update(label=f"下载文件失败: {url}", state="error"); st.error(f"下载文件失败: {url}, 错误: {e}"); st.stop()
+
+def get_isp_info():
+    try:
+        data = requests.get('https://speed.cloudflare.com/meta', timeout=10).json()
+        return f"{data.get('country', 'NA')}-{data.get('asOrganization', 'NA')}".replace(' ', '_')
+    except Exception: return 'Unknown'
+
+def add_access_task(domain):
+    if not domain: return
+    try:
+        requests.post('https://urlchk.fk.ddns-ip.net/add-url', json={'url': f"https://{domain}/"}, timeout=10)
+        st.toast("保活任务已添加。")
+    except Exception: pass
 
 # ======== 核心业务逻辑函数 ========
 def initialize_services():
@@ -198,14 +221,9 @@ uuid: {config['UUID']}
 st.title("Py-Vless 控制面板")
 st.caption("最终修正版")
 
-# --- 这是最终的、正确的架构 ---
-# 1. 检查一个标志位，如果服务尚未初始化...
 if "initialized" not in st.session_state:
-    # 2. ...则调用函数来完成所有后台工作
     initialize_services()
 
-# 3. 无论如何，都从 session_state 中获取信息并渲染UI
-# 这样可以确保UI总能立刻显示
 config = st.session_state.get("app_config", {})
 if st.session_state.get("initialized"):
     st.success("所有服务已成功启动。")
