@@ -18,6 +18,20 @@ import ssl
 import zipfile
 import streamlit as st
 
+# ======== FORCEFULLY CLEAN UP OLD PROCESSES (CRITICAL FIX) ========
+def cleanup_old_processes():
+    """Kills any lingering processes from previous runs to prevent port conflicts."""
+    try:
+        # Use pkill to find and kill processes by name/command line
+        os.system("pkill -9 -f 'sing-box run'")
+        os.system("pkill -9 -f 'cloudflared tunnel'")
+        os.system("pkill -9 -f 'nezha-agent'")
+    except Exception:
+        pass # Ignore errors if pkill is not found or no processes exist
+
+# Run cleanup at the very start of the script execution
+cleanup_old_processes()
+
 # ======== Streamlit 配置 ========
 st.set_page_config(page_title="ArgoSB 控制面板", layout="centered")
 
