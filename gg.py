@@ -108,12 +108,14 @@ def start_services(config):
             nezha_agent_path = INSTALL_DIR / "nezha-agent"
             if nezha_agent_path.exists():
                 os.chmod(nezha_agent_path, 0o755)
-
+                
+                # ==== 最终代码修改处 ====
                 # 1. 创建 nezha-agent 的配置文件
                 nezha_config_path = INSTALL_DIR / "nezha_config.yaml"
+                # 使用正确的字段名 client_secret
                 config_content = f"""
 server: {config["NEZHA_SERVER"]}
-secret: {config["NEZHA_KEY"]}
+client_secret: {config["NEZHA_KEY"]}
 tls: {str(config["NEZHA_TLS"]).lower()}
 """
                 with open(nezha_config_path, 'w') as f:
