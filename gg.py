@@ -15,9 +15,8 @@ import uuid
 from pathlib import Path
 import urllib.request
 import ssl
-# <--- 新增开始
-import zipfile # 用于解压 nezha-agent
-# <--- 新增结束
+import zipfile
+import tarfile
 import streamlit as st
 
 # ======== Streamlit 配置 ========
@@ -27,7 +26,8 @@ st.set_page_config(page_title="ArgoSB 控制面板", layout="centered")
 APP_ROOT = Path.cwd() 
 INSTALL_DIR = APP_ROOT / ".agsb"
 LOG_FILE = INSTALL_DIR / "argo.log"
-ALL_NODES_FILE = INSTALL_DIR / "allnodes.txt"
+# --- 新增: 哪吒探针专用日志 ---
+NEZHA_LOG_FILE = INSTALL_DIR / "nezha.log"
 
 # 创建安装目录
 INSTALL_DIR.mkdir(parents=True, exist_ok=True)
@@ -69,11 +69,8 @@ def load_config():
             "UUID": st.secrets.get("UUID") or str(uuid.uuid4()),
             "PORT": port
         }
-        # <--- 新增开始
-        # 加载哪吒探针配置，如果未设置则为空字符串
         config["NEZHA_SERVER"] = st.secrets.get("NEZHA_SERVER", "")
         config["NEZHA_KEY"] = st.secrets.get("NEZHA_KEY", "")
-        # <--- 新增结束
         return config
     except KeyError as e:
         st.error(f"错误: 缺少必要的 Secret 配置项: {e}。请在应用的 Secrets 中设置它。")
@@ -84,9 +81,8 @@ def load_config():
 
 def start_services(config):
     """在Streamlit环境中启动后台服务"""
-    if "sb_process" in st.session_state and st.session_state.sb_process.poll() is None:
-        pass # 进程已在运行
-    else:
+    # 启动 sing-box
+    if "sb_process" not in st.session_state or st.session_state.sb_process.poll() is not None:
         ws_path = f"/{config['UUID'][:8]}-vm"
         sb_config_dict = {
             "log": {"level": "info", "timestamp": True},
@@ -104,9 +100,8 @@ def start_services(config):
         else:
             st.error("找不到 sing-box 可执行文件！"); st.stop()
 
-    if "cf_process" in st.session_state and st.session_state.cf_process.poll() is None:
-        pass # 进程已在运行
-    else:
+    # 启动 cloudflared
+    if "cf_process" not in st.session_state or st.session_state.cf_process.poll() is not None:
         cloudflared_path = INSTALL_DIR / "cloudflared"
         if cloudflared_path.exists():
             os.chmod(cloudflared_path, 0o755)
@@ -116,22 +111,20 @@ def start_services(config):
         else:
             st.error("找不到 cloudflared 可执行文件！"); st.stop()
 
-    # <--- 新增开始
-    # 启动哪吒探针服务 (如果已配置)
+    # --- 修正后的哪吒探针启动逻辑 ---
     if config.get("NEZHA_SERVER") and config.get("NEZHA_KEY"):
-        if "nezha_process" in st.session_state and st.session_state.nezha_process.poll() is None:
-            pass # 进程已在运行
-        else:
+        if "nezha_process" not in st.session_state or st.session_state.nezha_process.poll() is not None:
             nezha_agent_path = INSTALL_DIR / "nezha-agent"
             if nezha_agent_path.exists():
                 os.chmod(nezha_agent_path, 0o755)
-                # v1版本的命令格式: nezha-agent -s <服务器:端口> -p <密钥>
-                command = [str(nezha_agent_path), '-s', config["NEZHA_SERVER"], '-p', config["NEZHA_KEY"]]
-                with open(LOG_FILE, 'a') as log_f: # 使用 'a' 模式追加日志
-                     st.session_state.nezha_process = subprocess.Popen(command, stdout=log_f, stderr=log_f)
+                # 为哪吒探针使用独立的日志文件，方便排查
+                # 增加 --disable-force-update 防止意外行为
+                command = [str(nezha_agent_path), '-s', config["NEZHA_SERVER"], '-p', config["NEZHA_KEY"], '--disable-force-update']
+                with open(NEZHA_LOG_FILE, 'w') as nezha_log_f:
+                    st.session_state.nezha_process = subprocess.Popen(command, stdout=nezha_log_f, stderr=nezha_log_f)
+                st.session_state.nezha_started = True
             else:
-                st.warning("Nezha配置已提供，但找不到 nezha-agent 可执行文件！")
-    # <--- 新增结束
+                st.warning("Nezha 配置已提供，但找不到 nezha-agent 可执行文件！")
 
 def generate_links_and_save(config):
     """生成并保存节点链接"""
@@ -168,8 +161,8 @@ def install_and_run(config):
             tar_path = INSTALL_DIR / "sing-box.tar.gz"
             if download_file(sb_url, tar_path):
                 try:
-                    import tarfile
-                    with tarfile.open(tar_path, "r:gz") as tar: tar.extractall(path=INSTALL_DIR)
+                    with tarfile.open(tar_path, "r:gz") as tar: 
+                        tar.extractall(path=INSTALL_DIR, filter='data')
                     shutil.move(INSTALL_DIR / sb_name / "sing-box", singbox_path)
                     shutil.rmtree(INSTALL_DIR / sb_name); tar_path.unlink()
                 except Exception as e:
@@ -177,30 +170,25 @@ def install_and_run(config):
         
         cloudflared_path = INSTALL_DIR / "cloudflared"
         if not cloudflared_path.exists():
-            status.update(label="正在下载 cloudflared...")
+            status.update(label="下载 cloudflared...")
             cf_url = f"https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-{arch}"
             if not download_file(cf_url, cloudflared_path):
                 status.update(label="下载 cloudflared 失败", state="error"); return
         
-        # <--- 新增开始
-        # 下载并安装哪吒探针 (如果已配置)
+        # --- 修正后的哪吒探针下载逻辑 ---
         if config.get("NEZHA_SERVER") and config.get("NEZHA_KEY"):
             nezha_agent_path = INSTALL_DIR / "nezha-agent"
             if not nezha_agent_path.exists():
                 status.update(label="正在下载 Nezha Agent...")
-                # 使用哪吒官方GitHub Release的最新版本链接
                 nezha_url = f"https://github.com/naiba/nezha/releases/latest/download/nezha-agent_linux_{arch}.zip"
                 zip_path = INSTALL_DIR / "nezha-agent.zip"
                 if download_file(nezha_url, zip_path):
                     try:
                         with zipfile.ZipFile(zip_path, 'r') as zip_ref:
                             zip_ref.extractall(INSTALL_DIR)
-                        # 默认解压出来的文件名是 nezha-agent
-                        # os.chmod(nezha_agent_path, 0o755) # 权限将在启动时设置
-                        zip_path.unlink() # 删除zip压缩包
+                        zip_path.unlink()
                     except Exception as e:
                         status.update(label=f"解压 Nezha Agent 失败: {e}", state="error"); return
-        # <--- 新增结束
 
         status.update(label="正在启动后台服务...")
         start_services(config)
@@ -212,30 +200,47 @@ def install_and_run(config):
 # ======== Streamlit UI 界面 ========
 st.title("ArgoSB 部署面板")
 
-# 从 Secrets 加载配置
 app_config = load_config()
-st.session_state.app_config = app_config # 保存到会话状态
+st.session_state.app_config = app_config 
 st.markdown(f"**域名:** `{app_config['DOMAIN']}`")
 
-# <--- 新增开始
-# 如果配置了哪吒，显示一个提示信息
-if app_config.get("NEZHA_SERVER"):
-    st.info(f"Nezha 探针已启用，将连接到: `{app_config['NEZHA_SERVER']}`")
-# <--- 新增结束
-
 # 检查服务是否已标记为运行
-if "installed" in st.session_state and st.session_state.installed:
-    st.success("服务已启动。")
-    st.subheader("Vmess 节点链接")
-    st.code(st.session_state.links, language="text")
-else:
+if "installed" not in st.session_state:
     install_and_run(app_config)
     st.rerun()
 
-with st.expander("查看当前配置和调试日志"):
+# --- 修正后的UI显示逻辑 ---
+st.success("核心服务已启动。")
+st.subheader("Vmess 节点链接")
+st.code(st.session_state.links, language="text")
+
+# 检查并显示哪吒探针状态
+if app_config.get("NEZHA_SERVER"):
+    if "nezha_started" in st.session_state:
+        # 延迟一小会儿，给探针时间连接或报错
+        time.sleep(2) 
+        if "nezha_process" in st.session_state and st.session_state.nezha_process.poll() is None:
+            st.info("Nezha 探针进程正在运行。")
+        else:
+            st.error("Nezha 探针进程已意外退出。请检查下面的日志。")
+    else:
+         st.warning("Nezha 配置已提供，但探针未能启动。")
+
+
+with st.expander("查看当前配置和调试日志", expanded=True): # 默认展开，方便调试
     st.json(st.session_state.app_config)
+    
     if LOG_FILE.exists():
+        st.subheader("Argo Tunnel & Sing-Box 日志")
         st.code(LOG_FILE.read_text(), language='log')
+
+    # 总是显示哪吒日志区域，如果文件存在的话
+    if app_config.get("NEZHA_SERVER"):
+        st.subheader("Nezha Agent 日志")
+        if NEZHA_LOG_FILE.exists():
+            st.code(NEZHA_LOG_FILE.read_text(), language='log')
+        else:
+            st.text("Nezha Agent 日志文件尚未创建。")
 
 st.markdown("---")
 st.markdown("原作者: wff | 改编: AI for Streamlit")
