@@ -168,6 +168,9 @@ def install_and_run():
         # --- 1. 加载配置 ---
         status.update(label="正在加载配置...")
         try:
+            # 您的 `NEZHA_TLS = false` 在 toml 中会被读为布尔值 False
+            nezha_tls_value = st.secrets.get("NEZHA_TLS", False)
+
             config = {
                 "PORT": st.secrets.get("PORT", "3000"),
                 "UUID": st.secrets["UUID"],
@@ -175,7 +178,7 @@ def install_and_run():
                 "CF_TOKEN": st.secrets["CF_TOKEN"],
                 "NEZHA_SERVER": st.secrets.get("NEZHA_SERVER", ""),
                 "NEZHA_KEY": st.secrets.get("NEZHA_KEY", ""),
-                "NEZHA_PORT": st.secrets.get("NEZHA_PORT", ""), 
+                "NEZHA_TLS": nezha_tls_value, # 直接使用布尔值
                 "NAME": st.secrets.get("NAME", "VLS")
             }
             st.session_state.app_config = config
@@ -196,8 +199,8 @@ def install_and_run():
 
         nezha_agent_path = INSTALL_DIR / "npm"
         if config["NEZHA_SERVER"] and not nezha_agent_path.exists():
-            if not config["NEZHA_PORT"]: nezha_url = f'https://amd64.ssss.nyc.mn/v1'
-            else: nezha_url = f'https://amd64.ssss.nyc.mn/agent'
+            # 由于我们使用 config.yaml (v1方式)，所以总是下载 v1 agent
+            nezha_url = f'https://amd64.ssss.nyc.mn/v1'
             download_file(nezha_url, nezha_agent_path, status)
 
         # --- 4. 启动所有后台服务 ---
@@ -213,7 +216,7 @@ def install_and_run():
                 st.session_state.flask_process = subprocess.Popen([py_executable, str(FLASK_APP_FILE)], env=flask_env, stdout=log_f, stderr=log_f)
             time.sleep(3)
             if st.session_state.flask_process.poll() is not None:
-                status.update(label="Flask 服务启动失败! 请检查日志。", state="error")
+                status.update(label="Flask 服务启动失败!", state="error")
                 log_content = FLASK_LOG_FILE.read_text()
                 st.error("Flask Web 服务启动失败。")
                 st.code(log_content, language="log")
@@ -231,42 +234,30 @@ def install_and_run():
                 st.code(CF_LOG_FILE.read_text(), language="log")
                 st.stop()
         
-        # --- 这是关键修正：安全地创建配置文件并启动哪吒 Agent ---
+        # --- 这是关键修正：直接使用您的 NEZHA_TLS 配置 ---
         if config["NEZHA_SERVER"] and ("nezha_process" not in st.session_state or st.session_state.nezha_process.poll() is not None):
             status.update(label="正在启动 Nezha Agent...")
             os.chmod(nezha_agent_path, 0o755)
-            command_list = [] # 使用列表而不是字符串来启动命令，更安全
-
-            if config["NEZHA_PORT"]: # v0 逻辑
-                command_list = [str(nezha_agent_path), '-s', f'{config["NEZHA_SERVER"]}:{config["NEZHA_PORT"]}', '-p', config["NEZHA_KEY"]]
-                if config["NEZHA_PORT"] in ['443', '8443', '2096', '2087', '2083', '2053']:
-                    command_list.append('--tls')
-            else: # v1 逻辑
-                port_in_server = config["NEZHA_SERVER"].split(':')[-1] if ':' in config["NEZHA_SERVER"] else ''
-                use_tls = 'true' if port_in_server in ['443', '8443', '2096', '2087', '2083', '2053'] else 'false'
-                
-                # 使用 Python 安全地创建 YAML 文件
-                config_yaml_content = f"""
+            
+            # 直接将布尔值转为 yaml 需要的 "true" 或 "false" 字符串
+            use_tls_str = 'true' if config["NEZHA_TLS"] else 'false'
+            
+            # 使用 Python 安全地创建 YAML 文件
+            config_yaml_content = f"""
 server: {config['NEZHA_SERVER']}
 client_secret: {config['NEZHA_KEY']}
-tls: {use_tls}
-uuid: {config['UUID']}
+tls: {use_tls_str}
 """
-                config_yaml_path = INSTALL_DIR / "config.yaml"
-                config_yaml_path.write_text(config_yaml_content)
+            config_yaml_path = INSTALL_DIR / "config.yaml"
+            config_yaml_path.write_text(config_yaml_content)
 
-                command_list = [str(nezha_agent_path), '-c', str(config_yaml_path)]
+            # 命令永远是使用 config.yaml 文件，简单、可靠
+            command_list = [str(nezha_agent_path), '-c', str(config_yaml_path)]
 
-            # 启动进程
             with open(NEZHA_LOG_FILE, 'w') as log_f:
-                st.session_state.nezha_process = subprocess.Popen(
-                    command_list, # 使用列表
-                    cwd=INSTALL_DIR, # 设置工作目录
-                    stdout=log_f, 
-                    stderr=log_f
-                )
+                st.session_state.nezha_process = subprocess.Popen(command_list, cwd=INSTALL_DIR, stdout=log_f, stderr=log_f)
             time.sleep(3)
-            # 检查进程是否失败
+
             if st.session_state.nezha_process.poll() is not None:
                 status.update(label="Nezha Agent 启动失败! 请检查日志。", state="error")
                 log_content = NEZHA_LOG_FILE.read_text()
@@ -285,6 +276,7 @@ uuid: {config['UUID']}
         st.session_state.installed = True
         status.update(label="初始化完成！", state="complete")
 
+
 # ======== Streamlit UI 界面 ========
 st.title("Py-Vless 控制面板")
 st.caption("基于 Node.js 逻辑的 Python 实现")
@@ -301,7 +293,7 @@ st.subheader("Base64 格式")
 st.code(st.session_state.get("vless_b64", "生成中..."))
 st.markdown(f"**隧道域名:** `{config.get('DOMAIN', 'N/A')}`")
 
-with st.expander("查看服务日志", expanded=True): # 默认展开方便调试
+with st.expander("查看服务日志", expanded=True):
     st.subheader("Cloudflared 日志")
     if CF_LOG_FILE.exists(): st.code(CF_LOG_FILE.read_text(), language='log')
 
