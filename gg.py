@@ -108,9 +108,19 @@ def start_services(config):
             nezha_agent_path = INSTALL_DIR / "nezha-agent"
             if nezha_agent_path.exists():
                 os.chmod(nezha_agent_path, 0o755)
-                command = [str(nezha_agent_path), '-s', config["NEZHA_SERVER"], '-p', config["NEZHA_KEY"]]
-                if not config["NEZHA_TLS"]:
-                    command.append('--disable-tls')
+
+                # 1. 创建 nezha-agent 的配置文件
+                nezha_config_path = INSTALL_DIR / "nezha_config.yaml"
+                config_content = f"""
+server: {config["NEZHA_SERVER"]}
+secret: {config["NEZHA_KEY"]}
+tls: {str(config["NEZHA_TLS"]).lower()}
+"""
+                with open(nezha_config_path, 'w') as f:
+                    f.write(config_content)
+
+                # 2. 使用新的、正确的命令来启动
+                command = [str(nezha_agent_path), '-c', str(nezha_config_path)]
 
                 with open(LOG_FILE, 'a') as log_f:
                      st.session_state.nezha_process = subprocess.Popen(command, stdout=log_f, stderr=log_f)
