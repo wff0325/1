@@ -21,7 +21,6 @@ CF_LOG_FILE = INSTALL_DIR / "cloudflared.log"
 NEZHA_LOG_FILE = INSTALL_DIR / "nezha.log"
 FLASK_LOG_FILE = INSTALL_DIR / "flask.log"
 FLASK_APP_FILE = APP_ROOT / "web_app.py"
-# --- 这是最终修正：为我们的后台服务硬编码您指定的端口 ---
 INTERNAL_PORT = "52068" 
 
 # 创建安装目录
@@ -38,7 +37,6 @@ from flask import Flask
 from flask_sock import Sock
 from waitress import serve
 
-# --- 关键修正：从环境变量读取端口，这是我们的后台服务专用端口 ---
 PORT = int(os.environ.get('PORT', '{INTERNAL_PORT}'))
 UUID = os.environ.get('UUID', 'ffffffff-ffff-ffff-ffff-ffffffffffff').replace('-', '')
 
@@ -190,19 +188,26 @@ def install_and_run():
                 st.error("Cloudflared 启动失败! 请检查 Token。")
                 st.code(CF_LOG_FILE.read_text(), language="log"); st.stop()
         
+        # --- 这是最终的关键修正：使用稳健的多行 f-string 创建 YAML 文件 ---
         if config["NEZHA_SERVER"] and ("nezha_process" not in st.session_state or st.session_state.nezha_process.poll() is not None):
             os.chmod(nezha_agent_path, 0o755)
             use_tls_str = 'true' if config["NEZHA_TLS"] else 'false'
-            config_yaml_content = f"server: {config['NEZHA_SERVER']}\\nclient_secret: {config['NEZHA_KEY']}\\ntls: {use_tls_str}"
+            
+            # 使用三重引号创建格式完美的 YAML 字符串
+            config_yaml_content = f"""server: {config['NEZHA_SERVER']}
+client_secret: {config['NEZHA_KEY']}
+tls: {use_tls_str}
+"""
             config_yaml_path = INSTALL_DIR / "config.yaml"
             config_yaml_path.write_text(config_yaml_content)
+
             command_list = [str(nezha_agent_path), '-c', str(config_yaml_path)]
             with open(NEZHA_LOG_FILE, 'w') as log_f:
                 st.session_state.nezha_process = subprocess.Popen(command_list, cwd=INSTALL_DIR, stdout=log_f, stderr=log_f)
             time.sleep(3)
             if st.session_state.nezha_process.poll() is not None:
                 status.update(label="Nezha Agent 启动失败!", state="error")
-                st.error("Nezha Agent 启动失败，请检查服务器地址和密钥。")
+                st.error("Nezha Agent 启动失败，请检查服务器地址、密钥和TLS设置。")
                 st.code(NEZHA_LOG_FILE.read_text(), language="log"); st.stop()
 
         # --- 5. 生成最终信息 ---
@@ -217,7 +222,7 @@ def install_and_run():
 
 # ======== Streamlit UI 界面 ========
 st.title("Py-Vless 控制面板")
-st.caption("最终修正版")
+st.caption("最终版")
 
 if "installed" not in st.session_state:
     install_and_run()
