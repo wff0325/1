@@ -1,5 +1,0 @@
-streamlit
-requests
-flask
-flask-sock
-waitress
