@@ -21,12 +21,14 @@ CF_LOG_FILE = INSTALL_DIR / "cloudflared.log"
 NEZHA_LOG_FILE = INSTALL_DIR / "nezha.log"
 FLASK_LOG_FILE = INSTALL_DIR / "flask.log"
 FLASK_APP_FILE = APP_ROOT / "web_app.py"
+# --- 使用您指定的端口作为后台服务的监听端口 ---
+BACKEND_PORT_STR = "52068" 
 
 # 创建安装目录
 INSTALL_DIR.mkdir(parents=True, exist_ok=True)
 
 # ======== Flask App 代码 ========
-FLASK_APP_CODE = """
+FLASK_APP_CODE = f"""
 import os
 import sys
 import socket
@@ -37,7 +39,7 @@ from flask_sock import Sock
 from waitress import serve
 
 # --- 从环境变量读取我们自定义的端口号 ---
-PORT = int(os.environ.get('BACKEND_PORT', 3000))
+PORT = int(os.environ.get('BACKEND_PORT', '{BACKEND_PORT_STR}'))
 UUID = os.environ.get('UUID', 'ffffffff-ffff-ffff-ffff-ffffffffffff').replace('-', '')
 
 app = Flask(__name__)
@@ -101,40 +103,13 @@ if __name__ == "__main__":
     serve(app, host='0.0.0.0', port=PORT)
 """
 
-# ======== 辅助函数 ========
-def download_file(url, target_path, status_ui):
-    try:
-        status_ui.update(label=f'正在下载 {Path(url).name}...')
-        with requests.get(url, stream=True, timeout=30) as r:
-            r.raise_for_status()
-            with open(target_path, 'wb') as f:
-                for chunk in r.iter_content(chunk_size=8192): f.write(chunk)
-        return True
-    except Exception as e:
-        status_ui.update(label=f"下载文件失败: {url}", state="error"); st.error(f"下载文件失败: {url}, 错误: {e}"); st.stop()
-
-def get_isp_info():
-    try:
-        data = requests.get('https://speed.cloudflare.com/meta', timeout=10).json()
-        return f"{data.get('country', 'NA')}-{data.get('asOrganization', 'NA')}".replace(' ', '_')
-    except Exception: return 'Unknown'
-
-def add_access_task(domain):
-    if not domain: return
-    try:
-        requests.post('https://urlchk.fk.ddns-ip.net/add-url', json={'url': f"https://{domain}/"}, timeout=10)
-        st.toast("保活任务已添加。")
-    except Exception: pass
-
-# ======== 核心业务逻辑 ========
-def install_and_run():
+# ======== 核心业务逻辑函数 ========
+def initialize_services():
     with st.status("正在初始化服务...", expanded=True) as status:
         # --- 1. 加载配置 ---
         status.update(label="正在加载配置...")
         try:
-            # --- 关键修正：读取我们自定义的 BACKEND_PORT ---
             config = {
-                "BACKEND_PORT": st.secrets.get("BACKEND_PORT", "52068"),
                 "UUID": st.secrets["UUID"],
                 "DOMAIN": st.secrets["DOMAIN"], 
                 "CF_TOKEN": st.secrets["CF_TOKEN"],
@@ -166,9 +141,8 @@ def install_and_run():
         # --- 4. 启动所有后台服务 ---
         status.update(label="正在启动后台服务...")
         
-        # --- 关键修正：将 BACKEND_PORT 传递给 Flask 进程 ---
         flask_env = os.environ.copy()
-        flask_env.update({"BACKEND_PORT": config["BACKEND_PORT"], "UUID": config["UUID"]})
+        flask_env.update({"BACKEND_PORT": BACKEND_PORT_STR, "UUID": config["UUID"]})
 
         if "flask_process" not in st.session_state or st.session_state.flask_process.poll() is not None:
             py_executable = sys.executable
@@ -217,27 +191,35 @@ uuid: {config['UUID']}
         st.session_state.vless_url = vless_url
         st.session_state.vless_b64 = base64.b64encode(vless_url.encode()).decode()
         add_access_task(config['DOMAIN'])
-        st.session_state.installed = True
+        st.session_state.initialized = True
         status.update(label="初始化完成！", state="complete")
 
 # ======== Streamlit UI 界面 ========
 st.title("Py-Vless 控制面板")
 st.caption("最终修正版")
 
-if "installed" not in st.session_state:
-    install_and_run()
+# --- 这是最终的、正确的架构 ---
+# 1. 检查一个标志位，如果服务尚未初始化...
+if "initialized" not in st.session_state:
+    # 2. ...则调用函数来完成所有后台工作
+    initialize_services()
 
+# 3. 无论如何，都从 session_state 中获取信息并渲染UI
+# 这样可以确保UI总能立刻显示
 config = st.session_state.get("app_config", {})
-st.success("所有服务已成功启动。")
-st.subheader("VLESS 订阅链接")
-st.code(st.session_state.get("vless_url", "生成中..."), language="text")
-st.markdown(f"**隧道域名:** `{config.get('DOMAIN', 'N/A')}`")
+if st.session_state.get("initialized"):
+    st.success("所有服务已成功启动。")
+    st.subheader("VLESS 订阅链接")
+    st.code(st.session_state.get("vless_url", "生成中..."), language="text")
+    st.markdown(f"**隧道域名:** `{config.get('DOMAIN', 'N/A')}`")
 
-with st.expander("查看服务日志", expanded=False):
-    st.subheader("Cloudflared 日志")
-    if CF_LOG_FILE.exists(): st.code(CF_LOG_FILE.read_text(), language='log')
-    st.subheader("后台 Web 服务日志")
-    if FLASK_LOG_FILE.exists(): st.code(FLASK_LOG_FILE.read_text(), language='log')
-    if config.get("NEZHA_SERVER"):
-        st.subheader("Nezha Agent 日志")
-        if NEZHA_LOG_FILE.exists(): st.code(NEZHA_LOG_FILE.read_text(), language='log')
+    with st.expander("查看服务日志", expanded=False):
+        st.subheader("Cloudflared 日志")
+        if CF_LOG_FILE.exists(): st.code(CF_LOG_FILE.read_text(), language='log')
+        st.subheader("后台 Web 服务日志")
+        if FLASK_LOG_FILE.exists(): st.code(FLASK_LOG_FILE.read_text(), language='log')
+        if config.get("NEZHA_SERVER"):
+            st.subheader("Nezha Agent 日志")
+            if NEZHA_LOG_FILE.exists(): st.code(NEZHA_LOG_FILE.read_text(), language='log')
+else:
+    st.warning("正在初始化服务，请稍候...")
