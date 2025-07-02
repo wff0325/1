@@ -11,6 +11,7 @@ import ssl
 import zipfile
 import streamlit as st
 import psutil
+import random # <-- 修复 NameError 的关键
 
 # ======== Streamlit 配置 ========
 st.set_page_config(page_title="ArgoSB 终极调试面板", layout="wide")
@@ -37,7 +38,6 @@ def download_with_progress(urls, target_path, status_placeholder):
             with urllib.request.urlopen(req, context=ctx) as response, open(target_path, 'wb') as out_file:
                 shutil.copyfileobj(response, out_file)
             
-            # 验证文件是否有效 (对ZIP文件特别重要)
             if target_path.suffix == '.zip':
                 with zipfile.ZipFile(target_path, 'r') as zf_test:
                     if zf_test.testzip() is not None:
@@ -138,41 +138,48 @@ if st.button("下载/更新所有必需文件"):
 st.header("2. 服务独立控制与日志")
 
 # --- 控制按钮 ---
-service_cols = st.columns(3)
-with service_cols[0]:
-    if st.button("启动所有服务"):
-        kill_all_processes() # 启动前先清理
-        # 启动 Cloudflared
-        token = st.secrets["CF_TOKEN"]; command = [str(INSTALL_DIR / "cloudflared"), 'tunnel', '--no-autoupdate', 'run', '--token', token]
-        st.session_state.processes['cloudflared'] = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-        # 启动 Sing-box
-        port = int(st.secrets.get("PORT", random.randint(10000, 20000))); uuid_str = st.secrets.get("UUID", str(uuid.uuid4())); ws_path = "/"
-        sb_config = {"log": {"level": "info"}, "inbounds": [{"type": "vmess", "listen": "127.0.0.1", "listen_port": port, "users": [{"uuid": uuid_str}], "transport": {"type": "ws", "path": ws_path}}], "outbounds": [{"type": "direct"}]}
-        (INSTALL_DIR / "sb.json").write_text(json.dumps(sb_config))
-        command = [str(INSTALL_DIR / "sing-box"), 'run', '-c', str(INSTALL_DIR / "sb.json")]
-        st.session_state.processes['sing-box'] = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-        # 启动 Nezha Agent
-        if "NEZHA_SERVER" in st.secrets:
-            nezha_config = {"SERVER": st.secrets["NEZHA_SERVER"], "PORT": st.secrets["NEZHA_PORT"], "KEY": st.secrets["NEZHA_KEY"], "TLS": st.secrets.get("NEZHA_TLS", False)}
-            command = [str(INSTALL_DIR / "nezha-agent"), '-s', f"{nezha_config['SERVER']}:{nezha_config['PORT']}", '-p', nezha_config['KEY']]
-            if nezha_config['TLS']: command.append('--tls')
-            st.session_state.processes['nezha-agent'] = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-        st.rerun()
+if st.button("启动所有服务"):
+    kill_all_processes() # 启动前先清理
+    # 启动 Cloudflared
+    token = st.secrets["CF_TOKEN"]; command = [str(INSTALL_DIR / "cloudflared"), 'tunnel', '--no-autoupdate', 'run', '--token', token]
+    st.session_state.processes['cloudflared'] = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, encoding='utf-8', errors='ignore')
+    # 启动 Sing-box
+    port = int(st.secrets.get("PORT", random.randint(10000, 20000))); uuid_str = st.secrets.get("UUID", str(uuid.uuid4())); ws_path = "/"
+    sb_config = {"log": {"level": "info"}, "inbounds": [{"type": "vmess", "listen": "127.0.0.1", "listen_port": port, "users": [{"uuid": uuid_str}], "transport": {"type": "ws", "path": ws_path}}], "outbounds": [{"type": "direct"}]}
+    (INSTALL_DIR / "sb.json").write_text(json.dumps(sb_config))
+    command = [str(INSTALL_DIR / "sing-box"), 'run', '-c', str(INSTALL_DIR / "sb.json")]
+    st.session_state.processes['sing-box'] = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, encoding='utf-8', errors='ignore')
+    # 启动 Nezha Agent
+    if "NEZHA_SERVER" in st.secrets:
+        nezha_config = {"SERVER": st.secrets["NEZHA_SERVER"], "PORT": st.secrets["NEZHA_PORT"], "KEY": st.secrets["NEZHA_KEY"], "TLS": st.secrets.get("NEZHA_TLS", False)}
+        command = [str(INSTALL_DIR / "nezha-agent"), '-s', f"{nezha_config['SERVER']}:{nezha_config['PORT']}", '-p', nezha_config['KEY']]
+        if nezha_config['TLS']: command.append('--tls')
+        st.session_state.processes['nezha-agent'] = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, encoding='utf-8', errors='ignore')
+    st.rerun()
 
 # --- 日志显示 ---
 log_tabs = st.tabs(["Cloudflared", "Sing-box", "Nezha Agent"])
 
-with log_tabs[0]:
-    st.subheader("Cloudflared Tunnel 日志")
-    if 'cloudflared' in st.session_state.processes:
-        st.code(st.session_state.processes['cloudflared'].stdout.read(), language="log")
+def display_log(service_name):
+    if service_name in st.session_state.processes:
+        proc = st.session_state.processes[service_name]
+        # 非阻塞地读取日志
+        output = ""
+        try:
+            # Popen 的 stdout 是一个流，不能被反复读取
+            # 我们在这里把它读完并保存
+            if f"{service_name}_log" not in st.session_state:
+                 st.session_state[f"{service_name}_log"] = ""
+            
+            # 实时读取新的日志
+            new_output = proc.stdout.read()
+            if new_output:
+                st.session_state[f"{service_name}_log"] += new_output
+            
+            st.code(st.session_state[f"{service_name}_log"], language="log")
+        except Exception as e:
+            st.error(f"无法读取日志: {e}")
 
-with log_tabs[1]:
-    st.subheader("Sing-box (Vmess 服务) 日志")
-    if 'sing-box' in st.session_state.processes:
-        st.code(st.session_state.processes['sing-box'].stdout.read(), language="log")
-
-with log_tabs[2]:
-    st.subheader("Nezha Agent 日志")
-    if 'nezha-agent' in st.session_state.processes:
-        st.code(st.session_state.processes['nezha-agent'].stdout.read(), language="log")
+with log_tabs[0]: st.subheader("Cloudflared Tunnel 日志"); display_log('cloudflared')
+with log_tabs[1]: st.subheader("Sing-box (Vmess 服务) 日志"); display_log('sing-box')
+with log_tabs[2]: st.subheader("Nezha Agent 日志"); display_log('nezha-agent')
