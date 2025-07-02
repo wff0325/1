@@ -97,8 +97,6 @@ def start_services(config):
     """在Streamlit环境中启动所有后台服务"""
     # 启动 sing-box
     if "sb_process" not in st.session_state or st.session_state.sb_process.poll() is not None:
-        # --- 最终简化 ---
-        # 使用最简单、最兼容的根路径 "/"
         ws_path = "/"
         sb_config = {"log": {"level": "info"}, "inbounds": [{"type": "vmess", "listen": "127.0.0.1", "listen_port": config['PORT'], "users": [{"uuid": config['UUID']}], "transport": {"type": "ws", "path": ws_path}}], "outbounds": [{"type": "direct"}]}
         (INSTALL_DIR / "sb.json").write_text(json.dumps(sb_config))
@@ -111,8 +109,14 @@ def start_services(config):
         cloudflared_path = INSTALL_DIR / "cloudflared"
         os.chmod(cloudflared_path, 0o755)
         command = [str(cloudflared_path), 'tunnel', '--no-autoupdate', 'run', '--token', config['CF_TOKEN']]
-        with open(LOG_FILE, 'w') as log_f:
-            st.session_state.cf_process = subprocess.Popen(command, stdout=log_f, stderr=log_f)
+        
+        # --- 诊断修改 ---
+        # 强制将 cloudflared 的所有输出都打印到主日志流
+        st.session_state.cf_process = subprocess.Popen(
+            command,
+            stdout=sys.stdout,
+            stderr=sys.stderr
+        )
 
     # 启动哪吒探针 (如果已配置)
     if config.get("NEZHA"):
@@ -120,28 +124,23 @@ def start_services(config):
             nezha_path = INSTALL_DIR / "nezha-agent"
             os.chmod(nezha_path, 0o755)
             nezha_config = config["NEZHA"]
+            # 构建最终版哪吒命令
             command = [
                 str(nezha_path), 
                 '-s', f"{nezha_config['SERVER']}:{nezha_config['PORT']}",
                 '-p', nezha_config['KEY']
             ]
+            # 关键：只有当NEZHA_TLS为true时，才添加 --tls 参数
             if nezha_config['TLS']:
                 command.append('--tls')
             
             st.session_state.nezha_process = subprocess.Popen(command, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 def generate_links_and_save(config):
-    # --- 最终简化 ---
-    # 使用最简单、最兼容的根路径 "/"
     ws_path = "/"
     all_links = []
-    
-    # 1. 基于域名的标准节点 (推荐)
     all_links.append(generate_vmess_link({"v": "2", "ps": f"VM-TLS-Domain", "add": config['DOMAIN'], "port": "443", "id": config['UUID'], "aid": "0", "net": "ws", "type": "none", "host": config['DOMAIN'], "path": ws_path, "tls": "tls", "sni": config['DOMAIN']}))
-    
-    # 2. 基于IP的备用节点 (用于排错)
     all_links.append(generate_vmess_link({"v": "2", "ps": f"VM-TLS-IP", "add": "104.21.2.19", "port": "443", "id": config['UUID'], "aid": "0", "net": "ws", "type": "none", "host": config['DOMAIN'], "path": ws_path, "tls": "tls", "sni": config['DOMAIN']}))
-
     st.session_state.links = "\n".join(all_links)
     st.session_state.installed = True
     
@@ -149,15 +148,9 @@ def install_and_run(config):
     with st.status("正在初始化服务...", expanded=True) as status:
         arch = "amd64"
         
-        # 定义需要下载的文件
-        required_files = {
-            "sing-box": not (INSTALL_DIR / "sing-box").exists(),
-            "cloudflared": not (INSTALL_DIR / "cloudflared").exists(),
-        }
-        if config.get("NEZHA"):
-            required_files["nezha-agent"] = not (INSTALL_DIR / "nezha-agent").exists()
+        required_files = {"sing-box": not (INSTALL_DIR / "sing-box").exists(), "cloudflared": not (INSTALL_DIR / "cloudflared").exists()}
+        if config.get("NEZHA"): required_files["nezha-agent"] = not (INSTALL_DIR / "nezha-agent").exists()
 
-        # 执行下载
         if required_files.get("sing-box"):
             status.update(label="正在下载 sing-box..."); sb_version = "1.9.0-beta.11"; sb_name = f"sing-box-{sb_version}-linux-{arch}"; sb_url = f"https://github.com/SagerNet/sing-box/releases/download/v{sb_version}/{sb_name}.tar.gz"; tar_path = INSTALL_DIR / "sing-box.tar.gz"
             if download_file(sb_url, tar_path):
@@ -204,7 +197,8 @@ with st.expander("查看当前配置和Argo日志"):
     if app_config.get("NEZHA"):
         display_config["NEZHA"] = {k: v for k, v in app_config["NEZHA"].items() if k != "KEY"}
     st.json(display_config)
-    if LOG_FILE.exists(): st.code(LOG_FILE.read_text(), language='log')
+    # This section is for displaying the argo.log file, which we are now bypassing for diagnostics
+    # st.info("Argo日志已重定向到主日志流进行诊断。")
 
 st.markdown("---")
-st.markdown("原作者: wff| 改编: AI for Streamlit")
+st.markdown("原作者: wff | 改编: AI for Streamlit")
