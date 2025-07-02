@@ -62,11 +62,8 @@ def load_config():
             "USER_NAME": st.secrets.get("USER_NAME", "default_user"),
             "UUID": st.secrets.get("UUID") or str(uuid.uuid4()),
             "PORT": port,
-            # ==== 代码修改处 #1 ====
-            # 加载哪吒探针配置，并正确处理布尔值
             "NEZHA_SERVER": st.secrets.get("NEZHA_SERVER", ""),
             "NEZHA_KEY": st.secrets.get("NEZHA_KEY", ""),
-            # 默认使用TLS，除非明确指定为 False
             "NEZHA_TLS": str(st.secrets.get("NEZHA_TLS", True)).lower() == "true"
         }
         return config
@@ -93,7 +90,8 @@ def start_services(config):
         singbox_path = INSTALL_DIR / "sing-box"
         if singbox_path.exists():
             os.chmod(singbox_path, 0o755)
-            st.session_state.sb_process = subprocess.Popen([str(singbox_path), 'run', '-c', str(INSTALL_DIR / "sb.json")], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+            with open(LOG_FILE, 'a') as log_f:
+                 st.session_state.sb_process = subprocess.Popen([str(singbox_path), 'run', '-c', str(INSTALL_DIR / "sb.json")], stdout=log_f, stderr=log_f)
 
     # 启动 cloudflared
     if "cf_process" not in st.session_state or st.session_state.cf_process.poll() is not None:
@@ -110,15 +108,12 @@ def start_services(config):
             nezha_agent_path = INSTALL_DIR / "nezha-agent"
             if nezha_agent_path.exists():
                 os.chmod(nezha_agent_path, 0o755)
-                # ==== 代码修改处 #2 ====
-                # 构建基础命令
                 command = [str(nezha_agent_path), '-s', config["NEZHA_SERVER"], '-p', config["NEZHA_KEY"]]
-                # 如果 NEZHA_TLS 为 False，则添加 --disable-tls 参数
                 if not config["NEZHA_TLS"]:
                     command.append('--disable-tls')
 
-                with open(LOG_FILE, 'a') as log_f: # 使用 'a' 模式追加日志
-                    st.session_state.nezha_process = subprocess.Popen(command, stdout=log_f, stderr=log_f)
+                with open(LOG_FILE, 'a') as log_f:
+                     st.session_state.nezha_process = subprocess.Popen(command, stdout=log_f, stderr=log_f)
             else:
                 st.warning("Nezha配置已提供，但找不到 nezha-agent 可执行文件！")
 
@@ -148,34 +143,47 @@ def install_and_run(config):
         arch = "amd64"
 
         # 安装 sing-box
-        if not (INSTALL_DIR / "sing-box").exists():
+        singbox_path = INSTALL_DIR / "sing-box"
+        if not singbox_path.exists():
             status.update(label="正在下载 sing-box...")
             sb_version = "1.9.0-beta.11"
-            sb_url = f"https://github.com/SagerNet/sing-box/releases/download/v{sb_version}/sing-box-{sb_version}-linux-{arch}.tar.gz"
+            sb_name = f"sing-box-{sb_version}-linux-{arch}"
+            sb_url = f"https://github.com/SagerNet/sing-box/releases/download/v{sb_version}/{sb_name}.tar.gz"
             tar_path = INSTALL_DIR / "sing-box.tar.gz"
             if download_file(sb_url, tar_path):
-                import tarfile
-                with tarfile.open(tar_path, "r:gz") as tar:
-                    shutil.move(tar.extractfile(f"sing-box-{sb_version}-linux-{arch}/sing-box"), INSTALL_DIR / "sing-box")
-                tar_path.unlink()
+                try:
+                    import tarfile
+                    with tarfile.open(tar_path, "r:gz") as tar:
+                        source_file = tar.extractfile(f"{sb_name}/sing-box")
+                        with open(singbox_path, "wb") as dest_file:
+                            if source_file:
+                                shutil.copyfileobj(source_file, dest_file)
+                    tar_path.unlink()
+                except Exception as e:
+                    status.update(label=f"解压 sing-box 失败: {e}", state="error"); return
 
         # 安装 cloudflared
-        if not (INSTALL_DIR / "cloudflared").exists():
+        cloudflared_path = INSTALL_DIR / "cloudflared"
+        if not cloudflared_path.exists():
             status.update(label="正在下载 cloudflared...")
             cf_url = f"https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-{arch}"
-            if not download_file(cf_url, INSTALL_DIR / "cloudflared"):
+            if not download_file(cf_url, cloudflared_path):
                 status.update(label="下载 cloudflared 失败", state="error"); return
 
         # 安装哪吒探针
         if config.get("NEZHA_SERVER") and config.get("NEZHA_KEY"):
-            if not (INSTALL_DIR / "nezha-agent").exists():
+            nezha_agent_path = INSTALL_DIR / "nezha-agent"
+            if not nezha_agent_path.exists():
                 status.update(label="正在下载 Nezha Agent...")
                 nezha_url = f"https://github.com/nezhahq/agent/releases/download/v1.13.0/nezha-agent_linux_{arch}.zip"
                 zip_path = INSTALL_DIR / "nezha-agent.zip"
                 if download_file(nezha_url, zip_path):
-                    with zipfile.ZipFile(zip_path, 'r') as zip_ref:
-                        zip_ref.extractall(INSTALL_DIR)
-                    zip_path.unlink()
+                    try:
+                        with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+                            zip_ref.extractall(INSTALL_DIR)
+                        zip_path.unlink()
+                    except Exception as e:
+                        status.update(label=f"解压 Nezha Agent 失败: {e}", state="error"); return
 
         status.update(label="正在启动后台服务...")
         start_services(config)
@@ -202,7 +210,9 @@ else:
     st.code(st.session_state.links, language="text")
 
 with st.expander("查看当前配置和调试日志"):
-    st.json({k: v for k, v in st.session_state.app_config.items() if k != "CF_TOKEN"})
+    config_to_show = {k: v for k, v in st.session_state.app_config.items() if k not in ["CF_TOKEN", "UUID", "NEZHA_KEY"]}
+    st.json(config_to_show)
+
     if LOG_FILE.exists():
         st.code(LOG_FILE.read_text(), language='log')
 
