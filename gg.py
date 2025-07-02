@@ -2,203 +2,160 @@
 import os
 import sys
 import json
-import random
-import time
-import shutil
-import re
-import base64
-import socket
 import subprocess
-import platform
-from datetime import datetime
-import uuid
 from pathlib import Path
 import urllib.request
 import ssl
 import zipfile
 import streamlit as st
-import psutil # Import the new dependency
+import psutil
 
-# ======== PYTHON-NATIVE PROCESS CLEANUP (DEFINITIVE FIX) ========
-def cleanup_old_processes():
-    """Kills any lingering processes from previous runs using psutil."""
+# ======== Streamlit 配置 ========
+st.set_page_config(page_title="ArgoSB 调试面板", layout="wide")
+st.title("ArgoSB 交互式调试面板")
+st.warning("请按顺序点击按钮进行诊断。")
+
+# ======== 核心变量和路径 ========
+APP_ROOT = Path.cwd()
+INSTALL_DIR = APP_ROOT / ".agsb"
+INSTALL_DIR.mkdir(parents=True, exist_ok=True)
+
+# ======== 状态检查函数 ========
+def check_binaries():
+    """检查所需的可执行文件是否存在。"""
+    files = {
+        "cloudflared": (INSTALL_DIR / "cloudflared").exists(),
+        "sing-box": (INSTALL_DIR / "sing-box").exists(),
+    }
+    if "NEZHA_SERVER" in st.secrets:
+        files["nezha-agent"] = (INSTALL_DIR / "nezha-agent").exists()
+    return files
+
+def check_processes():
+    """检查相关进程是否正在运行。"""
+    procs = {}
     keywords = ['sing-box', 'cloudflared', 'nezha-agent']
     for proc in psutil.process_iter(['cmdline']):
         try:
             if proc.info['cmdline']:
                 cmd_line = ' '.join(proc.info['cmdline'])
-                if any(keyword in cmd_line for keyword in keywords):
-                    proc.kill() # Terminate the process
-        except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+                for keyword in keywords:
+                    if keyword in cmd_line:
+                        procs[keyword] = f"Running (PID: {proc.pid})"
+        except (psutil.NoSuchProcess, psutil.AccessDenied):
             pass
+    return procs
 
-# Run cleanup at the very start of the script execution
-cleanup_old_processes()
+# ======== UI 布局 ========
+st.header("1. 状态检查")
+col1, col2, col3 = st.columns(3)
 
-# ======== Streamlit 配置 ========
-st.set_page_config(page_title="ArgoSB 控制面板", layout="centered")
+with col1:
+    st.subheader("Secrets 配置")
+    with st.expander("点击查看已加载的 Secrets", expanded=False):
+        # 为了安全，不直接显示敏感信息
+        secrets_to_show = {k: (v[:8] + '...' if k in ['CF_TOKEN', 'NEZHA_KEY'] else v) for k, v in st.secrets.items()}
+        st.json(secrets_to_show)
 
-# ======== 核心变量和路径 ========
-APP_ROOT = Path.cwd() 
-INSTALL_DIR = APP_ROOT / ".agsb"
-LOG_FILE = INSTALL_DIR / "argo.log"
+with col2:
+    st.subheader("文件状态")
+    st.write(check_binaries())
 
-# 创建安装目录
-INSTALL_DIR.mkdir(parents=True, exist_ok=True)
+with col3:
+    st.subheader("进程状态")
+    st.write(check_processes())
 
+st.header("2. 手动操作")
 
-# ======== 辅助函数 ========
-def download_file(url, target_path):
-    try:
-        with st.spinner(f'正在下载 {Path(url).name}...'):
-            ctx = ssl._create_unverified_context()
-            headers = {'User-Agent': 'Mozilla/5.0'}
-            req = urllib.request.Request(url, headers=headers)
-            with urllib.request.urlopen(req, context=ctx) as response, open(target_path, 'wb') as out_file:
-                shutil.copyfileobj(response, out_file)
-        return True
-    except Exception as e:
-        st.error(f"下载文件失败: {url}, 错误: {e}")
-        return False
-
-def generate_vmess_link(config_dict):
-    vmess_str = json.dumps(config_dict, sort_keys=True)
-    return f"vmess://{base64.b64encode(vmess_str.encode('utf-8')).decode('utf-8').rstrip('=')}"
-
-# ======== 核心业务逻辑 ========
-
-def load_config():
-    """从 Streamlit Secrets 加载所有配置 (最终版)"""
-    try:
-        port_value = st.secrets.get("PORT")
-        config = {
-            "DOMAIN": st.secrets["DOMAIN"], "CF_TOKEN": st.secrets["CF_TOKEN"],
-            "USER_NAME": st.secrets.get("USER_NAME", "default_user"),
-            "UUID": st.secrets.get("UUID") or str(uuid.uuid4()),
-            "PORT": int(port_value) if port_value else random.randint(10000, 20000)
-        }
-        # 加载带TLS开关的哪吒探针配置
-        if st.secrets.get("NEZHA_SERVER") and st.secrets.get("NEZHA_PORT") and st.secrets.get("NEZHA_KEY"):
-            config["NEZHA"] = {
-                "SERVER": st.secrets["NEZHA_SERVER"],
-                "PORT": st.secrets["NEZHA_PORT"],
-                "KEY": st.secrets["NEZHA_KEY"],
-                "TLS": st.secrets.get("NEZHA_TLS", False) # 关键：读取TLS开关，默认为False
-            }
-        return config
-    except KeyError as e:
-        st.error(f"错误: 缺少必要的 Secret 配置项: {e}。")
-        st.stop()
-    except ValueError:
-        st.error(f"错误: Secrets 中的 PORT 或 NEZHA_PORT 值不是一个有效的数字。")
-        st.stop()
-
-def start_services(config):
-    """在Streamlit环境中启动所有后台服务"""
-    # 启动 sing-box
-    if "sb_process" not in st.session_state or st.session_state.sb_process.poll() is not None:
-        ws_path = "/"
-        sb_config = {"log": {"level": "info"}, "inbounds": [{"type": "vmess", "listen": "127.0.0.1", "listen_port": config['PORT'], "users": [{"uuid": config['UUID']}], "transport": {"type": "ws", "path": ws_path}}], "outbounds": [{"type": "direct"}]}
-        (INSTALL_DIR / "sb.json").write_text(json.dumps(sb_config))
-        singbox_path = INSTALL_DIR / "sing-box"
-        os.chmod(singbox_path, 0o755)
-        st.session_state.sb_process = subprocess.Popen([str(singbox_path), 'run', '-c', str(INSTALL_DIR / "sb.json")])
-
-    # 启动 cloudflared
-    if "cf_process" not in st.session_state or st.session_state.cf_process.poll() is not None:
-        cloudflared_path = INSTALL_DIR / "cloudflared"
-        os.chmod(cloudflared_path, 0o755)
-        command = [str(cloudflared_path), 'tunnel', '--no-autoupdate', 'run', '--token', config['CF_TOKEN']]
-        
-        # --- 诊断修改 ---
-        # 强制将 cloudflared 的所有输出都打印到主日志流
-        st.session_state.cf_process = subprocess.Popen(
-            command,
-            stdout=sys.stdout,
-            stderr=sys.stderr
-        )
-
-    # 启动哪吒探针 (如果已配置)
-    if config.get("NEZHA"):
-        if "nezha_process" not in st.session_state or st.session_state.nezha_process.poll() is not None:
-            nezha_path = INSTALL_DIR / "nezha-agent"
-            os.chmod(nezha_path, 0o755)
-            nezha_config = config["NEZHA"]
-            # 构建最终版哪吒命令
-            command = [
-                str(nezha_path), 
-                '-s', f"{nezha_config['SERVER']}:{nezha_config['PORT']}",
-                '-p', nezha_config['KEY']
-            ]
-            # 关键：只有当NEZHA_TLS为true时，才添加 --tls 参数
-            if nezha_config['TLS']:
-                command.append('--tls')
-            
-            st.session_state.nezha_process = subprocess.Popen(command, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-
-def generate_links_and_save(config):
-    ws_path = "/"
-    all_links = []
-    all_links.append(generate_vmess_link({"v": "2", "ps": f"VM-TLS-Domain", "add": config['DOMAIN'], "port": "443", "id": config['UUID'], "aid": "0", "net": "ws", "type": "none", "host": config['DOMAIN'], "path": ws_path, "tls": "tls", "sni": config['DOMAIN']}))
-    all_links.append(generate_vmess_link({"v": "2", "ps": f"VM-TLS-IP", "add": "104.21.2.19", "port": "443", "id": config['UUID'], "aid": "0", "net": "ws", "type": "none", "host": config['DOMAIN'], "path": ws_path, "tls": "tls", "sni": config['DOMAIN']}))
-    st.session_state.links = "\n".join(all_links)
-    st.session_state.installed = True
-    
-def install_and_run(config):
-    with st.status("正在初始化服务...", expanded=True) as status:
+# --- 操作 1: 下载 ---
+if st.button("下载所有必需文件"):
+    with st.status("正在下载...", expanded=True) as status:
         arch = "amd64"
         
-        required_files = {"sing-box": not (INSTALL_DIR / "sing-box").exists(), "cloudflared": not (INSTALL_DIR / "cloudflared").exists()}
-        if config.get("NEZHA"): required_files["nezha-agent"] = not (INSTALL_DIR / "nezha-agent").exists()
+        # 下载 cloudflared
+        status.update(label="正在下载 cloudflared...")
+        cf_url = f"https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-{arch}"
+        subprocess.run(['wget', '-O', str(INSTALL_DIR / "cloudflared"), cf_url], capture_output=True)
+        os.chmod(INSTALL_DIR / "cloudflared", 0o755)
+        st.write("✅ cloudflared 下载完成。")
 
-        if required_files.get("sing-box"):
-            status.update(label="正在下载 sing-box..."); sb_version = "1.9.0-beta.11"; sb_name = f"sing-box-{sb_version}-linux-{arch}"; sb_url = f"https://github.com/SagerNet/sing-box/releases/download/v{sb_version}/{sb_name}.tar.gz"; tar_path = INSTALL_DIR / "sing-box.tar.gz"
-            if download_file(sb_url, tar_path):
-                import tarfile;
-                with tarfile.open(tar_path, "r:gz") as tar: tar.extractall(path=INSTALL_DIR, filter='data');
-                shutil.move(INSTALL_DIR / sb_name / "sing-box", INSTALL_DIR / "sing-box"); shutil.rmtree(INSTALL_DIR / sb_name); tar_path.unlink()
+        # 下载 sing-box
+        status.update(label="正在下载 sing-box...")
+        sb_version = "1.9.0-beta.11"
+        sb_name = f"sing-box-{sb_version}-linux-{arch}"
+        sb_url = f"https://github.com/SagerNet/sing-box/releases/download/v{sb_version}/{sb_name}.tar.gz"
+        tar_path = INSTALL_DIR / "sing-box.tar.gz"
+        subprocess.run(['wget', '-O', str(tar_path), sb_url], capture_output=True)
+        import tarfile
+        with tarfile.open(tar_path, "r:gz") as tar: tar.extractall(path=INSTALL_DIR, filter='data')
+        shutil.move(INSTALL_DIR / sb_name / "sing-box", INSTALL_DIR / "sing-box")
+        shutil.rmtree(INSTALL_DIR / sb_name); tar_path.unlink()
+        os.chmod(INSTALL_DIR / "sing-box", 0o755)
+        st.write("✅ sing-box 下载完成。")
         
-        if required_files.get("cloudflared"):
-            status.update(label="正在下载 cloudflared..."); cf_url = f"https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-{arch}"; download_file(cf_url, INSTALL_DIR / "cloudflared")
-        
-        if required_files.get("nezha-agent"):
-            status.update(label="正在下载哪吒探针..."); nezha_url = "https://github.91chi.fun/https://github.com/naiba/nezha/releases/latest/download/nezha-agent_linux_amd64.zip"; zip_path = INSTALL_DIR / "nezha-agent.zip"
-            if download_file(nezha_url, zip_path):
-                with zipfile.ZipFile(zip_path, 'r') as zf: zf.extractall(INSTALL_DIR);
-                zip_path.unlink()
-        
-        status.update(label="正在启动后台服务...")
-        start_services(config)
-        
-        status.update(label="正在生成节点链接...")
-        generate_links_and_save(config)
-        status.update(label="初始化完成！", state="complete", expanded=False)
-
-# ======== Streamlit UI 界面 ========
-st.title("ArgoSB 部署面板")
-app_config = load_config()
-st.session_state.app_config = app_config
-st.markdown(f"**域名:** `{app_config['DOMAIN']}`")
-
-if app_config.get("NEZHA"):
-    tls_status = "启用 (TLS)" if app_config["NEZHA"]["TLS"] else "禁用 (No-TLS)"
-    st.info(f"哪吒探针已配置: {tls_status}")
-
-if "installed" in st.session_state and st.session_state.installed:
-    st.success("服务已启动。")
-    st.subheader("Vmess 节点链接")
-    st.code(st.session_state.links, language="text")
-else:
-    install_and_run(app_config)
+        status.update(label="所有文件下载完毕！", state="complete")
     st.rerun()
 
-with st.expander("查看当前配置和Argo日志"):
-    display_config = {k: v for k, v in app_config.items() if k not in ["CF_TOKEN", "NEZHA"]}
-    if app_config.get("NEZHA"):
-        display_config["NEZHA"] = {k: v for k, v in app_config["NEZHA"].items() if k != "KEY"}
-    st.json(display_config)
-    # This section is for displaying the argo.log file, which we are now bypassing for diagnostics
-    # st.info("Argo日志已重定向到主日志流进行诊断。")
+# --- 操作 2: 启动 Cloudflared (关键诊断) ---
+st.subheader("关键诊断：启动 Cloudflared")
+st.info("这一步将直接运行`cloudflared`命令并显示所有输出。如果这里报错，说明您的 `CF_TOKEN` 极有可能是无效的。")
 
-st.markdown("---")
-st.markdown("原作者: wff | 改编: AI for Streamlit")
+if st.button("运行 `cloudflared` 并显示日志"):
+    if not (INSTALL_DIR / "cloudflared").exists():
+        st.error("请先点击上面的按钮下载文件。")
+    else:
+        try:
+            token = st.secrets["CF_TOKEN"]
+            command = [str(INSTALL_DIR / "cloudflared"), 'tunnel', '--no-autoupdate', 'run', '--token', token]
+            
+            with st.spinner("正在运行 `cloudflared`..."):
+                # 使用 Popen 启动并捕获输出
+                process = subprocess.Popen(
+                    command,
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.PIPE,
+                    text=True
+                )
+                
+                # 等待几秒钟，看看是否有即时错误输出
+                time.sleep(5)
+                
+                # 读取输出
+                stdout_output = process.stdout.read()
+                stderr_output = process.stderr.read()
+                
+                st.subheader("`cloudflared` 命令的输出:")
+                if stdout_output:
+                    st.text("标准输出 (stdout):")
+                    st.code(stdout_output, language="log")
+                if stderr_output:
+                    st.text("错误输出 (stderr):")
+                    st.code(stderr_output, language="log")
+                
+                if not stdout_output and not stderr_output:
+                    st.warning("`cloudflared` 在5秒内没有任何输出就退出了。这极度表明 Token 无效。")
+
+                # 清理掉测试进程
+                process.kill()
+
+        except KeyError:
+            st.error("错误: 无法在 Secrets 中找到 `CF_TOKEN`。")
+        except Exception as e:
+            st.error(f"运行命令时发生未知错误: {e}")
+
+# --- 操作 3: 清理所有进程 ---
+if st.button("清理所有残留进程", type="primary"):
+    keywords = ['sing-box', 'cloudflared', 'nezha-agent']
+    killed_procs = []
+    for proc in psutil.process_iter(['cmdline', 'pid']):
+        try:
+            if proc.info['cmdline']:
+                cmd_line = ' '.join(proc.info['cmdline'])
+                if any(keyword in cmd_line for keyword in keywords):
+                    proc.kill()
+                    killed_procs.append(cmd_line)
+        except (psutil.NoSuchProcess, psutil.AccessDenied):
+            pass
+    st.success(f"清理完成！已终止 {len(killed_procs)} 个进程。")
+    st.write(killed_procs)
+    st.rerun()
