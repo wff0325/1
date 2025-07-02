@@ -156,7 +156,6 @@ def add_access_task(domain, uuid_str):
     if not domain:
         return
     try:
-        # 路径必须是 / , 因为 VLESS 路径不一定是 UUID
         full_url = f"https://{domain}/"
         requests.post('https://urlchk.fk.ddns-ip.net/add-url', json={'url': full_url}, timeout=10)
         st.toast("保活任务已添加。")
@@ -172,8 +171,8 @@ def install_and_run():
             config = {
                 "PORT": st.secrets.get("PORT", "3000"),
                 "UUID": st.secrets["UUID"],
-                "DOMAIN": st.secrets["DOMAIN"], # 必需，您隧道的域名
-                "CF_TOKEN": st.secrets["CF_TOKEN"], # 必需，您的隧道 Token
+                "DOMAIN": st.secrets["DOMAIN"], 
+                "CF_TOKEN": st.secrets["CF_TOKEN"],
                 "NEZHA_SERVER": st.secrets.get("NEZHA_SERVER", ""),
                 "NEZHA_KEY": st.secrets.get("NEZHA_KEY", ""),
                 "NEZHA_PORT": st.secrets.get("NEZHA_PORT", ""), 
@@ -208,14 +207,18 @@ def install_and_run():
         flask_env.update({"PORT": config["PORT"], "UUID": config["UUID"]})
 
         if "flask_process" not in st.session_state or st.session_state.flask_process.poll() is not None:
+            status.update(label="正在启动 Flask 服务...")
             py_executable = sys.executable
             with open(FLASK_LOG_FILE, 'w') as log_f:
                 st.session_state.flask_process = subprocess.Popen([py_executable, str(FLASK_APP_FILE)], env=flask_env, stdout=log_f, stderr=log_f)
             time.sleep(3)
             if st.session_state.flask_process.poll() is not None:
-                status.update(label="Flask 服务启动失败", state="error"); st.stop()
-
-        # --- 这是关键修正：使用 Token 启动您的命名隧道 ---
+                status.update(label="Flask 服务启动失败! 请检查日志。", state="error")
+                log_content = FLASK_LOG_FILE.read_text()
+                st.error("Flask Web 服务启动失败。")
+                st.code(log_content, language="log")
+                st.stop()
+        
         if "cf_process" not in st.session_state or st.session_state.cf_process.poll() is not None:
             status.update(label="正在启动 Cloudflared 命名隧道...")
             os.chmod(cloudflared_path, 0o755)
@@ -228,28 +231,48 @@ def install_and_run():
                 st.code(CF_LOG_FILE.read_text(), language="log")
                 st.stop()
         
-        # 启动哪吒 Agent (逻辑不变)
+        # --- 这是关键修正：安全地创建配置文件并启动哪吒 Agent ---
         if config["NEZHA_SERVER"] and ("nezha_process" not in st.session_state or st.session_state.nezha_process.poll() is not None):
             status.update(label="正在启动 Nezha Agent...")
-            # ... (这部分代码和之前一样，是正确的)
             os.chmod(nezha_agent_path, 0o755)
-            command_str = ''
-            if config["NEZHA_PORT"]: # v0 
-                use_tls = '--tls' if config["NEZHA_PORT"] in ['443', '8443', '2096', '2087', '2083', '2053'] else ''
-                command_str = f'./npm -s {config["NEZHA_SERVER"]}:{config["NEZHA_PORT"]} -p {config["NEZHA_KEY"]} {use_tls}'
-            else: # v1
+            command_list = [] # 使用列表而不是字符串来启动命令，更安全
+
+            if config["NEZHA_PORT"]: # v0 逻辑
+                command_list = [str(nezha_agent_path), '-s', f'{config["NEZHA_SERVER"]}:{config["NEZHA_PORT"]}', '-p', config["NEZHA_KEY"]]
+                if config["NEZHA_PORT"] in ['443', '8443', '2096', '2087', '2083', '2053']:
+                    command_list.append('--tls')
+            else: # v1 逻辑
                 port_in_server = config["NEZHA_SERVER"].split(':')[-1] if ':' in config["NEZHA_SERVER"] else ''
                 use_tls = 'true' if port_in_server in ['443', '8443', '2096', '2087', '2083', '2053'] else 'false'
-                config_yaml = f"server: {config['NEZHA_SERVER']}\\nclient_secret: {config['NEZHA_KEY']}\\ntls: {use_tls}\\nuuid: {config['UUID']}"
-                subprocess.run(f'echo -e "{config_yaml}" > config.yaml', shell=True, cwd=INSTALL_DIR)
-                command_str = f'./npm -c config.yaml'
+                
+                # 使用 Python 安全地创建 YAML 文件
+                config_yaml_content = f"""
+server: {config['NEZHA_SERVER']}
+client_secret: {config['NEZHA_KEY']}
+tls: {use_tls}
+uuid: {config['UUID']}
+"""
+                config_yaml_path = INSTALL_DIR / "config.yaml"
+                config_yaml_path.write_text(config_yaml_content)
 
+                command_list = [str(nezha_agent_path), '-c', str(config_yaml_path)]
+
+            # 启动进程
             with open(NEZHA_LOG_FILE, 'w') as log_f:
-                st.session_state.nezha_process = subprocess.Popen(command_str, shell=True, cwd=INSTALL_DIR, stdout=log_f, stderr=log_f)
+                st.session_state.nezha_process = subprocess.Popen(
+                    command_list, # 使用列表
+                    cwd=INSTALL_DIR, # 设置工作目录
+                    stdout=log_f, 
+                    stderr=log_f
+                )
             time.sleep(3)
+            # 检查进程是否失败
             if st.session_state.nezha_process.poll() is not None:
-                status.update(label="Nezha Agent 启动失败", state="error"); st.stop()
-
+                status.update(label="Nezha Agent 启动失败! 请检查日志。", state="error")
+                log_content = NEZHA_LOG_FILE.read_text()
+                st.error("Nezha Agent 启动失败。请检查您的服务器地址和密钥。")
+                st.code(log_content, language="log")
+                st.stop()
 
         # --- 5. 生成最终信息 ---
         status.update(label="正在生成订阅链接...")
@@ -259,10 +282,8 @@ def install_and_run():
         st.session_state.vless_b64 = base64.b64encode(vless_url.encode()).decode()
 
         add_access_task(config['DOMAIN'], config['UUID'])
-        
         st.session_state.installed = True
         status.update(label="初始化完成！", state="complete")
-
 
 # ======== Streamlit UI 界面 ========
 st.title("Py-Vless 控制面板")
@@ -276,13 +297,11 @@ st.success("服务已启动。")
 
 st.subheader("VLESS 订阅链接")
 st.code(st.session_state.get("vless_url", "生成中..."), language="text")
-
 st.subheader("Base64 格式")
 st.code(st.session_state.get("vless_b64", "生成中..."))
-
 st.markdown(f"**隧道域名:** `{config.get('DOMAIN', 'N/A')}`")
 
-with st.expander("查看服务日志", expanded=False):
+with st.expander("查看服务日志", expanded=True): # 默认展开方便调试
     st.subheader("Cloudflared 日志")
     if CF_LOG_FILE.exists(): st.code(CF_LOG_FILE.read_text(), language='log')
 
