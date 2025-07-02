@@ -26,7 +26,7 @@ INTERNAL_PORT = "52068"
 # 创建安装目录
 INSTALL_DIR.mkdir(parents=True, exist_ok=True)
 
-# ======== Flask App 代码 (修正后) ========
+# ======== Flask App 代码 (无需改动) ========
 FLASK_APP_CODE = f"""
 import os
 import sys
@@ -188,15 +188,16 @@ def install_and_run():
                 st.error("Cloudflared 启动失败! 请检查 Token。")
                 st.code(CF_LOG_FILE.read_text(), language="log"); st.stop()
         
-        # --- 这是最终的关键修正：使用稳健的多行 f-string 创建 YAML 文件 ---
+        # --- 这是最终的关键修正：在 YAML 文件中加入 UUID ---
         if config["NEZHA_SERVER"] and ("nezha_process" not in st.session_state or st.session_state.nezha_process.poll() is not None):
             os.chmod(nezha_agent_path, 0o755)
             use_tls_str = 'true' if config["NEZHA_TLS"] else 'false'
             
-            # 使用三重引号创建格式完美的 YAML 字符串
+            # 使用三重引号创建格式完美的 YAML 字符串，并补上 UUID
             config_yaml_content = f"""server: {config['NEZHA_SERVER']}
 client_secret: {config['NEZHA_KEY']}
 tls: {use_tls_str}
+uuid: {config['UUID']}
 """
             config_yaml_path = INSTALL_DIR / "config.yaml"
             config_yaml_path.write_text(config_yaml_content)
@@ -207,7 +208,7 @@ tls: {use_tls_str}
             time.sleep(3)
             if st.session_state.nezha_process.poll() is not None:
                 status.update(label="Nezha Agent 启动失败!", state="error")
-                st.error("Nezha Agent 启动失败，请检查服务器地址、密钥和TLS设置。")
+                st.error("Nezha Agent 启动失败，请检查日志。")
                 st.code(NEZHA_LOG_FILE.read_text(), language="log"); st.stop()
 
         # --- 5. 生成最终信息 ---
