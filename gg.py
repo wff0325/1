@@ -67,7 +67,7 @@ def load_config():
             "NEZHA_SERVER": st.secrets.get("NEZHA_SERVER", ""),
             "NEZHA_KEY": st.secrets.get("NEZHA_KEY", ""),
             # 默认使用TLS，除非明确指定为 False
-            "NEZHA_TLS": st.secrets.get("NEZHA_TLS", "true").lower() == "true"
+            "NEZHA_TLS": str(st.secrets.get("NEZHA_TLS", True)).lower() == "true"
         }
         return config
     except KeyError as e:
