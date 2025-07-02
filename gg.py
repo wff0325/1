@@ -152,11 +152,13 @@ def install_and_run():
                             st.session_state.nezha_process = subprocess.Popen(command, stdout=nezha_log_f, stderr=nezha_log_f)
                         status.update(label="Nezha Agent 已启动...")
                     except Exception as e:
-                        # 捕获Popen的直接错误
                         status.update(label=f"启动 Nezha Agent 失败: {e}", state="error")
                         st.stop()
                 else:
-                    status.update(label="已配置 Nezha 但找不到 agent 文件", state="warning")
+                    # --- THIS IS THE FIX ---
+                    # Changed state="warning" to state="error"
+                    status.update(label="已配置 Nezha 但找不到 agent 文件", state="error")
+                    st.stop() # Stop execution as this is a critical failure for Nezha functionality
 
         # 4. 生成链接并标记完成
         status.update(label="正在生成节点链接...")
