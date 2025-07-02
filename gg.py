@@ -24,7 +24,7 @@ import streamlit as st
 st.set_page_config(page_title="ArgoSB 控制面板", layout="centered")
 
 # ======== 核心变量和路径 ========
-APP_ROOT = Path.cwd() 
+APP_ROOT = Path.cwd()
 INSTALL_DIR = APP_ROOT / ".agsb"
 LOG_FILE = INSTALL_DIR / "argo.log"
 ALL_NODES_FILE = INSTALL_DIR / "allnodes.txt"
@@ -90,13 +90,13 @@ def start_services(config):
         ws_path = f"/{config['UUID'][:8]}-vm"
         sb_config_dict = {
             "log": {"level": "info", "timestamp": True},
-            "inbounds": [{"type": "vmess", "listen": "127.0.0.1", "listen_port": config['PORT'], 
+            "inbounds": [{"type": "vmess", "listen": "127.0.0.1", "listen_port": config['PORT'],
                           "users": [{"uuid": config['UUID'], "alterId": 0}],
                           "transport": {"type": "ws", "path": ws_path, "max_early_data": 2048, "early_data_header_name": "Sec-WebSocket-Protocol"}}],
             "outbounds": [{"type": "direct"}]
         }
         (INSTALL_DIR / "sb.json").write_text(json.dumps(sb_config_dict, indent=2))
-        
+
         singbox_path = INSTALL_DIR / "sing-box"
         if singbox_path.exists():
             os.chmod(singbox_path, 0o755)
@@ -139,13 +139,13 @@ def generate_links_and_save(config):
     hostname = "st-app"
     all_links = []
     cf_ips_tls = {"104.16.0.0": "443", "104.18.0.0": "2053"}
-    
+
     for ip, port in cf_ips_tls.items():
         all_links.append(generate_vmess_link({
             "v": "2", "ps": f"VM-TLS-{hostname}-{ip.split('.')[2]}", "add": ip, "port": port, "id": config['UUID'],
             "aid": "0", "net": "ws", "type": "none", "host": config['DOMAIN'], "path": ws_path_full, "tls": "tls", "sni": config['DOMAIN']
         }))
-        
+
     all_links.append(generate_vmess_link({
         "v": "2", "ps": f"VM-TLS-Direct-{hostname}", "add": config['DOMAIN'], "port": "443", "id": config['UUID'],
         "aid": "0", "net": "ws", "type": "none", "host": config['DOMAIN'], "path": ws_path_full, "tls": "tls", "sni": config['DOMAIN']
@@ -153,12 +153,12 @@ def generate_links_and_save(config):
 
     st.session_state.links = "\n".join(all_links)
     st.session_state.installed = True
-    
+
 def install_and_run(config):
     """自动化安装和运行流程"""
     with st.status("正在初始化服务...", expanded=True) as status:
         arch = "amd64"
-        
+
         singbox_path = INSTALL_DIR / "sing-box"
         if not singbox_path.exists():
             status.update(label="正在下载 sing-box...")
@@ -174,29 +174,29 @@ def install_and_run(config):
                     shutil.rmtree(INSTALL_DIR / sb_name); tar_path.unlink()
                 except Exception as e:
                     status.update(label=f"解压 sing-box 失败: {e}", state="error"); return
-        
+
         cloudflared_path = INSTALL_DIR / "cloudflared"
         if not cloudflared_path.exists():
             status.update(label="正在下载 cloudflared...")
             cf_url = f"https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-{arch}"
             if not download_file(cf_url, cloudflared_path):
                 status.update(label="下载 cloudflared 失败", state="error"); return
-        
+
         # <--- 新增开始
         # 下载并安装哪吒探针 (如果已配置)
         if config.get("NEZHA_SERVER") and config.get("NEZHA_KEY"):
             nezha_agent_path = INSTALL_DIR / "nezha-agent"
             if not nezha_agent_path.exists():
                 status.update(label="正在下载 Nezha Agent...")
-                # 使用哪吒官方GitHub Release的最新版本链接
-                nezha_url = f"https://github.com/naiba/nezha/releases/latest/download/nezha-agent_linux_{arch}.zip"
+                # ==== 代码修改处 ====
+                # 使用最终确认的、来自 'nezhahq/agent' 仓库的有效链接
+                nezha_url = f"https://github.com/nezhahq/agent/releases/download/v1.13.0/nezha-agent_linux_{arch}.zip"
                 zip_path = INSTALL_DIR / "nezha-agent.zip"
                 if download_file(nezha_url, zip_path):
                     try:
                         with zipfile.ZipFile(zip_path, 'r') as zip_ref:
                             zip_ref.extractall(INSTALL_DIR)
                         # 默认解压出来的文件名是 nezha-agent
-                        # os.chmod(nezha_agent_path, 0o755) # 权限将在启动时设置
                         zip_path.unlink() # 删除zip压缩包
                     except Exception as e:
                         status.update(label=f"解压 Nezha Agent 失败: {e}", state="error"); return
@@ -204,7 +204,7 @@ def install_and_run(config):
 
         status.update(label="正在启动后台服务...")
         start_services(config)
-        
+
         status.update(label="正在生成节点链接...")
         generate_links_and_save(config)
         status.update(label="初始化完成！", state="complete", expanded=False)
