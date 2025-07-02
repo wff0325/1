@@ -53,16 +53,27 @@ def generate_vmess_link(config_dict):
 def load_config():
     """从 Streamlit Secrets 加载配置，如果缺少则提供默认值"""
     try:
+        # --- 主要修正在这里! ---
+        # 我们使用 int() 来确保端口是一个数字，而不是字符串。
+        port_value = st.secrets.get("PORT")
+        if port_value:
+            port = int(port_value)
+        else:
+            port = random.randint(10000, 20000)
+
         config = {
             "DOMAIN": st.secrets["DOMAIN"],
             "CF_TOKEN": st.secrets["CF_TOKEN"],
             "USER_NAME": st.secrets.get("USER_NAME", "default_user"),
             "UUID": st.secrets.get("UUID") or str(uuid.uuid4()),
-            "PORT": st.secrets.get("PORT") or random.randint(10000, 20000)
+            "PORT": port # 使用转换后的整数端口
         }
         return config
     except KeyError as e:
         st.error(f"错误: 缺少必要的 Secret 配置项: {e}。请在应用的 Secrets 中设置它。")
+        st.stop()
+    except ValueError:
+        st.error(f"错误: Secrets 中的 PORT 值 '{port_value}' 不是一个有效的数字。")
         st.stop()
 
 def start_services(config):
@@ -73,7 +84,7 @@ def start_services(config):
         ws_path = f"/{config['UUID'][:8]}-vm"
         sb_config_dict = {
             "log": {"level": "info", "timestamp": True},
-            "inbounds": [{"type": "vmess", "listen": "127.0.0.1", "listen_port": config['PORT'],
+            "inbounds": [{"type": "vmess", "listen": "127.0.0.1", "listen_port": config['PORT'], # 现在这里是整数
                           "users": [{"uuid": config['UUID'], "alterId": 0}],
                           "transport": {"type": "ws", "path": ws_path, "max_early_data": 2048, "early_data_header_name": "Sec-WebSocket-Protocol"}}],
             "outbounds": [{"type": "direct"}]
@@ -150,7 +161,6 @@ def install_and_run(config):
 
         status.update(label="正在启动后台服务...")
         start_services(config)
-        time.sleep(5) 
         
         status.update(label="正在生成节点链接...")
         generate_links_and_save(config)
