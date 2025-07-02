@@ -198,4 +198,4 @@ with st.expander("查看当前配置和Argo日志"):
     if LOG_FILE.exists(): st.code(LOG_FILE.read_text(), language='log')
 
 st.markdown("---")
-st.markdown("原作者: 康康 | 改编: AI for Streamlit")
+st.markdown("原作者: wff | 改编: AI for Streamlit")
