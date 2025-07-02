@@ -9,9 +9,11 @@ from pathlib import Path
 import urllib.request
 import ssl
 import zipfile
+import tarfile  # <--- 已将此项移至顶部
 import streamlit as st
 import psutil
-import random # <-- 修复 NameError 的关键
+import random
+import uuid
 
 # ======== Streamlit 配置 ========
 st.set_page_config(page_title="ArgoSB 终极调试面板", layout="wide")
@@ -118,7 +120,6 @@ if st.button("下载/更新所有必需文件"):
         sb_version="1.9.0-beta.11"; sb_name=f"sing-box-{sb_version}-linux-{arch}"; tar_path=INSTALL_DIR/"sing-box.tar.gz"
         sb_urls = [f"https://github.com/SagerNet/sing-box/releases/download/v{sb_version}/{sb_name}.tar.gz"]
         if download_with_progress(sb_urls, tar_path, status):
-            import tarfile;
             with tarfile.open(tar_path, "r:gz") as tar: tar.extractall(path=INSTALL_DIR, filter='data')
             shutil.move(INSTALL_DIR/sb_name/"sing-box", INSTALL_DIR/"sing-box"); shutil.rmtree(INSTALL_DIR/sb_name); tar_path.unlink(); os.chmod(INSTALL_DIR/"sing-box", 0o755)
 
@@ -142,44 +143,46 @@ if st.button("启动所有服务"):
     kill_all_processes() # 启动前先清理
     # 启动 Cloudflared
     token = st.secrets["CF_TOKEN"]; command = [str(INSTALL_DIR / "cloudflared"), 'tunnel', '--no-autoupdate', 'run', '--token', token]
-    st.session_state.processes['cloudflared'] = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, encoding='utf-8', errors='ignore')
+    st.session_state.processes['cloudflared'] = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, encoding='utf-8', errors='ignore')
     # 启动 Sing-box
     port = int(st.secrets.get("PORT", random.randint(10000, 20000))); uuid_str = st.secrets.get("UUID", str(uuid.uuid4())); ws_path = "/"
     sb_config = {"log": {"level": "info"}, "inbounds": [{"type": "vmess", "listen": "127.0.0.1", "listen_port": port, "users": [{"uuid": uuid_str}], "transport": {"type": "ws", "path": ws_path}}], "outbounds": [{"type": "direct"}]}
     (INSTALL_DIR / "sb.json").write_text(json.dumps(sb_config))
     command = [str(INSTALL_DIR / "sing-box"), 'run', '-c', str(INSTALL_DIR / "sb.json")]
-    st.session_state.processes['sing-box'] = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, encoding='utf-8', errors='ignore')
+    st.session_state.processes['sing-box'] = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, encoding='utf-8', errors='ignore')
     # 启动 Nezha Agent
     if "NEZHA_SERVER" in st.secrets:
         nezha_config = {"SERVER": st.secrets["NEZHA_SERVER"], "PORT": st.secrets["NEZHA_PORT"], "KEY": st.secrets["NEZHA_KEY"], "TLS": st.secrets.get("NEZHA_TLS", False)}
         command = [str(INSTALL_DIR / "nezha-agent"), '-s', f"{nezha_config['SERVER']}:{nezha_config['PORT']}", '-p', nezha_config['KEY']]
         if nezha_config['TLS']: command.append('--tls')
-        st.session_state.processes['nezha-agent'] = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, encoding='utf-8', errors='ignore')
+        st.session_state.processes['nezha-agent'] = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, encoding='utf-8', errors='ignore')
     st.rerun()
 
 # --- 日志显示 ---
+st.subheader("实时日志 (页面刷新后更新)")
 log_tabs = st.tabs(["Cloudflared", "Sing-box", "Nezha Agent"])
 
 def display_log(service_name):
+    output_key = f"{service_name}_log_output"
+    if output_key not in st.session_state:
+        st.session_state[output_key] = f"No logs yet for {service_name}."
+
+    # 为了能实时看到最新的日志，我们在每次渲染时都尝试读取
     if service_name in st.session_state.processes:
         proc = st.session_state.processes[service_name]
-        # 非阻塞地读取日志
-        output = ""
         try:
-            # Popen 的 stdout 是一个流，不能被反复读取
-            # 我们在这里把它读完并保存
-            if f"{service_name}_log" not in st.session_state:
-                 st.session_state[f"{service_name}_log"] = ""
-            
-            # 实时读取新的日志
-            new_output = proc.stdout.read()
-            if new_output:
-                st.session_state[f"{service_name}_log"] += new_output
-            
-            st.code(st.session_state[f"{service_name}_log"], language="log")
-        except Exception as e:
-            st.error(f"无法读取日志: {e}")
+            # Popen的stdout是一个流，需要实时读取
+            # 我们在这里将它读完并保存
+            # 注意：这是一个简化的日志查看器，可能不完美
+            stdout_data = proc.stdout.read()
+            if stdout_data:
+                st.session_state[output_key] += stdout_data
+        except:
+             pass
 
-with log_tabs[0]: st.subheader("Cloudflared Tunnel 日志"); display_log('cloudflared')
-with log_tabs[1]: st.subheader("Sing-box (Vmess 服务) 日志"); display_log('sing-box')
-with log_tabs[2]: st.subheader("Nezha Agent 日志"); display_log('nezha-agent')
+    st.code(st.session_state[output_key], language="log")
+
+
+with log_tabs[0]: display_log('cloudflared')
+with log_tabs[1]: display_log('sing-box')
+with log_tabs[2]: display_log('nezha-agent')
