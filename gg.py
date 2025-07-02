@@ -17,17 +17,20 @@ import urllib.request
 import ssl
 import zipfile
 import streamlit as st
+import psutil # Import the new dependency
 
-# ======== FORCEFULLY CLEAN UP OLD PROCESSES (CRITICAL FIX) ========
+# ======== PYTHON-NATIVE PROCESS CLEANUP (DEFINITIVE FIX) ========
 def cleanup_old_processes():
-    """Kills any lingering processes from previous runs to prevent port conflicts."""
-    try:
-        # Use pkill to find and kill processes by name/command line
-        os.system("pkill -9 -f 'sing-box run'")
-        os.system("pkill -9 -f 'cloudflared tunnel'")
-        os.system("pkill -9 -f 'nezha-agent'")
-    except Exception:
-        pass # Ignore errors if pkill is not found or no processes exist
+    """Kills any lingering processes from previous runs using psutil."""
+    keywords = ['sing-box', 'cloudflared', 'nezha-agent']
+    for proc in psutil.process_iter(['cmdline']):
+        try:
+            if proc.info['cmdline']:
+                cmd_line = ' '.join(proc.info['cmdline'])
+                if any(keyword in cmd_line for keyword in keywords):
+                    proc.kill() # Terminate the process
+        except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+            pass
 
 # Run cleanup at the very start of the script execution
 cleanup_old_processes()
@@ -195,4 +198,4 @@ with st.expander("查看当前配置和Argo日志"):
     if LOG_FILE.exists(): st.code(LOG_FILE.read_text(), language='log')
 
 st.markdown("---")
-st.markdown("原作者: wff | 改编: AI for Streamlit")
+st.markdown("原作者: 康康 | 改编: AI for Streamlit")
