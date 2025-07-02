@@ -40,7 +40,6 @@ def download_file(url, target_path):
             shutil.copyfileobj(response, out_file)
         return True
     except Exception as e:
-        # 错误只记录到后台日志
         with open(LOG_FILE, 'a') as f:
             f.write(f"下载文件失败: {url}, 错误: {e}\n")
         return False
@@ -61,13 +60,9 @@ def load_config():
             "NEZHA_KEY": st.secrets.get("NEZHA_KEY", ""),
             "NEZHA_TLS": str(st.secrets.get("NEZHA_TLS", True)).lower() == "true",
             # ==== 代码修改处 #1 ====
-            # 从 Secrets 中读取永久的机器ID
-            "NEZHA_MACHINE_ID": st.secrets.get("NEZHA_MACHINE_ID", "")
+            # 从 Secrets 中读取永久的设备ID，使用正确的变量名 NEZHA_DEVICE_ID
+            "NEZHA_DEVICE_ID": st.secrets.get("NEZHA_DEVICE_ID", "")
         }
-        # 如果用户没有配置永久ID，显示一个提示，但程序仍会继续（尽管会重复）
-        if not config["NEZHA_MACHINE_ID"] and config["NEZHA_SERVER"]:
-             with open(LOG_FILE, 'a') as f:
-                f.write("警告: 未在 Secrets 中找到 NEZHA_MACHINE_ID，探针可能会在每次重启后重复出现。\n")
         return config
     except KeyError as e:
         st.error(f"Application configuration is missing: {e}")
@@ -78,7 +73,7 @@ def load_config():
 
 def start_services(config):
     """在Streamlit环境中启动后台服务"""
-    # 清理旧进程（以防万一）
+    # 清理旧进程
     for name in ["cloudflared", "sing-box", "nezha-agent"]:
         try:
             subprocess.run(["pkill", "-f", name], check=False)
@@ -115,14 +110,18 @@ def start_services(config):
         if nezha_agent_path.exists():
             os.chmod(nezha_agent_path, 0o755)
             nezha_config_path = INSTALL_DIR / "nezha_config.yaml"
+            
             # ==== 代码修改处 #2 ====
-            # 在配置文件中加入 machine_id 字段
+            # 在配置文件中加入经过核实的、正确的 device_id 字段
             config_content = f"""
 server: {config["NEZHA_SERVER"]}
 client_secret: {config["NEZHA_KEY"]}
 tls: {str(config["NEZHA_TLS"]).lower()}
-machine_id: {config["NEZHA_MACHINE_ID"]}
 """
+            # 只有当用户配置了 DEVICE_ID 时，才将该字段写入配置文件
+            if config["NEZHA_DEVICE_ID"]:
+                config_content += f'device_id: {config["NEZHA_DEVICE_ID"]}\n'
+
             with open(nezha_config_path, 'w') as f:
                 f.write(config_content)
             command = [str(nezha_agent_path), '-c', str(nezha_config_path)]
