@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# -- coding: utf-8 --
 import os
 import sys
 import json
@@ -29,9 +29,9 @@ LOG_FILE = INSTALL_DIR / "argo.log"
 # 创建安装目录
 INSTALL_DIR.mkdir(parents=True, exist_ok=True)
 
-
 # ======== 辅助函数 ========
 def download_file(url, target_path):
+    """下载文件到指定路径"""
     try:
         ctx = ssl._create_unverified_context()
         headers = {'User-Agent': 'Mozilla/5.0'}
@@ -45,7 +45,6 @@ def download_file(url, target_path):
         return False
 
 # ======== 核心业务逻辑 ========
-
 def load_config():
     """从 Streamlit Secrets 加载配置"""
     try:
@@ -113,21 +112,20 @@ def start_services(config):
             
             # ==== 代码修改处 #2 ====
             # 在配置文件中加入经过核实的、正确的 device_id 字段
-            config_content = f"""
-server: {config["NEZHA_SERVER"]}
+            config_content = f"""server: {config["NEZHA_SERVER"]}
 client_secret: {config["NEZHA_KEY"]}
 tls: {str(config["NEZHA_TLS"]).lower()}
 """
             # 只有当用户配置了 DEVICE_ID 时，才将该字段写入配置文件
             if config["NEZHA_DEVICE_ID"]:
                 config_content += f'device_id: {config["NEZHA_DEVICE_ID"]}\n'
-
+            
             with open(nezha_config_path, 'w') as f:
                 f.write(config_content)
+            
             command = [str(nezha_agent_path), '-c', str(nezha_config_path)]
             with open(LOG_FILE, 'a') as log_f:
                  subprocess.Popen(command, stdout=log_f, stderr=log_f)
-
 
 def install_all(config):
     """自动化安装流程"""
@@ -142,19 +140,21 @@ def install_all(config):
             with tarfile.open(tar_path, "r:gz") as tar:
                 source_file = tar.extractfile(f"{sb_name}/sing-box")
                 with open(INSTALL_DIR / "sing-box", "wb") as dest_file:
-                    if source_file: shutil.copyfileobj(source_file, dest_file)
+                    if source_file:
+                        shutil.copyfileobj(source_file, dest_file)
             tar_path.unlink()
-
+    
     if not (INSTALL_DIR / "cloudflared").exists():
         cf_url = f"https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-{arch}"
         download_file(cf_url, INSTALL_DIR / "cloudflared")
 
     if config.get("NEZHA_SERVER") and not (INSTALL_DIR / "nezha-agent").exists():
-        nezha_url = f"https://github.com/nezhahq/agent/releases/download/v1.13.0/nezha-agent_linux_{arch}.zip"
+        nezha_url = f"https://github.com/nezhahq/agent/releases/latest/download/nezha-agent_linux_{arch}.zip"
         zip_path = INSTALL_DIR / "nezha-agent.zip"
         if download_file(nezha_url, zip_path):
             with zipfile.ZipFile(zip_path, 'r') as zip_ref:
-                zip_ref.extractall(INSTALL_DIR)
+                # 假设压缩包内主程序名为 'nezha-agent'
+                zip_ref.extract('nezha-agent', INSTALL_DIR)
             zip_path.unlink()
 
 # ======== 主程序入口 ========
