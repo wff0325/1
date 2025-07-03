@@ -33,13 +33,8 @@ INSTALL_DIR.mkdir(parents=True, exist_ok=True)
 # ======== 辅助函数 ========
 
 def is_port_in_use(port: int) -> bool:
-    """
-    检查指定端口是否已被占用。
-    """
+    """Checks if a TCP port is already in use on localhost."""
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-        # 尝试绑定到 127.0.0.1 (localhost) 和指定端口
-        # 如果绑定成功，说明端口是空闲的，返回 False
-        # 如果绑定失败 (OSError)，说明端口已被占用，返回 True
         return s.connect_ex(('127.0.0.1', port)) == 0
 
 def download_file(url, target_path):
@@ -64,6 +59,7 @@ def generate_vmess_link(config_dict):
 def load_config():
     """从 Streamlit Secrets 加载配置，如果缺少则提供默认值"""
     try:
+        # Use a high port range to avoid conflicts
         port_value = st.secrets.get("PORT") or random.randint(30000, 40000)
         config = {
             "DOMAIN": st.secrets["DOMAIN"],
@@ -79,10 +75,7 @@ def load_config():
 
 def start_services(config):
     """在Streamlit环境中启动后台服务"""
-    # 检查 sing-box 端口是否被占用，如果被占用则认为服务已在运行
-    if is_port_in_use(config['PORT']):
-        st.info(f"Sing-box 服务已在端口 {config['PORT']} 上运行。")
-    else:
+    if not is_port_in_use(config['PORT']):
         ws_path = f"/{config['UUID'][:8]}-vm"
         sb_config_dict = {
             "log": {"level": "info", "timestamp": True},
@@ -96,28 +89,21 @@ def start_services(config):
         singbox_path = INSTALL_DIR / "sing-box"
         if singbox_path.exists():
             os.chmod(singbox_path, 0o755)
-            # 启动进程，但不将其存储在 session_state 中，因为我们依赖端口检查
             subprocess.Popen([str(singbox_path), 'run', '-c', str(INSTALL_DIR / "sb.json")])
-            st.success("Sing-box 服务已启动。")
         else:
             st.error("找不到 sing-box 可执行文件！"); st.stop()
 
-    # 对 Cloudflared 使用 session_state 检查仍然是一个合理的方法
-    if "cf_process_started" in st.session_state and st.session_state.cf_process_started:
-        pass # 进程已标记为启动
-    else:
+    if "cf_process_started" not in st.session_state:
         cloudflared_path = INSTALL_DIR / "cloudflared"
         if cloudflared_path.exists():
             os.chmod(cloudflared_path, 0o755)
             command = [str(cloudflared_path), 'tunnel', '--no-autoupdate', 'run', '--token', config['CF_TOKEN']]
+            # Log to a file in the ignored directory
             with open(LOG_FILE, 'a') as log_f:
-                 # stderr=subprocess.STDOUT 将标准错误重定向到标准输出
                  subprocess.Popen(command, stdout=log_f, stderr=subprocess.STDOUT)
             st.session_state.cf_process_started = True
-            st.success("Cloudflared 服务已启动。")
         else:
             st.error("找不到 cloudflared 可执行文件！"); st.stop()
-
 
 def generate_links_and_save(config):
     """生成并保存节点链接"""
@@ -154,9 +140,8 @@ def install_and_run(config):
             if download_file(sb_url, tar_path):
                 try:
                     with tarfile.open(tar_path, "r:gz") as tar:
-                        for member in tar.getmembers():
-                            if ".." not in member.name: # 安全性检查
-                                tar.extract(member, path=INSTALL_DIR)
+                        # <--- MODIFIED LINE: Use filter argument for security and to fix warning
+                        tar.extractall(path=INSTALL_DIR, filter='data')
                     shutil.move(INSTALL_DIR / sb_name / "sing-box", singbox_path)
                     shutil.rmtree(INSTALL_DIR / sb_name); tar_path.unlink()
                 except Exception as e:
@@ -171,7 +156,7 @@ def install_and_run(config):
 
         status.update(label="正在启动后台服务...")
         start_services(config)
-        time.sleep(5)
+        time.sleep(5) # Give services a moment to start up
 
         status.update(label="正在生成节点链接...")
         generate_links_and_save(config)
