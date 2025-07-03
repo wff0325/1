@@ -15,7 +15,7 @@ import uuid
 from pathlib import Path
 import urllib.request
 import ssl
-import tarfile  # 确保导入 tarfile
+import tarfile
 import streamlit as st
 
 # ======== Streamlit 配置 ========
@@ -54,14 +54,13 @@ def generate_vmess_link(config_dict):
 def load_config():
     """从 Streamlit Secrets 加载配置，如果缺少则提供默认值"""
     try:
-        # 如果 secrets 中没有 PORT，则使用随机整数；如果有，则将其转换为整数
         port_value = st.secrets.get("PORT") or random.randint(10000, 20000)
         config = {
             "DOMAIN": st.secrets["DOMAIN"],
             "CF_TOKEN": st.secrets["CF_TOKEN"],
             "USER_NAME": st.secrets.get("USER_NAME", "default_user"),
             "UUID": st.secrets.get("UUID") or str(uuid.uuid4()),
-            "PORT": int(port_value)  # <--- 修改点 1: 确保 PORT 是整数类型
+            "PORT": int(port_value)
         }
         return config
     except KeyError as e:
@@ -71,7 +70,7 @@ def load_config():
 def start_services(config):
     """在Streamlit环境中启动后台服务"""
     if "sb_process" in st.session_state and st.session_state.sb_process.poll() is None:
-        pass # 进程已在运行
+        pass
     else:
         ws_path = f"/{config['UUID'][:8]}-vm"
         sb_config_dict = {
@@ -91,7 +90,7 @@ def start_services(config):
             st.error("找不到 sing-box 可执行文件！"); st.stop()
 
     if "cf_process" in st.session_state and st.session_state.cf_process.poll() is None:
-        pass # 进程已在运行
+        pass
     else:
         cloudflared_path = INSTALL_DIR / "cloudflared"
         if cloudflared_path.exists():
@@ -137,9 +136,12 @@ def install_and_run(config):
             tar_path = INSTALL_DIR / "sing-box.tar.gz"
             if download_file(sb_url, tar_path):
                 try:
-                    # 使用 with 语句确保文件被正确关闭，并添加 filter 参数
                     with tarfile.open(tar_path, "r:gz") as tar:
-                        tar.extractall(path=INSTALL_DIR, filter='data') # <--- 修改点 2: 修复 DeprecationWarning
+                        def filter_data(members):
+                            for member in members:
+                                if ".." not in member.name:
+                                    yield member
+                        tar.extractall(path=INSTALL_DIR, members=filter_data(tar))
                     shutil.move(INSTALL_DIR / sb_name / "sing-box", singbox_path)
                     shutil.rmtree(INSTALL_DIR / sb_name); tar_path.unlink()
                 except Exception as e:
@@ -160,7 +162,39 @@ def install_and_run(config):
         generate_links_and_save(config)
         status.update(label="初始化完成！", state="complete", expanded=False)
 
-# ======== Streamlit UI 界面 ========
+# --- 新增的登录逻辑开始 ---
+
+# 检查会话状态中用户是否已登录
+if not st.session_state.get("logged_in", False):
+    st.title("访问授权")
+    st.write("这是一个私人应用，请输入密码访问。")
+
+    # 从Secrets获取预设密码
+    try:
+        correct_password = st.secrets["APP_PASSWORD"]
+    except KeyError:
+        st.error("错误: 应用密码 (APP_PASSWORD) 未在 Streamlit Secrets 中设置。请联系管理员。")
+        st.stop()
+
+    # 创建密码输入表单
+    password = st.text_input("密码", type="password")
+
+    if st.button("登录"):
+        if password == correct_password:
+            st.session_state.logged_in = True
+            st.success("登录成功！正在加载应用...")
+            time.sleep(1) # 短暂延时，提升用户体验
+            st.rerun()
+        else:
+            st.error("密码错误，请重试。")
+            
+    # 在登录成功前，停止执行后续代码
+    st.stop()
+
+# --- 新增的登录逻辑结束 ---
+
+
+# ======== Streamlit UI 界面 (登录后可见) ========
 st.title("ArgoSB 部署面板")
 
 # 从 Secrets 加载配置
