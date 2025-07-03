@@ -25,13 +25,23 @@ st.set_page_config(page_title="ArgoSB 控制面板", layout="centered")
 APP_ROOT = Path.cwd()
 INSTALL_DIR = APP_ROOT / ".agsb"
 LOG_FILE = INSTALL_DIR / "argo.log"
-ALL_NODES_FILE = INSTALL_DIR / "allnodes.txt"
 
 # 创建安装目录
 INSTALL_DIR.mkdir(parents=True, exist_ok=True)
 
 
 # ======== 辅助函数 ========
+
+def is_port_in_use(port: int) -> bool:
+    """
+    检查指定端口是否已被占用。
+    """
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        # 尝试绑定到 127.0.0.1 (localhost) 和指定端口
+        # 如果绑定成功，说明端口是空闲的，返回 False
+        # 如果绑定失败 (OSError)，说明端口已被占用，返回 True
+        return s.connect_ex(('127.0.0.1', port)) == 0
+
 def download_file(url, target_path):
     try:
         with st.spinner(f'正在下载 {Path(url).name}...'):
@@ -54,7 +64,7 @@ def generate_vmess_link(config_dict):
 def load_config():
     """从 Streamlit Secrets 加载配置，如果缺少则提供默认值"""
     try:
-        port_value = st.secrets.get("PORT") or random.randint(10000, 20000)
+        port_value = st.secrets.get("PORT") or random.randint(30000, 40000)
         config = {
             "DOMAIN": st.secrets["DOMAIN"],
             "CF_TOKEN": st.secrets["CF_TOKEN"],
@@ -69,8 +79,9 @@ def load_config():
 
 def start_services(config):
     """在Streamlit环境中启动后台服务"""
-    if "sb_process" in st.session_state and st.session_state.sb_process.poll() is None:
-        pass
+    # 检查 sing-box 端口是否被占用，如果被占用则认为服务已在运行
+    if is_port_in_use(config['PORT']):
+        st.info(f"Sing-box 服务已在端口 {config['PORT']} 上运行。")
     else:
         ws_path = f"/{config['UUID'][:8]}-vm"
         sb_config_dict = {
@@ -85,21 +96,28 @@ def start_services(config):
         singbox_path = INSTALL_DIR / "sing-box"
         if singbox_path.exists():
             os.chmod(singbox_path, 0o755)
-            st.session_state.sb_process = subprocess.Popen([str(singbox_path), 'run', '-c', str(INSTALL_DIR / "sb.json")])
+            # 启动进程，但不将其存储在 session_state 中，因为我们依赖端口检查
+            subprocess.Popen([str(singbox_path), 'run', '-c', str(INSTALL_DIR / "sb.json")])
+            st.success("Sing-box 服务已启动。")
         else:
             st.error("找不到 sing-box 可执行文件！"); st.stop()
 
-    if "cf_process" in st.session_state and st.session_state.cf_process.poll() is None:
-        pass
+    # 对 Cloudflared 使用 session_state 检查仍然是一个合理的方法
+    if "cf_process_started" in st.session_state and st.session_state.cf_process_started:
+        pass # 进程已标记为启动
     else:
         cloudflared_path = INSTALL_DIR / "cloudflared"
         if cloudflared_path.exists():
             os.chmod(cloudflared_path, 0o755)
             command = [str(cloudflared_path), 'tunnel', '--no-autoupdate', 'run', '--token', config['CF_TOKEN']]
-            with open(LOG_FILE, 'w') as log_f:
-                 st.session_state.cf_process = subprocess.Popen(command, stdout=log_f, stderr=log_f)
+            with open(LOG_FILE, 'a') as log_f:
+                 # stderr=subprocess.STDOUT 将标准错误重定向到标准输出
+                 subprocess.Popen(command, stdout=log_f, stderr=subprocess.STDOUT)
+            st.session_state.cf_process_started = True
+            st.success("Cloudflared 服务已启动。")
         else:
             st.error("找不到 cloudflared 可执行文件！"); st.stop()
+
 
 def generate_links_and_save(config):
     """生成并保存节点链接"""
@@ -126,7 +144,6 @@ def install_and_run(config):
     """自动化安装和运行流程"""
     with st.status("正在初始化服务...", expanded=True) as status:
         arch = "amd64"
-
         singbox_path = INSTALL_DIR / "sing-box"
         if not singbox_path.exists():
             status.update(label="正在下载 sing-box...")
@@ -137,11 +154,9 @@ def install_and_run(config):
             if download_file(sb_url, tar_path):
                 try:
                     with tarfile.open(tar_path, "r:gz") as tar:
-                        def filter_data(members):
-                            for member in members:
-                                if ".." not in member.name:
-                                    yield member
-                        tar.extractall(path=INSTALL_DIR, members=filter_data(tar))
+                        for member in tar.getmembers():
+                            if ".." not in member.name: # 安全性检查
+                                tar.extract(member, path=INSTALL_DIR)
                     shutil.move(INSTALL_DIR / sb_name / "sing-box", singbox_path)
                     shutil.rmtree(INSTALL_DIR / sb_name); tar_path.unlink()
                 except Exception as e:
@@ -162,49 +177,36 @@ def install_and_run(config):
         generate_links_and_save(config)
         status.update(label="初始化完成！", state="complete", expanded=False)
 
-# --- 新增的登录逻辑开始 ---
-
-# 检查会话状态中用户是否已登录
+# --- 登录逻辑 ---
 if not st.session_state.get("logged_in", False):
     st.title("访问授权")
     st.write("这是一个私人应用，请输入密码访问。")
-
-    # 从Secrets获取预设密码
     try:
         correct_password = st.secrets["APP_PASSWORD"]
     except KeyError:
         st.error("错误: 应用密码 (APP_PASSWORD) 未在 Streamlit Secrets 中设置。请联系管理员。")
         st.stop()
 
-    # 创建密码输入表单
     password = st.text_input("密码", type="password")
-
     if st.button("登录"):
         if password == correct_password:
             st.session_state.logged_in = True
             st.success("登录成功！正在加载应用...")
-            time.sleep(1) # 短暂延时，提升用户体验
+            time.sleep(1)
             st.rerun()
         else:
             st.error("密码错误，请重试。")
-            
-    # 在登录成功前，停止执行后续代码
     st.stop()
-
-# --- 新增的登录逻辑结束 ---
-
 
 # ======== Streamlit UI 界面 (登录后可见) ========
 st.title("ArgoSB 部署面板")
 
-# 从 Secrets 加载配置
 app_config = load_config()
-st.session_state.app_config = app_config # 保存到会话状态
+st.session_state.app_config = app_config
 st.markdown(f"**域名:** `{app_config['DOMAIN']}`")
 
-# 检查服务是否已标记为运行
 if "installed" in st.session_state and st.session_state.installed:
-    st.success("服务已启动。")
+    st.success("服务已就绪。")
     st.subheader("Vmess 节点链接")
     st.code(st.session_state.links, language="text")
 else:
@@ -214,7 +216,10 @@ else:
 with st.expander("查看当前配置和调试日志"):
     st.json(st.session_state.app_config)
     if LOG_FILE.exists():
-        st.code(LOG_FILE.read_text(), language='log')
+        try:
+            st.code(LOG_FILE.read_text(), language='log')
+        except Exception as e:
+            st.warning(f"无法读取日志文件: {e}")
 
 st.markdown("---")
 st.markdown("原作者: wff | 改编: AI for Streamlit")
