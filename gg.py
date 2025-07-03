@@ -15,7 +15,7 @@ import uuid
 from pathlib import Path
 import urllib.request
 import ssl
-import tarfile  # 确保导入 tarfile
+import tarfile
 import streamlit as st
 
 # ======== Streamlit 配置 ========
@@ -25,7 +25,6 @@ st.set_page_config(page_title="ArgoSB 控制面板", layout="centered")
 APP_ROOT = Path.cwd()
 INSTALL_DIR = APP_ROOT / ".agsb"
 LOG_FILE = INSTALL_DIR / "argo.log"
-ALL_NODES_FILE = INSTALL_DIR / "allnodes.txt"
 
 # 创建安装目录
 INSTALL_DIR.mkdir(parents=True, exist_ok=True)
@@ -49,19 +48,20 @@ def generate_vmess_link(config_dict):
     vmess_str = json.dumps(config_dict, sort_keys=True)
     return f"vmess://{base64.b64encode(vmess_str.encode('utf-8')).decode('utf-8').rstrip('=')}"
 
+
 # ======== 核心业务逻辑 ========
 
 def load_config():
     """从 Streamlit Secrets 加载配置，如果缺少则提供默认值"""
     try:
-        # 如果 secrets 中没有 PORT，则使用随机整数；如果有，则将其转换为整数
         port_value = st.secrets.get("PORT") or random.randint(10000, 20000)
         config = {
             "DOMAIN": st.secrets["DOMAIN"],
             "CF_TOKEN": st.secrets["CF_TOKEN"],
             "USER_NAME": st.secrets.get("USER_NAME", "default_user"),
             "UUID": st.secrets.get("UUID") or str(uuid.uuid4()),
-            "PORT": int(port_value)  # <--- 修改点 1: 确保 PORT 是整数类型
+            "PORT": int(port_value),
+            "STATIC_PORT": int(port_value) + 1  # 为内部静态服务器分配一个端口
         }
         return config
     except KeyError as e:
@@ -70,15 +70,44 @@ def load_config():
 
 def start_services(config):
     """在Streamlit环境中启动后台服务"""
+    # 1. 启动伪装页面服务器
+    # 这个服务器会托管你 GitHub 仓库根目录下的文件 (index.html)
+    if "static_server_process" in st.session_state and st.session_state.static_server_process.poll() is None:
+        pass # 进程已在运行
+    else:
+        # 使用 Python 内置的 http.server 模块，将当前目录(APP_ROOT)作为网站根目录
+        command = [
+            sys.executable, '-m', 'http.server',
+            '--directory', str(APP_ROOT), # 直接使用应用根目录
+            '--bind', '127.0.0.1',
+            str(config['STATIC_PORT'])
+        ]
+        st.session_state.static_server_process = subprocess.Popen(command, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
+    # 2. 启动 sing-box 进行流量分流
     if "sb_process" in st.session_state and st.session_state.sb_process.poll() is None:
         pass # 进程已在运行
     else:
         ws_path = f"/{config['UUID'][:8]}-vm"
+        
+        # 使用 fallbacks 将非 Vmess 流量转发到内部静态服务器
         sb_config_dict = {
             "log": {"level": "info", "timestamp": True},
-            "inbounds": [{"type": "vmess", "listen": "127.0.0.1", "listen_port": config['PORT'],
-                          "users": [{"uuid": config['UUID'], "alterId": 0}],
-                          "transport": {"type": "ws", "path": ws_path, "max_early_data": 2048, "early_data_header_name": "Sec-WebSocket-Protocol"}}],
+            "inbounds": [{
+                "type": "vmess",
+                "listen": "127.0.0.1",
+                "listen_port": config['PORT'],
+                "users": [{"uuid": config['UUID'], "alterId": 0}],
+                "transport": {
+                    "type": "ws",
+                    "path": ws_path,
+                    "max_early_data": 2048,
+                    "early_data_header_name": "Sec-WebSocket-Protocol"
+                },
+                "fallbacks": [{
+                    "dest": config['STATIC_PORT'] # 转发到内部静态服务器的端口
+                }]
+            }],
             "outbounds": [{"type": "direct"}]
         }
         (INSTALL_DIR / "sb.json").write_text(json.dumps(sb_config_dict, indent=2))
@@ -90,17 +119,24 @@ def start_services(config):
         else:
             st.error("找不到 sing-box 可执行文件！"); st.stop()
 
+    # 3. 启动 cloudflared 将外部流量导入
     if "cf_process" in st.session_state and st.session_state.cf_process.poll() is None:
         pass # 进程已在运行
     else:
         cloudflared_path = INSTALL_DIR / "cloudflared"
         if cloudflared_path.exists():
             os.chmod(cloudflared_path, 0o755)
-            command = [str(cloudflared_path), 'tunnel', '--no-autoupdate', 'run', '--token', config['CF_TOKEN']]
+            # cloudflared 连接到 sing-box 的端口，由 sing-box 负责所有分流
+            command = [
+                str(cloudflared_path), 'tunnel', '--no-autoupdate',
+                '--url', f"http://127.0.0.1:{config['PORT']}",
+                'run', '--token', config['CF_TOKEN']
+            ]
             with open(LOG_FILE, 'w') as log_f:
                  st.session_state.cf_process = subprocess.Popen(command, stdout=log_f, stderr=log_f)
         else:
             st.error("找不到 cloudflared 可执行文件！"); st.stop()
+
 
 def generate_links_and_save(config):
     """生成并保存节点链接"""
@@ -137,9 +173,8 @@ def install_and_run(config):
             tar_path = INSTALL_DIR / "sing-box.tar.gz"
             if download_file(sb_url, tar_path):
                 try:
-                    # 使用 with 语句确保文件被正确关闭，并添加 filter 参数
                     with tarfile.open(tar_path, "r:gz") as tar:
-                        tar.extractall(path=INSTALL_DIR, filter='data') # <--- 修改点 2: 修复 DeprecationWarning
+                        tar.extractall(path=INSTALL_DIR, filter='data')
                     shutil.move(INSTALL_DIR / sb_name / "sing-box", singbox_path)
                     shutil.rmtree(INSTALL_DIR / sb_name); tar_path.unlink()
                 except Exception as e:
@@ -163,10 +198,18 @@ def install_and_run(config):
 # ======== Streamlit UI 界面 ========
 st.title("ArgoSB 部署面板")
 
+# 检查伪装页面是否存在
+decoy_exists = (APP_ROOT / "index.html").exists()
+if not decoy_exists:
+    st.warning("警告: 在你的 GitHub 仓库根目录中未找到 `index.html` 文件。伪装将无法正常工作，访问域名可能会显示错误。")
+
+
 # 从 Secrets 加载配置
 app_config = load_config()
-st.session_state.app_config = app_config # 保存到会话状态
+st.session_state.app_config = app_config
 st.markdown(f"**域名:** `{app_config['DOMAIN']}`")
+if decoy_exists:
+    st.markdown(f"**访问** `https://{app_config['DOMAIN']}` **可查看仓库中的 `index.html` 作为伪装页面。**")
 
 # 检查服务是否已标记为运行
 if "installed" in st.session_state and st.session_state.installed:
