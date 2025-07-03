@@ -10,6 +10,7 @@ from pathlib import Path
 import urllib.request
 import ssl
 import tarfile
+from datetime import datetime  # <--- 新增的导入语句
 import streamlit as st
 
 # ======== 核心：这是一个后台启动器，不需要任何UI ========
