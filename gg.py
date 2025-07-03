@@ -15,13 +15,14 @@ import uuid
 from pathlib import Path
 import urllib.request
 import ssl
+import tarfile  # 确保导入 tarfile
 import streamlit as st
 
 # ======== Streamlit 配置 ========
 st.set_page_config(page_title="ArgoSB 控制面板", layout="centered")
 
 # ======== 核心变量和路径 ========
-APP_ROOT = Path.cwd() 
+APP_ROOT = Path.cwd()
 INSTALL_DIR = APP_ROOT / ".agsb"
 LOG_FILE = INSTALL_DIR / "argo.log"
 ALL_NODES_FILE = INSTALL_DIR / "allnodes.txt"
@@ -53,12 +54,14 @@ def generate_vmess_link(config_dict):
 def load_config():
     """从 Streamlit Secrets 加载配置，如果缺少则提供默认值"""
     try:
+        # 如果 secrets 中没有 PORT，则使用随机整数；如果有，则将其转换为整数
+        port_value = st.secrets.get("PORT") or random.randint(10000, 20000)
         config = {
             "DOMAIN": st.secrets["DOMAIN"],
             "CF_TOKEN": st.secrets["CF_TOKEN"],
             "USER_NAME": st.secrets.get("USER_NAME", "default_user"),
             "UUID": st.secrets.get("UUID") or str(uuid.uuid4()),
-            "PORT": st.secrets.get("PORT") or random.randint(10000, 20000)
+            "PORT": int(port_value)  # <--- 修改点 1: 确保 PORT 是整数类型
         }
         return config
     except KeyError as e:
@@ -79,7 +82,7 @@ def start_services(config):
             "outbounds": [{"type": "direct"}]
         }
         (INSTALL_DIR / "sb.json").write_text(json.dumps(sb_config_dict, indent=2))
-        
+
         singbox_path = INSTALL_DIR / "sing-box"
         if singbox_path.exists():
             os.chmod(singbox_path, 0o755)
@@ -105,13 +108,13 @@ def generate_links_and_save(config):
     hostname = "st-app"
     all_links = []
     cf_ips_tls = {"104.16.0.0": "443", "104.18.0.0": "2053"}
-    
+
     for ip, port in cf_ips_tls.items():
         all_links.append(generate_vmess_link({
             "v": "2", "ps": f"VM-TLS-{hostname}-{ip.split('.')[2]}", "add": ip, "port": port, "id": config['UUID'],
             "aid": "0", "net": "ws", "type": "none", "host": config['DOMAIN'], "path": ws_path_full, "tls": "tls", "sni": config['DOMAIN']
         }))
-        
+
     all_links.append(generate_vmess_link({
         "v": "2", "ps": f"VM-TLS-Direct-{hostname}", "add": config['DOMAIN'], "port": "443", "id": config['UUID'],
         "aid": "0", "net": "ws", "type": "none", "host": config['DOMAIN'], "path": ws_path_full, "tls": "tls", "sni": config['DOMAIN']
@@ -119,12 +122,12 @@ def generate_links_and_save(config):
 
     st.session_state.links = "\n".join(all_links)
     st.session_state.installed = True
-    
+
 def install_and_run(config):
     """自动化安装和运行流程"""
     with st.status("正在初始化服务...", expanded=True) as status:
         arch = "amd64"
-        
+
         singbox_path = INSTALL_DIR / "sing-box"
         if not singbox_path.exists():
             status.update(label="正在下载 sing-box...")
@@ -134,13 +137,14 @@ def install_and_run(config):
             tar_path = INSTALL_DIR / "sing-box.tar.gz"
             if download_file(sb_url, tar_path):
                 try:
-                    import tarfile
-                    with tarfile.open(tar_path, "r:gz") as tar: tar.extractall(path=INSTALL_DIR)
+                    # 使用 with 语句确保文件被正确关闭，并添加 filter 参数
+                    with tarfile.open(tar_path, "r:gz") as tar:
+                        tar.extractall(path=INSTALL_DIR, filter='data') # <--- 修改点 2: 修复 DeprecationWarning
                     shutil.move(INSTALL_DIR / sb_name / "sing-box", singbox_path)
                     shutil.rmtree(INSTALL_DIR / sb_name); tar_path.unlink()
                 except Exception as e:
                     status.update(label=f"解压 sing-box 失败: {e}", state="error"); return
-        
+
         cloudflared_path = INSTALL_DIR / "cloudflared"
         if not cloudflared_path.exists():
             status.update(label="正在下载 cloudflared...")
@@ -150,8 +154,8 @@ def install_and_run(config):
 
         status.update(label="正在启动后台服务...")
         start_services(config)
-        time.sleep(5) 
-        
+        time.sleep(5)
+
         status.update(label="正在生成节点链接...")
         generate_links_and_save(config)
         status.update(label="初始化完成！", state="complete", expanded=False)
