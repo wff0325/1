@@ -5,225 +5,165 @@ import json
 import random
 import time
 import shutil
-import re
-import base64
-import socket
 import subprocess
-import platform
-from datetime import datetime
-import uuid
 from pathlib import Path
 import urllib.request
 import ssl
 import tarfile
 import streamlit as st
 
-# ======== Streamlit 配置 ========
-st.set_page_config(page_title="ArgoSB 控制面板", layout="centered")
+# ======== 核心：这是一个后台启动器，不需要任何UI ========
 
-# ======== 核心变量和路径 ========
+# 1. 基本配置和路径设置
+st.set_page_config(page_title="Service Launcher", layout="wide") # 页面本身不会显示，但设置一下无妨
+
 APP_ROOT = Path.cwd()
 INSTALL_DIR = APP_ROOT / ".agsb"
 LOG_FILE = INSTALL_DIR / "argo.log"
 
-# 创建安装目录
+# 创建目录
 INSTALL_DIR.mkdir(parents=True, exist_ok=True)
 
+# ======== 2. 辅助函数 ========
 
-# ======== 辅助函数 ========
+def print_and_log(message):
+    """在终端和日志文件中同时打印消息"""
+    print(message)
+    with open(LOG_FILE, "a") as f:
+        f.write(f"[{datetime.now()}] {message}\n")
+
 def download_file(url, target_path):
+    """下载文件，并在终端打印进度"""
+    print_and_log(f"Downloading {Path(url).name}...")
     try:
-        with st.spinner(f'正在下载 {Path(url).name}...'):
-            ctx = ssl._create_unverified_context()
-            headers = {'User-Agent': 'Mozilla/5.0'}
-            req = urllib.request.Request(url, headers=headers)
-            with urllib.request.urlopen(req, context=ctx) as response, open(target_path, 'wb') as out_file:
-                shutil.copyfileobj(response, out_file)
+        ctx = ssl._create_unverified_context()
+        headers = {'User-Agent': 'Mozilla/5.0'}
+        req = urllib.request.Request(url, headers=headers)
+        with urllib.request.urlopen(req, context=ctx) as response, open(target_path, 'wb') as out_file:
+            shutil.copyfileobj(response, out_file)
+        print_and_log(f"Successfully downloaded to {target_path}")
         return True
     except Exception as e:
-        st.error(f"下载文件失败: {url}, 错误: {e}")
+        print_and_log(f"ERROR: Failed to download {url}. Reason: {e}")
         return False
 
-def generate_vmess_link(config_dict):
-    vmess_str = json.dumps(config_dict, sort_keys=True)
-    return f"vmess://{base64.b64encode(vmess_str.encode('utf-8')).decode('utf-8').rstrip('=')}"
+# ======== 3. 核心业务逻辑 ========
 
-
-# ======== 核心业务逻辑 ========
-
-def load_config():
-    """从 Streamlit Secrets 加载配置，如果缺少则提供默认值"""
+def run_services():
+    """主函数：加载配置、下载依赖、启动服务"""
+    
+    # --- 加载配置 ---
     try:
         port_value = st.secrets.get("PORT") or random.randint(10000, 20000)
         config = {
             "DOMAIN": st.secrets["DOMAIN"],
             "CF_TOKEN": st.secrets["CF_TOKEN"],
-            "USER_NAME": st.secrets.get("USER_NAME", "default_user"),
             "UUID": st.secrets.get("UUID") or str(uuid.uuid4()),
             "PORT": int(port_value),
-            "STATIC_PORT": int(port_value) + 1  # 为内部静态服务器分配一个端口
+            "STATIC_PORT": int(port_value) + 1
         }
-        return config
+        print_and_log("Configuration loaded successfully.")
     except KeyError as e:
+        print_and_log(f"FATAL ERROR: Missing secret: {e}. Deployment cannot continue.")
         st.error(f"错误: 缺少必要的 Secret 配置项: {e}。请在应用的 Secrets 中设置它。")
-        st.stop()
+        return # 停止执行
 
-def start_services(config):
-    """在Streamlit环境中启动后台服务"""
-    # 1. 启动伪装页面服务器
-    # 这个服务器会托管你 GitHub 仓库根目录下的文件 (index.html)
-    if "static_server_process" in st.session_state and st.session_state.static_server_process.poll() is None:
-        pass # 进程已在运行
-    else:
-        # 使用 Python 内置的 http.server 模块，将当前目录(APP_ROOT)作为网站根目录
-        command = [
-            sys.executable, '-m', 'http.server',
-            '--directory', str(APP_ROOT), # 直接使用应用根目录
-            '--bind', '127.0.0.1',
-            str(config['STATIC_PORT'])
-        ]
-        st.session_state.static_server_process = subprocess.Popen(command, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-
-    # 2. 启动 sing-box 进行流量分流
-    if "sb_process" in st.session_state and st.session_state.sb_process.poll() is None:
-        pass # 进程已在运行
-    else:
-        ws_path = f"/{config['UUID'][:8]}-vm"
-        
-        # 使用 fallbacks 将非 Vmess 流量转发到内部静态服务器
-        sb_config_dict = {
-            "log": {"level": "info", "timestamp": True},
-            "inbounds": [{
-                "type": "vmess",
-                "listen": "127.0.0.1",
-                "listen_port": config['PORT'],
-                "users": [{"uuid": config['UUID'], "alterId": 0}],
-                "transport": {
-                    "type": "ws",
-                    "path": ws_path,
-                    "max_early_data": 2048,
-                    "early_data_header_name": "Sec-WebSocket-Protocol"
-                },
-                "fallbacks": [{
-                    "dest": config['STATIC_PORT'] # 转发到内部静态服务器的端口
-                }]
-            }],
-            "outbounds": [{"type": "direct"}]
-        }
-        (INSTALL_DIR / "sb.json").write_text(json.dumps(sb_config_dict, indent=2))
-
-        singbox_path = INSTALL_DIR / "sing-box"
-        if singbox_path.exists():
-            os.chmod(singbox_path, 0o755)
-            st.session_state.sb_process = subprocess.Popen([str(singbox_path), 'run', '-c', str(INSTALL_DIR / "sb.json")])
-        else:
-            st.error("找不到 sing-box 可执行文件！"); st.stop()
-
-    # 3. 启动 cloudflared 将外部流量导入
-    if "cf_process" in st.session_state and st.session_state.cf_process.poll() is None:
-        pass # 进程已在运行
-    else:
-        cloudflared_path = INSTALL_DIR / "cloudflared"
-        if cloudflared_path.exists():
-            os.chmod(cloudflared_path, 0o755)
-            # cloudflared 连接到 sing-box 的端口，由 sing-box 负责所有分流
-            command = [
-                str(cloudflared_path), 'tunnel', '--no-autoupdate',
-                '--url', f"http://127.0.0.1:{config['PORT']}",
-                'run', '--token', config['CF_TOKEN']
-            ]
-            with open(LOG_FILE, 'w') as log_f:
-                 st.session_state.cf_process = subprocess.Popen(command, stdout=log_f, stderr=log_f)
-        else:
-            st.error("找不到 cloudflared 可执行文件！"); st.stop()
-
-
-def generate_links_and_save(config):
-    """生成并保存节点链接"""
-    ws_path_full = f"/{config['UUID'][:8]}-vm?ed=2048"
-    hostname = "st-app"
-    all_links = []
-    cf_ips_tls = {"104.16.0.0": "443", "104.18.0.0": "2053"}
-
-    for ip, port in cf_ips_tls.items():
-        all_links.append(generate_vmess_link({
-            "v": "2", "ps": f"VM-TLS-{hostname}-{ip.split('.')[2]}", "add": ip, "port": port, "id": config['UUID'],
-            "aid": "0", "net": "ws", "type": "none", "host": config['DOMAIN'], "path": ws_path_full, "tls": "tls", "sni": config['DOMAIN']
-        }))
-
-    all_links.append(generate_vmess_link({
-        "v": "2", "ps": f"VM-TLS-Direct-{hostname}", "add": config['DOMAIN'], "port": "443", "id": config['UUID'],
-        "aid": "0", "net": "ws", "type": "none", "host": config['DOMAIN'], "path": ws_path_full, "tls": "tls", "sni": config['DOMAIN']
-    }))
-
-    st.session_state.links = "\n".join(all_links)
-    st.session_state.installed = True
-
-def install_and_run(config):
-    """自动化安装和运行流程"""
-    with st.status("正在初始化服务...", expanded=True) as status:
+    # --- 检查并下载 sing-box ---
+    singbox_path = INSTALL_DIR / "sing-box"
+    if not singbox_path.exists():
         arch = "amd64"
+        sb_version = "1.9.0-beta.11"
+        sb_name = f"sing-box-{sb_version}-linux-{arch}"
+        sb_url = f"https://github.com/SagerNet/sing-box/releases/download/v{sb_version}/{sb_name}.tar.gz"
+        tar_path = INSTALL_DIR / "sing-box.tar.gz"
+        if download_file(sb_url, tar_path):
+            try:
+                with tarfile.open(tar_path, "r:gz") as tar:
+                    tar.extractall(path=INSTALL_DIR, filter='data')
+                shutil.move(INSTALL_DIR / sb_name / "sing-box", singbox_path)
+                shutil.rmtree(INSTALL_DIR / sb_name); tar_path.unlink()
+                print_and_log("sing-box extracted successfully.")
+            except Exception as e:
+                print_and_log(f"FATAL ERROR: Failed to extract sing-box: {e}")
+                return
+    else:
+        print_and_log("sing-box already exists.")
 
-        singbox_path = INSTALL_DIR / "sing-box"
-        if not singbox_path.exists():
-            status.update(label="正在下载 sing-box...")
-            sb_version = "1.9.0-beta.11"
-            sb_name = f"sing-box-{sb_version}-linux-{arch}"
-            sb_url = f"https://github.com/SagerNet/sing-box/releases/download/v{sb_version}/{sb_name}.tar.gz"
-            tar_path = INSTALL_DIR / "sing-box.tar.gz"
-            if download_file(sb_url, tar_path):
-                try:
-                    with tarfile.open(tar_path, "r:gz") as tar:
-                        tar.extractall(path=INSTALL_DIR, filter='data')
-                    shutil.move(INSTALL_DIR / sb_name / "sing-box", singbox_path)
-                    shutil.rmtree(INSTALL_DIR / sb_name); tar_path.unlink()
-                except Exception as e:
-                    status.update(label=f"解压 sing-box 失败: {e}", state="error"); return
+    # --- 检查并下载 cloudflared ---
+    cloudflared_path = INSTALL_DIR / "cloudflared"
+    if not cloudflared_path.exists():
+        arch = "amd64"
+        cf_url = f"https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-{arch}"
+        if not download_file(cf_url, cloudflared_path):
+            print_and_log("FATAL ERROR: Failed to download cloudflared.")
+            return
+    else:
+        print_and_log("cloudflared already exists.")
+        
+    # --- 启动伪装网站服务器 ---
+    # 它会托管你仓库根目录下的 index.html
+    decoy_html_path = APP_ROOT / "index.html"
+    if not decoy_html_path.exists():
+        print_and_log("WARNING: index.html not found in the repository root. Decoy website will not work.")
+    
+    server_cmd = [
+        sys.executable, '-m', 'http.server',
+        '--directory', str(APP_ROOT),
+        '--bind', '127.0.0.1',
+        str(config['STATIC_PORT'])
+    ]
+    with open(LOG_FILE, "a") as log_f:
+        subprocess.Popen(server_cmd, stdout=log_f, stderr=log_f)
+    print_and_log(f"Internal static server started on port {config['STATIC_PORT']}.")
 
-        cloudflared_path = INSTALL_DIR / "cloudflared"
-        if not cloudflared_path.exists():
-            status.update(label="正在下载 cloudflared...")
-            cf_url = f"https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-{arch}"
-            if not download_file(cf_url, cloudflared_path):
-                status.update(label="下载 cloudflared 失败", state="error"); return
+    # --- 配置并启动 sing-box ---
+    ws_path = f"/{config['UUID'][:8]}-vm"
+    sb_config_dict = {
+        "log": {"level": "info", "timestamp": True},
+        "inbounds": [{"type": "vmess", "listen": "127.0.0.1", "listen_port": config['PORT'],
+                      "users": [{"uuid": config['UUID'], "alterId": 0}],
+                      "transport": {"type": "ws", "path": ws_path},
+                      "fallbacks": [{"dest": config['STATIC_PORT']}]
+                     }],
+        "outbounds": [{"type": "direct"}]
+    }
+    (INSTALL_DIR / "sb.json").write_text(json.dumps(sb_config_dict, indent=2))
+    
+    os.chmod(singbox_path, 0o755)
+    singbox_cmd = [str(singbox_path), 'run', '-c', str(INSTALL_DIR / "sb.json")]
+    with open(LOG_FILE, "a") as log_f:
+        subprocess.Popen(singbox_cmd, stdout=log_f, stderr=log_f)
+    print_and_log(f"sing-box started, listening on port {config['PORT']}.")
 
-        status.update(label="正在启动后台服务...")
-        start_services(config)
-        time.sleep(5)
+    # --- 启动 cloudflared ---
+    os.chmod(cloudflared_path, 0o755)
+    cf_cmd = [
+        str(cloudflared_path), 'tunnel', '--no-autoupdate',
+        '--url', f"http://127.0.0.1:{config['PORT']}",
+        'run', '--token', config['CF_TOKEN']
+    ]
+    with open(LOG_FILE, "a") as log_f:
+        subprocess.Popen(cf_cmd, stdout=log_f, stderr=log_f)
+    print_and_log("cloudflared tunnel started.")
 
-        status.update(label="正在生成节点链接...")
-        generate_links_and_save(config)
-        status.update(label="初始化完成！", state="complete", expanded=False)
+# ======== 4. 主程序入口 ========
 
-# ======== Streamlit UI 界面 ========
-st.title("ArgoSB 部署面板")
-
-# 检查伪装页面是否存在
-decoy_exists = (APP_ROOT / "index.html").exists()
-if not decoy_exists:
-    st.warning("警告: 在你的 GitHub 仓库根目录中未找到 `index.html` 文件。伪装将无法正常工作，访问域名可能会显示错误。")
-
-
-# 从 Secrets 加载配置
-app_config = load_config()
-st.session_state.app_config = app_config
-st.markdown(f"**域名:** `{app_config['DOMAIN']}`")
-if decoy_exists:
-    st.markdown(f"**访问** `https://{app_config['DOMAIN']}` **可查看仓库中的 `index.html` 作为伪装页面。**")
-
-# 检查服务是否已标记为运行
-if "installed" in st.session_state and st.session_state.installed:
-    st.success("服务已启动。")
-    st.subheader("Vmess 节点链接")
-    st.code(st.session_state.links, language="text")
+# 检查一个标记文件，防止在开发环境中重复运行
+# 在 Streamlit Cloud 上，每次部署都是一个新环境，所以这个逻辑会完整执行一次
+FLAG_FILE = INSTALL_DIR / ".launched"
+if not FLAG_FILE.exists():
+    # 运行所有服务
+    run_services()
+    
+    # 创建标记文件，表示已经启动过
+    FLAG_FILE.touch()
+    
+    print_and_log("All services launched. Script is now idle.")
 else:
-    install_and_run(app_config)
-    st.rerun()
+    print_and_log("Services already launched in this session. Script is idle.")
 
-with st.expander("查看当前配置和调试日志"):
-    st.json(st.session_state.app_config)
-    if LOG_FILE.exists():
-        st.code(LOG_FILE.read_text(), language='log')
-
-st.markdown("---")
-st.markdown("原作者: wff | 改编: AI for Streamlit")
+# --- 最后，用一个空白的占位符来保持 Streamlit 进程存活 ---
+# 这样，我们启动的所有子进程 (sing-box, cloudflared) 就能继续在后台运行
+st.empty()
+# 你现在看到的这个空白页面，外界是访问不到的。
+# 外界访问你的域名时，流量被 cloudflared -> sing-box 拦截并导向了伪装站。
