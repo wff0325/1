@@ -47,7 +47,7 @@ def download_file(url, target_path):
 # ======== 核心业务逻辑 ========
 
 def load_config():
-    """从 Streamlit Secrets 加载配置 (已移除哪吒探针部分)"""
+    """从 Streamlit Secrets 加载配置"""
     try:
         port_value = st.secrets.get("PORT")
         port = int(port_value) if port_value else random.randint(10000, 20000)
@@ -66,7 +66,7 @@ def load_config():
         st.stop()
 
 def start_services(config):
-    """在Streamlit环境中启动后台服务 (已移除哪吒探针部分)"""
+    """在Streamlit环境中启动后台服务"""
     # 清理旧进程
     for name in ["cloudflared", "sing-box"]:
         try:
@@ -90,16 +90,21 @@ def start_services(config):
         with open(LOG_FILE, 'a') as log_f:
             subprocess.Popen([str(singbox_path), 'run', '-c', str(INSTALL_DIR / "sb.json")], stdout=log_f, stderr=log_f)
 
-    # 启动 cloudflared
+    # 启动 cloudflared (这是唯一的、核心的修改点)
     cloudflared_path = INSTALL_DIR / "cloudflared"
     if cloudflared_path.exists():
         os.chmod(cloudflared_path, 0o755)
-        command = [str(cloudflared_path), 'tunnel', '--no-autoupdate', 'run', '--token', config['CF_TOKEN']]
+        
+        # 明确指定 cloudflared 将流量转发到本地 sing-box 监听的地址和端口
+        # 这是保证节点联通的最可靠方法
+        target_url = f"http://localhost:{config['PORT']}"
+        command = [str(cloudflared_path), 'tunnel', '--no-autoupdate', 'run', '--url', target_url, '--token', config['CF_TOKEN']]
+        
         with open(LOG_FILE, 'w') as log_f:
             subprocess.Popen(command, stdout=log_f, stderr=log_f)
 
 def install_all(config):
-    """自动化安装流程 (已移除哪吒探针部分)"""
+    """自动化安装流程"""
     arch = "amd64"
     if not (INSTALL_DIR / "sing-box").exists():
         sb_version = "1.9.0-beta.11"
