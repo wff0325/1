@@ -1,0 +1,4 @@
+[server]
+# A list of folders that should not be watched for changes.
+# We add .agsb to prevent the "inotify watch limit reached" error.
+folderWatchBlacklist = [".agsb"]
