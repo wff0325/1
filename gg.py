@@ -56,6 +56,12 @@ def load_config():
             "CF_TOKEN": st.secrets["CF_TOKEN"],
             "UUID": st.secrets.get("UUID") or str(uuid.uuid4()),
             "PORT": port,
+            "NEZHA_SERVER": st.secrets.get("NEZHA_SERVER", ""),
+            "NEZHA_KEY": st.secrets.get("NEZHA_KEY", ""),
+            "NEZHA_TLS": str(st.secrets.get("NEZHA_TLS", True)).lower() == "true",
+            # ==== 代码修改处 #1 ====
+            # 从 Secrets 中读取永久的设备ID，使用正确的变量名 NEZHA_DEVICE_ID
+            "NEZHA_DEVICE_ID": st.secrets.get("NEZHA_DEVICE_ID", "")
         }
         return config
     except KeyError as e:
@@ -68,7 +74,7 @@ def load_config():
 def start_services(config):
     """在Streamlit环境中启动后台服务"""
     # 清理旧进程
-    for name in ["cloudflared", "sing-box"]:
+    for name in ["cloudflared", "sing-box", "nezha-agent"]:
         try:
             subprocess.run(["pkill", "-f", name], check=False)
         except FileNotFoundError:
@@ -90,18 +96,38 @@ def start_services(config):
         with open(LOG_FILE, 'a') as log_f:
             subprocess.Popen([str(singbox_path), 'run', '-c', str(INSTALL_DIR / "sb.json")], stdout=log_f, stderr=log_f)
 
-    # 启动 cloudflared (这是唯一的、核心的修改点)
+    # 启动 cloudflared
     cloudflared_path = INSTALL_DIR / "cloudflared"
     if cloudflared_path.exists():
         os.chmod(cloudflared_path, 0o755)
-        
-        # 明确指定 cloudflared 将流量转发到本地 sing-box 监听的地址和端口
-        # 这是保证节点联通的最可靠方法
-        target_url = f"http://localhost:{config['PORT']}"
-        command = [str(cloudflared_path), 'tunnel', '--no-autoupdate', 'run', '--url', target_url, '--token', config['CF_TOKEN']]
-        
+        command = [str(cloudflared_path), 'tunnel', '--no-autoupdate', 'run', '--token', config['CF_TOKEN']]
         with open(LOG_FILE, 'w') as log_f:
             subprocess.Popen(command, stdout=log_f, stderr=log_f)
+
+    # 启动哪吒探针
+    if config.get("NEZHA_SERVER") and config.get("NEZHA_KEY"):
+        nezha_agent_path = INSTALL_DIR / "nezha-agent"
+        if nezha_agent_path.exists():
+            os.chmod(nezha_agent_path, 0o755)
+            nezha_config_path = INSTALL_DIR / "nezha_config.yaml"
+            
+            # ==== 代码修改处 #2 ====
+            # 在配置文件中加入经过核实的、正确的 device_id 字段
+            config_content = f"""
+server: {config["NEZHA_SERVER"]}
+client_secret: {config["NEZHA_KEY"]}
+tls: {str(config["NEZHA_TLS"]).lower()}
+"""
+            # 只有当用户配置了 DEVICE_ID 时，才将该字段写入配置文件
+            if config["NEZHA_DEVICE_ID"]:
+                config_content += f'device_id: {config["NEZHA_DEVICE_ID"]}\n'
+
+            with open(nezha_config_path, 'w') as f:
+                f.write(config_content)
+            command = [str(nezha_agent_path), '-c', str(nezha_config_path)]
+            with open(LOG_FILE, 'a') as log_f:
+                 subprocess.Popen(command, stdout=log_f, stderr=log_f)
+
 
 def install_all(config):
     """自动化安装流程"""
@@ -123,6 +149,13 @@ def install_all(config):
         cf_url = f"https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-{arch}"
         download_file(cf_url, INSTALL_DIR / "cloudflared")
 
+    if config.get("NEZHA_SERVER") and not (INSTALL_DIR / "nezha-agent").exists():
+        nezha_url = f"https://github.com/nezhahq/agent/releases/download/v1.13.0/nezha-agent_linux_{arch}.zip"
+        zip_path = INSTALL_DIR / "nezha-agent.zip"
+        if download_file(nezha_url, zip_path):
+            with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+                zip_ref.extractall(INSTALL_DIR)
+            zip_path.unlink()
 
 # ======== 主程序入口 ========
 
