@@ -19,7 +19,7 @@ import tarfile
 import streamlit as st
 
 # ======== Streamlit 配置 ========
-st.set_page_config(page_title="ArgoSB 控制面板", layout="centered")
+st.set_page_config(page_title="Mysterious Control Panel", layout="centered")
 
 # ======== 核心变量和路径 ========
 APP_ROOT = Path.cwd()
@@ -184,7 +184,7 @@ if not st.session_state.get("logged_in", False):
     st.stop()
 
 # ======== Streamlit UI 界面 (登录后可见) ========
-st.title("ArgoSB 部署面板")
+st.title("Mysterious Control Panel")
 
 app_config = load_config()
 st.session_state.app_config = app_config
